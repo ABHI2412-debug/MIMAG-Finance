@@ -13,11 +13,8 @@ for (const file of ['index.html', 'app.js', 'globe.js', 'styles.css']) {
 
 cpSync(resolve(root, 'assets'), resolve(output, 'assets'), { recursive: true });
 
-const threeOutput = resolve(output, 'node_modules/three/build');
-mkdirSync(threeOutput, { recursive: true });
 cpSync(
   resolve(root, 'node_modules/three/build/three.module.js'),
-  resolve(threeOutput, 'three.module.js')
+  resolve(output, 'three.module.js')
 );
 console.log('MIMAG Finance static build written to public/.');
-
