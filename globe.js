@@ -1,4 +1,4 @@
-let THREE;
+import * as THREE from "./node_modules/three/build/three.module.js";
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const toRadians = (value) => (value * Math.PI) / 180;
@@ -78,96 +78,13 @@ function buildOrbit(index, radius) {
   return line;
 }
 
-function initCanvasGlobe(container) {
-  const canvas = document.createElement("canvas");
-  canvas.className = "globe-canvas-fallback";
-  container.replaceChildren(canvas);
-  const context = canvas.getContext("2d");
-  if (!context) return;
-
-  let width = 1;
-  let height = 1;
-  let rotation = -0.45;
-  let targetRotation = rotation;
-  let dragging = false;
-  let lastX = 0;
-  let frame;
-  const dots = [];
-  for (let latitude = -78; latitude <= 80; latitude += 2.1) {
-    for (let longitude = -180; longitude < 180; longitude += 2.1) {
-      const noise = Math.abs(Math.sin(longitude * 12.9898 + latitude * 78.233) * 43758.5453) % 1;
-      if (isLand(longitude, latitude) && noise < .62) dots.push([longitude, latitude, noise]);
-    }
-  }
-
-  const resize = () => {
-    const rect = container.getBoundingClientRect();
-    const ratio = Math.min(window.devicePixelRatio || 1, 2);
-    width = Math.max(1, rect.width);
-    height = Math.max(1, rect.height);
-    canvas.width = width * ratio;
-    canvas.height = height * ratio;
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
-    context.setTransform(ratio, 0, 0, ratio, 0, 0);
-  };
-  const observer = new ResizeObserver(resize);
-  observer.observe(container);
-  resize();
-
-  const draw = () => {
-    const radius = Math.min(width, height) * .36;
-    const cx = width * .59;
-    const cy = height * .5;
-    const gradient = context.createRadialGradient(cx - radius * .3, cy - radius * .35, radius * .08, cx, cy, radius * 1.1);
-    gradient.addColorStop(0, "#bd7bea");
-    gradient.addColorStop(.55, "#7133a7");
-    gradient.addColorStop(1, "#160928");
-    context.clearRect(0, 0, width, height);
-    context.beginPath(); context.arc(cx, cy, radius, 0, Math.PI * 2); context.fillStyle = gradient; context.fill();
-    context.save(); context.beginPath(); context.arc(cx, cy, radius, 0, Math.PI * 2); context.clip();
-    context.strokeStyle = "rgba(226,190,255,.14)"; context.lineWidth = 1;
-    for (let lat = -60; lat <= 60; lat += 30) { const y = cy - Math.sin(lat * Math.PI / 180) * radius; context.beginPath(); context.ellipse(cx, y, radius * .98, radius * Math.cos(lat * Math.PI / 180) * .12, 0, 0, Math.PI * 2); context.stroke(); }
-    for (let lon = -60; lon <= 60; lon += 30) { context.beginPath(); context.ellipse(cx, cy, radius * Math.abs(Math.cos(lon * Math.PI / 180)), radius, 0, 0, Math.PI * 2); context.stroke(); }
-    for (const [lon, lat, noise] of dots) {
-      const longitude = (lon * Math.PI / 180) + rotation;
-      const latitude = lat * Math.PI / 180;
-      const depth = Math.cos(latitude) * Math.cos(longitude);
-      if (depth <= 0) continue;
-      const x = cx + Math.cos(latitude) * Math.sin(longitude) * radius;
-      const y = cy - Math.sin(latitude) * radius;
-      context.beginPath(); context.arc(x, y, 1.1 + noise * 1.1, 0, Math.PI * 2); context.fillStyle = `rgba(232,197,255,${.58 + depth * .34})`; context.fill();
-    }
-    context.restore();
-    context.beginPath(); context.arc(cx, cy, radius, 0, Math.PI * 2); context.strokeStyle = "rgba(218,168,255,.48)"; context.stroke();
-    rotation += (targetRotation - rotation) * .08;
-    targetRotation += .0018;
-    frame = requestAnimationFrame(draw);
-  };
-  const down = (event) => { dragging = true; lastX = event.clientX; };
-  const move = (event) => { if (!dragging) return; targetRotation += (event.clientX - lastX) * .008; lastX = event.clientX; };
-  const up = () => { dragging = false; };
-  canvas.addEventListener("pointerdown", down); canvas.addEventListener("pointermove", move); canvas.addEventListener("pointerup", up); canvas.addEventListener("pointerleave", up);
-  frame = requestAnimationFrame(draw);
-  return () => { cancelAnimationFrame(frame); observer.disconnect(); container.replaceChildren(); };
-}
-export async function initGlobe(container) {
+export function initGlobe(container) {
   if (!container) return;
-  if (!window.WebGLRenderingContext) return initCanvasGlobe(container);
-try {
-    THREE = await import("./node_modules/three/build/three.module.js");
-  } catch {
-    return initCanvasGlobe(container);
-  }
+  if (!window.WebGLRenderingContext) return;
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(34, 1, .1, 100);
   camera.position.set(0, .05, 7.25);
-  let renderer;
-  try {
-    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
-  } catch {
-    return initCanvasGlobe(container);
-  }
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
   renderer.setClearColor(0x000000, 0);
   container.appendChild(renderer.domElement);
@@ -258,6 +175,9 @@ try {
     container.replaceChildren();
   };
 }
+
+
+
 
 
 
