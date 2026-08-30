@@ -1,4 +1,4 @@
-let THREE;
+import * as THREE from "./node_modules/three/build/three.module.js";
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const toRadians = (value) => (value * Math.PI) / 180;
@@ -78,33 +78,8 @@ function buildOrbit(index, radius) {
   return line;
 }
 
-function renderStaticGlobe(container) {
-  const dots = [];
-  for (let latitude = -78; latitude <= 80; latitude += 1.8) {
-    for (let longitude = -180; longitude < 180; longitude += 1.8) {
-      const noise = Math.abs(Math.sin(longitude * 12.9898 + latitude * 78.233) * 43758.5453) % 1;
-      if (isLand(longitude, latitude) && noise < .6) {
-        const lon = longitude * Math.PI / 180 - .45;
-        const lat = latitude * Math.PI / 180;
-        const depth = Math.cos(lat) * Math.cos(lon);
-        if (depth > 0) {
-          const x = 50 + Math.cos(lat) * Math.sin(lon) * 42;
-          const y = 50 - Math.sin(lat) * 42;
-          dots.push(`<circle cx="${x.toFixed(2)}" cy="${y.toFixed(2)}" r="${(0.22 + noise * .28).toFixed(2)}" opacity="${(.55 + depth * .4).toFixed(2)}"/>`);
-        }
-      }
-    }
-  }
-  container.innerHTML = `<svg class="globe-svg-fallback" viewBox="0 0 100 100" aria-hidden="true"><defs><radialGradient id="globeFill" cx="34%" cy="28%"><stop offset="0" stop-color="#bd7bea"/><stop offset=".55" stop-color="#7133a7"/><stop offset="1" stop-color="#160928"/></radialGradient><clipPath id="globeClip"><circle cx="50" cy="50" r="42"/></clipPath></defs><circle cx="50" cy="50" r="42" fill="url(#globeFill)"/><g clip-path="url(#globeClip)" fill="#e8c5ff">${dots.join("")}</g><circle cx="50" cy="50" r="42" fill="none" stroke="rgba(218,168,255,.65)"/><ellipse cx="50" cy="50" rx="48" ry="18" fill="none" stroke="rgba(218,168,255,.3)" transform="rotate(-18 50 50)"/><ellipse cx="50" cy="50" rx="43" ry="48" fill="none" stroke="rgba(218,168,255,.2)" transform="rotate(-18 50 50)"/></svg>`;
-}
-export async function initGlobe(container) {
-  if (!container) return;
-  if (!window.WebGLRenderingContext) return renderStaticGlobe(container);
-  try {
-    THREE = await import("./node_modules/three/build/three.module.js");
-  } catch {
-    return renderStaticGlobe(container);
-  }
+export function initGlobe(container) {
+  if (!container || !window.WebGLRenderingContext) return;
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(34, 1, .1, 100);
   camera.position.set(0, .05, 7.25);
@@ -199,11 +174,3 @@ export async function initGlobe(container) {
     container.replaceChildren();
   };
 }
-
-
-
-
-
-
-
-
