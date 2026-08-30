@@ -1,5 +1,3 @@
-import { initGlobe } from "./globe.js?v=2";
-
 const funds = [
   { icon: "01", tag: "Equity · Direct Growth", name: "MIMAG Flexi Cap", description: "One fund for long-term wealth across market leaders and emerging businesses.", return: "18.4%", period: "3Y annualised", risk: "Very high risk", image: "./assets/finance-building.jpg" },
   { icon: "02", tag: "Hybrid · Direct Growth", name: "MIMAG Balanced Advantage", description: "Dynamic equity and debt allocation designed for changing market cycles.", return: "14.1%", period: "3Y annualised", risk: "High risk" },
@@ -238,7 +236,7 @@ const selectTool = (tool) => {
 
 render();
 document.querySelector("#insights").after(document.querySelector(".calculator-section"), document.querySelector(".lumpsum-section"));
-initGlobe(document.querySelector("#globe-scene"));
+import("./globe.js?v=2").then(({ initGlobe }) => initGlobe(document.querySelector("#globe-scene"))).catch((error) => console.warn("Globe unavailable:", error));
 updateCalculator();
 updateLumpSumCalculator();
 document.querySelectorAll(".range").forEach((input) => input.addEventListener("input", () => { updateCalculator(); updateGoalTool(); }));
@@ -256,3 +254,5 @@ document.querySelector("#themeToggle").addEventListener("click", () => { documen
 document.querySelector("#viewAllFunds").addEventListener("click", (event) => { event.preventDefault(); const toast = document.querySelector("#toast"); toast.textContent = "Fund explorer is next — the curated shortlist is ready to compare."; toast.classList.add("visible"); window.setTimeout(() => toast.classList.remove("visible"), 3200); });
 document.querySelector("#helpForm").addEventListener("submit", (event) => { event.preventDefault(); const name = new FormData(event.currentTarget).get("name"); event.currentTarget.reset(); showToast(`Thanks ${name || "there"}. Your financial help request is saved for this demo.`); });
 document.querySelector(".menu-button").addEventListener("click", () => { const nav = document.querySelector(".main-nav"); const open = nav.style.display === "flex"; nav.style.display = open ? "none" : "flex"; nav.style.position = "absolute"; nav.style.top = "66px"; nav.style.left = "15px"; nav.style.right = "15px"; nav.style.padding = "18px"; nav.style.flexDirection = "column"; nav.style.alignItems = "flex-start"; nav.style.border = "1px solid var(--line)"; nav.style.background = "#101014"; });
+
+
