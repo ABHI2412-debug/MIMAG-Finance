@@ -1,4 +1,4 @@
-import * as THREE from "./node_modules/three/build/three.module.js";
+let THREE;
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const toRadians = (value) => (value * Math.PI) / 180;
@@ -151,9 +151,14 @@ function initCanvasGlobe(container) {
   frame = requestAnimationFrame(draw);
   return () => { cancelAnimationFrame(frame); observer.disconnect(); container.replaceChildren(); };
 }
-export function initGlobe(container) {
+export async function initGlobe(container) {
   if (!container) return;
   if (!window.WebGLRenderingContext) return initCanvasGlobe(container);
+try {
+    THREE = await import("./node_modules/three/build/three.module.js");
+  } catch {
+    return initCanvasGlobe(container);
+  }
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(34, 1, .1, 100);
   camera.position.set(0, .05, 7.25);
@@ -253,6 +258,7 @@ export function initGlobe(container) {
     container.replaceChildren();
   };
 }
+
 
 
 
