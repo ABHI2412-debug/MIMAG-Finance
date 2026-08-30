@@ -1,0 +1,14 @@
+{
+  "name": "mimag-finance",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "node dev-server.mjs",
+    "start": "node dev-server.mjs",
+    "build": "node -e \"console.log('MIMAG Finance is a dependency-free static build.')\""
+  },
+  "dependencies": {
+    "three": "^0.185.1"
+  }
+}
