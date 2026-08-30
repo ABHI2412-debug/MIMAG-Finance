@@ -79,7 +79,8 @@ function buildOrbit(index, radius) {
 }
 
 export function initGlobe(container) {
-  if (!container || !window.WebGLRenderingContext) return;
+  if (!container) return;
+  if (!window.WebGLRenderingContext) { container.classList.add("globe-unavailable"); return; }
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(34, 1, .1, 100);
   camera.position.set(0, .05, 7.25);
@@ -174,3 +175,5 @@ export function initGlobe(container) {
     container.replaceChildren();
   };
 }
+
+
