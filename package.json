@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "node dev-server.mjs",
     "start": "node dev-server.mjs",
-    "build": "node -e \"console.log('MIMAG Finance is a dependency-free static build.')\""
+    "build": "node build.mjs"
   },
   "dependencies": {
     "three": "^0.185.1"
   }
 }
+
