@@ -17,4 +17,8 @@ cpSync(
   resolve(root, 'node_modules/three/build/three.module.js'),
   resolve(output, 'three.module.js')
 );
+cpSync(
+  resolve(root, 'node_modules/three/build/three.core.js'),
+  resolve(output, 'three.core.js')
+);
 console.log('MIMAG Finance static build written to public/.');
