@@ -33,6 +33,7 @@ img{display:block;max-width:100%}
 
 /* ── layout ──────────────────────────────────── */
 .container{width:min(1240px,100% - 64px);margin:0 auto}
+.sec,.ftr{position:relative;z-index:2}
 .sec{padding:120px 0} /* Increased padding for spacious feel */
 
 /* ── typography ──────────────────────────────── */
