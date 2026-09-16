@@ -137,7 +137,7 @@ const render = () => {
   </section>
 
   <!-- ═══ PARTNERS ═══ -->
-  <section class="sec sec--white" id="partners">
+  <section class="sec sec--dark-bg" id="partners">
     <div class="container">
       <div class="sec-head">
         <div>
@@ -257,7 +257,7 @@ const render = () => {
   </section>
 
   <!-- ═══ CTA ═══ -->
-  <section class="sec sec--navy" id="contact">
+  <section class="sec sec--dark-bg cta-sec" id="contact">
     <div class="container cta-layout">
       <div class="cta-left">
         <p class="eyebrow eyebrow--blue">READY TO TAKE THE NEXT STEP?</p>
