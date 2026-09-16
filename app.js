@@ -112,7 +112,7 @@ const render = () => {
   <!-- ═══ SERVICES ═══ -->
   <section class="sec sec--cream" id="services">
     <div class="container">
-      <div class="sec-head">
+      <div class="sec-head reveal">
         <div>
           <p class="eyebrow">OUR SERVICES</p>
           <h2>Complete Financial Solutions<br><strong>Under One Roof.</strong></h2>
@@ -122,12 +122,12 @@ const render = () => {
       </div>
       <div class="svc-grid">
         ${services.map(s => `
-        <div class="svc-card">
+        <div class="svc-card reveal reveal-delay-${(s.id % 5) || 1}">
           <span class="svc-ico">${s.icon}</span>
           <h3>${s.name}</h3>
           <p>${s.desc}</p>
         </div>`).join("")}
-        <div class="svc-card svc-card--cta">
+        <div class="svc-card svc-card--cta reveal reveal-delay-2">
           <p>Not sure<br>what's right for you?</p>
           <strong>Talk to our experts for personalised advice.</strong>
           <a class="btn btn--gold btn--sm" href="#contact">Get Advice ↗</a>
@@ -139,7 +139,7 @@ const render = () => {
   <!-- ═══ PARTNERS ═══ -->
   <section class="sec sec--dark-bg" id="partners">
     <div class="container">
-      <div class="sec-head">
+      <div class="sec-head reveal">
         <div>
           <p class="eyebrow">OUR TRUSTED PARTNERS</p>
           <h2>Direct Access to Leading<br><strong>Financial Institutions.</strong></h2>
@@ -163,7 +163,7 @@ const render = () => {
           <p class="sec-sub">Find out how your small, consistent investments can grow into something big over time.</p>
           <div class="calc-deco"><em>Small Investments,</em><br><em>Big Results</em></div>
         </div>
-        <div class="calc-panel">
+        <div class="calc-panel reveal reveal-delay-1">
           <div class="calc-tabs">
             <button class="calc-tab active" data-mode="sip">SIP Calculator</button>
             <button class="calc-tab" data-mode="ls">Lumpsum Calculator</button>
@@ -202,10 +202,10 @@ const render = () => {
         <p class="why-sub">We combine expertise, technology, and a client-first approach to help you make smarter financial decisions.</p>
       </div>
       <div class="why-grid">
-        <div class="why-card"><span class="why-ico">🎓</span><h3>Expert Guidance</h3><p>Backed by research and experience.</p></div>
-        <div class="why-card"><span class="why-ico">🔍</span><h3>Transparent Process</h3><p>Clear, honest, and always in your best interest.</p></div>
-        <div class="why-card"><span class="why-ico">🎯</span><h3>Personalised Solutions</h3><p>Tailored to your unique goals.</p></div>
-        <div class="why-card"><span class="why-ico">🔭</span><h3>Long-Term Focus</h3><p>Because your tomorrow matters.</p></div>
+        <div class="why-card reveal reveal-delay-1"><span class="why-ico">🎓</span><h3>Expert Guidance</h3><p>Backed by research and experience.</p></div>
+        <div class="why-card reveal reveal-delay-1"><span class="why-ico">🔍</span><h3>Transparent Process</h3><p>Clear, honest, and always in your best interest.</p></div>
+        <div class="why-card reveal reveal-delay-1"><span class="why-ico">🎯</span><h3>Personalised Solutions</h3><p>Tailored to your unique goals.</p></div>
+        <div class="why-card reveal reveal-delay-1"><span class="why-ico">🔭</span><h3>Long-Term Focus</h3><p>Because your tomorrow matters.</p></div>
       </div>
     </div>
   </section>
@@ -217,7 +217,7 @@ const render = () => {
       <h2 class="testi-h">What Our Clients Say.</h2>
       <div class="testi-grid">
         ${testimonials.map(t => `
-        <div class="testi-card">
+        <div class="testi-card reveal reveal-delay-1">
           <div class="testi-q">❝</div>
           <div class="testi-stars">${"★".repeat(t.stars)}${"☆".repeat(5 - t.stars)}</div>
           <p>${t.text}</p>
@@ -233,7 +233,7 @@ const render = () => {
   <!-- ═══ INSIGHTS ═══ -->
   <section class="sec sec--cream" id="insights">
     <div class="container">
-      <div class="sec-head">
+      <div class="sec-head reveal">
         <div>
           <p class="eyebrow">INSIGHTS &amp; RESEARCH</p>
           <h2>Knowledge for a<br><strong>Brighter Tomorrow.</strong></h2>
@@ -243,7 +243,7 @@ const render = () => {
       </div>
       <div class="ins-grid">
         ${insights.map(a => `
-        <a class="ins-card" href="#insights">
+        <a class="ins-card reveal reveal-delay-1" href="#insights">
           <div class="ins-img" style="background-image:url('${a.image}')">
             <span class="ins-tag">${a.tag}</span>
           </div>
@@ -259,13 +259,13 @@ const render = () => {
   <!-- ═══ CTA ═══ -->
   <section class="sec sec--dark-bg cta-sec" id="contact">
     <div class="container cta-layout">
-      <div class="cta-left">
+      <div class="cta-left reveal">
         <p class="eyebrow eyebrow--blue">READY TO TAKE THE NEXT STEP?</p>
         <h2>Let's Build Your<br><strong>Brighter Tomorrow.</strong></h2>
         <p>Connect with our financial experts and get a personalised plan for your goals.</p>
         <a class="btn btn--gold" href="mailto:hello@mimag.finance?subject=Free%20Consultation">Book a Free Consultation ↗</a>
       </div>
-      <div class="cta-right">
+      <div class="cta-right reveal reveal-delay-2">
         <span class="cta-pill">INVEST</span>
         <span class="cta-pill">PROTECT</span>
         <span class="cta-pill">GROW</span>
@@ -387,3 +387,16 @@ document.querySelector("#nlForm").addEventListener("submit", e => {
   e.preventDefault(); e.currentTarget.reset();
   toast("Thanks! You're subscribed to MIMAG Finance insights.");
 });
+
+// Scroll Animations
+const observerOptions = { root: null, rootMargin: "0px", threshold: 0.15 };
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));

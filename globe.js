@@ -45,7 +45,7 @@ function buildGlobePoints(radius) {
       if (random > 0.41) continue;
       const point = latitudeLongitudeToVector(latitude + (random - .5) * .55, longitude + (random - .5) * .55, radius);
       positions.push(point.x, point.y, point.z);
-      const color = new THREE.Color().setHSL(.76 + random * .055, .83, .56 + random * .22);
+      const color = new THREE.Color().setHSL(.12 + random * .02, .8, .6 + random * .2);
       colors.push(color.r, color.g, color.b);
     }
   }
@@ -54,7 +54,7 @@ function buildGlobePoints(radius) {
   geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
   return new THREE.Points(
     geometry,
-    new THREE.PointsMaterial({ size: .029, vertexColors: true, transparent: true, opacity: .92, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true })
+    new THREE.PointsMaterial({ size: .029, vertexColors: true, transparent: true, opacity: .95, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true })
   );
 }
 
@@ -70,7 +70,7 @@ function buildOrbit(index, radius) {
     points.push(new THREE.Vector3(Math.cos(angle) * orbitRadiusX, Math.sin(angle) * orbitRadiusY, 0));
   }
   const geometry = new THREE.BufferGeometry().setFromPoints(points);
-  const material = new THREE.LineDashedMaterial({ color: new THREE.Color().setHSL(.76 + (index % 3) * .03, .9, .67), dashSize: .13, gapSize: .25, transparent: true, opacity: .58, depthWrite: false, blending: THREE.AdditiveBlending });
+  const material = new THREE.LineDashedMaterial({ color: new THREE.Color().setHSL(.12 + (index % 3) * .02, .8, .6), dashSize: .13, gapSize: .25, transparent: true, opacity: .45, depthWrite: false, blending: THREE.AdditiveBlending });
   const line = new THREE.Line(geometry, material);
   line.computeLineDistances();
   line.rotation.set(toRadians(20 + index * 14), toRadians(-28 + index * 27), toRadians(index * 31));
@@ -96,7 +96,7 @@ export function initGlobe(container) {
   root.add(globe);
   const atmosphere = new THREE.Mesh(
     new THREE.SphereGeometry(radius * 1.012, 44, 44),
-    new THREE.MeshBasicMaterial({ color: 0x7e35be, transparent: true, opacity: .052, side: THREE.BackSide, depthWrite: false, blending: THREE.AdditiveBlending })
+    new THREE.MeshBasicMaterial({ color: 0xf7c353, transparent: true, opacity: .035, side: THREE.BackSide, depthWrite: false, blending: THREE.AdditiveBlending })
   );
   root.add(atmosphere);
   const arcs = new THREE.Group();
