@@ -38,6 +38,34 @@ const insights = [
   { tag: "Funds",     title: "NPS vs Mutual Funds: Which is Right for You?",    date: "Aug 12, 2024", image: "./assets/finance-building.jpg" },
 ];
 
+const funds = [
+  { name: "MIMAG High-Growth Equity", category: "Equity - Large & Mid Cap", risk: "Very High", return5y: "18.4%", minSip: "₹ 1,000", nav: "124.55", tag: "Top Rated" },
+  { name: "MIMAG Tax Saver 80C", category: "ELSS - Tax Saving", risk: "High", return5y: "15.2%", minSip: "₹ 500", nav: "86.12", tag: "Tax Saver" },
+  { name: "MIMAG Stable Debt Fund", category: "Debt - Corporate Bond", risk: "Low to Moderate", return5y: "7.8%", minSip: "₹ 1,000", nav: "32.40", tag: "Low Risk" },
+];
+
+const faqs = [
+  { q: "What is the minimum amount required to start a SIP?", a: "You can start a Systematic Investment Plan (SIP) with as little as ₹500 per month for most mutual funds." },
+  { q: "How do I track my portfolio performance?", a: "MIMAG Finance provides a unified dashboard where you can track all your mutual funds, insurance, and other assets in real-time." },
+  { q: "Is my money safe with MIMAG?", a: "We partner directly with SEBI-registered AMCs and IRDAI-approved insurers. Your investments are held securely with the respective institutions." },
+  { q: "Can I withdraw my mutual fund investments anytime?", a: "Yes, open-ended mutual funds can be withdrawn at any time. However, ELSS (Tax Saver) funds have a mandatory 3-year lock-in period." },
+];
+
+const processSteps = [
+  { step: "01", title: "Discovery", desc: "We understand your goals, risk appetite, and current financial standing." },
+  { step: "02", title: "Strategy", desc: "Our experts design a custom portfolio tailored to achieve your specific targets." },
+  { step: "03", title: "Execution", desc: "Seamless onboarding and investment execution via our digital platform." },
+  { step: "04", title: "Review", desc: "Continuous monitoring and periodic rebalancing to keep you on track." },
+];
+
+const tickers = [
+  { name: "NIFTY 50", val: "22,514.65", change: "+0.85%" },
+  { name: "SENSEX", val: "74,228.02", change: "+0.78%" },
+  { name: "GOLD (10g)", val: "71,450", change: "-0.12%" },
+  { name: "USD/INR", val: "83.45", change: "-0.05%" },
+  { name: "NIFTY BANK", val: "48,159.10", change: "+1.20%" },
+];
+
 /* ── math helpers ─────────────────────────────── */
 const formatINR = v => `₹ ${Math.round(v).toLocaleString("en-IN")}`;
 const sipFV = (m, r, y) => { const n=y*12, mr=r/12/100; return mr===0 ? m*n : m*(((1+mr)**n-1)/mr)*(1+mr); };
@@ -46,6 +74,14 @@ const lsFV  = (p, r, y) => p * ((1 + r/100) ** y);
 /* ── render ───────────────────────────────────── */
 const render = () => {
   document.querySelector("#app").innerHTML = `
+
+  <!-- ═══ TICKER ═══ -->
+  <div class="ticker-wrap">
+    <div class="ticker">
+      ${tickers.map(t => `<div class="ticker-item"><span>${t.name}</span><strong>${t.val}</strong><em class="${t.change.startsWith('+') ? 'up' : 'down'}">${t.change}</em></div>`).join("")}
+      ${tickers.map(t => `<div class="ticker-item"><span>${t.name}</span><strong>${t.val}</strong><em class="${t.change.startsWith('+') ? 'up' : 'down'}">${t.change}</em></div>`).join("")}
+    </div>
+  </div>
 
   <!-- ═══ HEADER ═══ -->
   <header class="hdr">
@@ -136,6 +172,34 @@ const render = () => {
     </div>
   </section>
 
+  <!-- ═══ FEATURED FUNDS ═══ -->
+  <section class="sec sec--dark-bg" id="funds">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow eyebrow--blue">TOP PERFORMERS</p>
+          <h2>Featured Investment<br><strong>Opportunities.</strong></h2>
+          <p class="sec-sub">Discover hand-picked mutual funds and portfolios that have consistently delivered outstanding returns.</p>
+        </div>
+      </div>
+      <div class="funds-grid">
+        ${funds.map(f => `
+        <div class="fund-card reveal reveal-delay-1">
+          <div class="fund-tag">${f.tag}</div>
+          <h3>${f.name}</h3>
+          <p class="fund-cat">${f.category}</p>
+          <div class="fund-stats">
+            <div class="f-stat"><span>5Y Return</span><strong class="text-green">${f.return5y}</strong></div>
+            <div class="f-stat"><span>Risk</span><strong>${f.risk}</strong></div>
+            <div class="f-stat"><span>Min SIP</span><strong>${f.minSip}</strong></div>
+          </div>
+          <div class="fund-chart"></div>
+          <div class="fund-bot"><span>NAV: ₹${f.nav}</span><a href="#contact" class="btn btn--outline-light btn--sm">Invest Now</a></div>
+        </div>`).join("")}
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ PARTNERS ═══ -->
   <section class="sec sec--dark-bg" id="partners">
     <div class="container">
@@ -210,14 +274,72 @@ const render = () => {
     </div>
   </section>
 
+  <!-- ═══ PLATFORM MOCKUP ═══ -->
+  <section class="sec sec--dark-bg platform-sec" id="platform">
+    <div class="container platform-layout">
+      <div class="plat-left reveal">
+        <p class="eyebrow eyebrow--blue">YOUR DIGITAL WEALTH</p>
+        <h2>Track Your Portfolio,<br><strong>Anytime, Anywhere.</strong></h2>
+        <p>Experience our state-of-the-art digital platform. Get real-time updates on your mutual funds, insurance policies, and alternative investments all in one unified dashboard.</p>
+        <ul class="plat-features">
+          <li><strong>Real-time Tracking:</strong> Live NAV updates and portfolio valuation.</li>
+          <li><strong>Goal Mapping:</strong> Track progress towards your financial goals.</li>
+          <li><strong>One-Click Invest:</strong> Seamlessly start new SIPs or lumpsums.</li>
+        </ul>
+      </div>
+      <div class="plat-right reveal reveal-delay-2">
+        <div class="mockup-frame">
+          <div class="mockup-inner">
+            <div class="mk-top"><span>Good Morning, Rahul</span><strong>₹ 46,71,332</strong><small>+12.4% All Time</small></div>
+            <div class="mk-chart"></div>
+            <div class="mk-assets">
+              <div class="mk-asset"><div class="mk-ic">📈</div><div>Mutual Funds<br><small>₹ 24.5L</small></div></div>
+              <div class="mk-asset"><div class="mk-ic">🛡️</div><div>Term Plan<br><small>Cover: ₹ 2Cr</small></div></div>
+              <div class="mk-asset"><div class="mk-ic">🏛️</div><div>NPS Tier I<br><small>₹ 4.2L</small></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROCESS TIMELINE ═══ -->
+  <section class="sec sec--cream" id="process">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow">HOW IT WORKS</p>
+          <h2>A Simple Path to<br><strong>Financial Freedom.</strong></h2>
+        </div>
+      </div>
+      <div class="process-grid">
+        ${processSteps.map((p, i) => `
+        <div class="process-step reveal reveal-delay-${(i%4)+1}">
+          <div class="step-num">${p.step}</div>
+          <h3>${p.title}</h3>
+          <p>${p.desc}</p>
+        </div>`).join("")}
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ TESTIMONIALS ═══ -->
   <section class="sec sec--cream" id="testimonials">
     <div class="container">
-      <p class="eyebrow">TESTIMONIALS</p>
-      <h2 class="testi-h">What Our Clients Say.</h2>
-      <div class="testi-grid">
-        ${testimonials.map(t => `
-        <div class="testi-card reveal reveal-delay-1">
+      <div class="testi-header reveal">
+        <div>
+          <p class="eyebrow">WALL OF LOVE</p>
+          <h2 class="testi-h">Trusted by Thousands.</h2>
+        </div>
+        <div class="trust-badge">
+          <strong>4.9/5</strong>
+          <div class="testi-stars">★★★★★</div>
+          <span>Based on 500+ Reviews</span>
+        </div>
+      </div>
+      <div class="testi-masonry">
+        ${testimonials.map((t, i) => `
+        <div class="testi-card reveal reveal-delay-${(i%3)+1}">
           <div class="testi-q">❝</div>
           <div class="testi-stars">${"★".repeat(t.stars)}${"☆".repeat(5 - t.stars)}</div>
           <p>${t.text}</p>
@@ -226,6 +348,11 @@ const render = () => {
             <div><strong>${t.name}</strong><span>${t.role}</span></div>
           </div>
         </div>`).join("")}
+        <div class="testi-card reveal reveal-delay-2" style="background: var(--c-navy); color: white;">
+          <h3 style="margin-bottom:10px;">Join our growing community!</h3>
+          <p style="color:rgba(255,255,255,0.8);margin-bottom:20px;">Experience financial peace of mind.</p>
+          <a class="btn btn--gold btn--sm" href="#contact">Get Started</a>
+        </div>
       </div>
     </div>
   </section>
@@ -252,6 +379,25 @@ const render = () => {
             <span class="ins-date">${a.date}</span>
           </div>
         </a>`).join("")}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ═══ -->
+  <section class="sec sec--cream" id="faq">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow">GOT QUESTIONS?</p>
+          <h2>Frequently Asked<br><strong>Questions.</strong></h2>
+        </div>
+      </div>
+      <div class="faq-list">
+        ${faqs.map((f, i) => `
+        <div class="faq-item reveal reveal-delay-${(i%4)+1}">
+          <button class="faq-btn"><span>${f.q}</span><i class="faq-icon">+</i></button>
+          <div class="faq-content"><p>${f.a}</p></div>
+        </div>`).join("")}
       </div>
     </div>
   </section>
@@ -400,3 +546,13 @@ const observer = new IntersectionObserver((entries, observer) => {
 }, observerOptions);
 
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+// FAQ Accordion
+document.querySelectorAll(".faq-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const parent = btn.parentElement;
+    const wasActive = parent.classList.contains("active");
+    document.querySelectorAll(".faq-item").forEach(item => item.classList.remove("active"));
+    if (!wasActive) parent.classList.add("active");
+  });
+});
