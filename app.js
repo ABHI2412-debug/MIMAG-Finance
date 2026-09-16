@@ -62,7 +62,7 @@ const render = () => {
         <a href="#contact">Careers</a>
       </nav>
       <div class="hdr-right">
-        <a class="btn btn--green" href="#contact">Book a Consultation</a>
+        <a class="btn btn--gold" href="#contact">Book a Consultation</a>
         <button class="hamburger" id="menuBtn" aria-label="Menu">☰</button>
       </div>
     </div>
@@ -130,7 +130,7 @@ const render = () => {
         <div class="svc-card svc-card--cta">
           <p>Not sure<br>what's right for you?</p>
           <strong>Talk to our experts for personalised advice.</strong>
-          <a class="btn btn--green btn--sm" href="#contact">Get Advice ↗</a>
+          <a class="btn btn--gold btn--sm" href="#contact">Get Advice ↗</a>
         </div>
       </div>
     </div>
@@ -181,7 +181,7 @@ const render = () => {
               <span>Time Period</span>
               <div class="calc-input"><input type="number" id="cIn3" value="20" min="1" max="30" step="1"><span class="suf">Years</span></div>
             </label>
-            <button class="btn btn--green btn--block" id="calcBtn" type="button">Calculate Now →</button>
+            <button class="btn btn--gold btn--block" id="calcBtn" type="button">Calculate Now →</button>
           </div>
         </div>
       </div>
@@ -263,7 +263,7 @@ const render = () => {
         <p class="eyebrow eyebrow--blue">READY TO TAKE THE NEXT STEP?</p>
         <h2>Let's Build Your<br><strong>Brighter Tomorrow.</strong></h2>
         <p>Connect with our financial experts and get a personalised plan for your goals.</p>
-        <a class="btn btn--green" href="mailto:hello@mimag.finance?subject=Free%20Consultation">Book a Free Consultation ↗</a>
+        <a class="btn btn--gold" href="mailto:hello@mimag.finance?subject=Free%20Consultation">Book a Free Consultation ↗</a>
       </div>
       <div class="cta-right">
         <span class="cta-pill">INVEST</span>
@@ -336,13 +336,13 @@ function switchCalcMode(mode) {
       <label class="calc-field"><span>Monthly Investment</span><div class="calc-input"><span class="pre">₹</span><input type="number" id="cIn1" value="5000" min="500" max="100000" step="500"></div></label>
       <label class="calc-field"><span>Expected Return</span><div class="calc-input"><input type="number" id="cIn2" value="12" min="1" max="30" step="0.5"><span class="suf">%</span></div></label>
       <label class="calc-field"><span>Time Period</span><div class="calc-input"><input type="number" id="cIn3" value="20" min="1" max="30" step="1"><span class="suf">Years</span></div></label>
-      <button class="btn btn--green btn--block" id="calcBtn" type="button">Calculate Now →</button>`;
+      <button class="btn btn--gold btn--block" id="calcBtn" type="button">Calculate Now →</button>`;
   } else {
     form.innerHTML = `
       <label class="calc-field"><span>Investment Amount</span><div class="calc-input"><span class="pre">₹</span><input type="number" id="cIn1" value="500000" min="5000" max="10000000" step="5000"></div></label>
       <label class="calc-field"><span>Expected Return</span><div class="calc-input"><input type="number" id="cIn2" value="12" min="1" max="30" step="0.5"><span class="suf">%</span></div></label>
       <label class="calc-field"><span>Time Period</span><div class="calc-input"><input type="number" id="cIn3" value="10" min="1" max="30" step="1"><span class="suf">Years</span></div></label>
-      <button class="btn btn--green btn--block" id="calcBtn" type="button">Calculate Now →</button>`;
+      <button class="btn btn--gold btn--block" id="calcBtn" type="button">Calculate Now →</button>`;
   }
   document.querySelector("#calcBtn").addEventListener("click", runCalc);
   document.querySelectorAll("#calcForm input").forEach(i => i.addEventListener("input", runCalc));
