@@ -9,7 +9,7 @@
     "build": "node build.mjs"
   },
   "dependencies": {
+    "puppeteer": "^25.11.0",
     "three": "^0.185.1"
   }
 }
-

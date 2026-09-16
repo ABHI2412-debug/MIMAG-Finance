@@ -371,7 +371,7 @@ requestAnimationFrame(() => {
   setTimeout(() => {
     const el = document.querySelector("#globe-scene");
     if (!el) return;
-    import("./globe.js?v=6")
+    import("./globe.js?v=7")
       .then(({ initGlobe }) => { if (el) initGlobe(el); })
       .catch(err => console.warn("Globe:", err));
   }, 120);

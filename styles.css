@@ -316,3 +316,21 @@ img{display:block;max-width:100%}
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 .reveal-delay-4 { transition-delay: 0.4s; }
+
+#globe-scene::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 450px; height: 450px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(247, 195, 83, 0.15), transparent 60%);
+  box-shadow: inset -10px -10px 40px rgba(0,0,0,0.8), 0 0 60px rgba(247, 195, 83, 0.1);
+  border: 1px solid rgba(247, 195, 83, 0.15);
+  z-index: -1;
+  pointer-events: none;
+}
+@media(max-width: 600px) {
+  #globe-scene::before { width: 300px; height: 300px; }
+}
+

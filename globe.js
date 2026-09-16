@@ -90,6 +90,7 @@ export function initGlobe(container) {
 
   const root = new THREE.Group();
   root.rotation.set(toRadians(-8), toRadians(-26), toRadians(7));
+  root.scale.set(0.01, 0.01, 0.01);
   scene.add(root);
   const radius = 2.15;
   const globe = buildGlobePoints(radius);
