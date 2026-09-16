@@ -7,17 +7,26 @@ const root = path.dirname(fileURLToPath(import.meta.url));
 const argValue = (name) => { const index = process.argv.indexOf(name); return index >= 0 ? process.argv[index + 1] : undefined; };
 const port = Number(process.env.PORT || argValue("--port") || 5173);
 const host = process.env.HOST || argValue("--host") || "0.0.0.0";
-const types = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css" };
+const types = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".gif": "image/gif", ".svg": "image/svg+xml", ".webp": "image/webp" };
 
 http.createServer((request, response) => {
     const pathname = new URL(request.url, `http://${request.headers.host || "localhost"}`).pathname;
     const requested = pathname === "/" ? "index.html" : pathname.slice(1);
-  const file = path.join(root, requested);
+  const dependencyFallbacks = {
+    "three.module.js": path.join(root, "node_modules/three/build/three.module.js"),
+    "three.core.js": path.join(root, "node_modules/three/build/three.core.js")
+  };
+  const file = dependencyFallbacks[requested] || path.join(root, requested);
     if (!fs.existsSync(file) || fs.statSync(file).isDirectory()) {
     response.writeHead(404, { "Content-Type": "text/plain" });
     response.end("Not found");
     return;
   }
-  response.writeHead(200, { "Content-Type": types[path.extname(file)] || "text/plain" });
+  response.writeHead(200, { 
+    "Content-Type": types[path.extname(file)] || "text/plain",
+    "Cache-Control": "no-cache, no-store, must-revalidate",
+    "Pragma": "no-cache",
+    "Expires": "0"
+  });
   response.end(fs.readFileSync(file));
 }).listen(port, host, () => console.log(`MIMAG Finance running at http://127.0.0.1:${port}`));
