@@ -141,7 +141,6 @@ export function initGlobe(container) {
     container.classList.remove("is-dragging");
   };
   const wheel = (event) => {
-    event.preventDefault();
     targetScale = clamp(targetScale - event.deltaY * .0022, .28, 2.35);
   };
   renderer.domElement.addEventListener("pointerdown", pointerDown);
