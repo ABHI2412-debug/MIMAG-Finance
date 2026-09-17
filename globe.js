@@ -70,7 +70,7 @@ function buildOrbit(index, radius) {
     points.push(new THREE.Vector3(Math.cos(angle) * orbitRadiusX, Math.sin(angle) * orbitRadiusY, 0));
   }
   const geometry = new THREE.BufferGeometry().setFromPoints(points);
-  const material = new THREE.LineDashedMaterial({ color: new THREE.Color().setHSL(.12 + (index % 3) * .02, .8, .6), dashSize: .13, gapSize: .25, transparent: true, opacity: .45, depthWrite: false, blending: THREE.AdditiveBlending });
+  const material = new THREE.LineDashedMaterial({ color: new THREE.Color().setHSL(.12 + (index % 3) * .02, .9, .75), dashSize: .13, gapSize: .25, transparent: true, opacity: .9, depthWrite: false, blending: THREE.AdditiveBlending });
   const line = new THREE.Line(geometry, material);
   line.computeLineDistances();
   line.rotation.set(toRadians(20 + index * 14), toRadians(-28 + index * 27), toRadians(index * 31));
@@ -123,25 +123,65 @@ export function initGlobe(container) {
   resizeObserver.observe(container);
   resize();
 
+  const activePointers = new Map();
+  let lastPinchDistance = 0;
+
+  const getPinchDistance = () => {
+    const pts = Array.from(activePointers.values());
+    if (pts.length < 2) return 0;
+    const dx = pts[0].x - pts[1].x;
+    const dy = pts[0].y - pts[1].y;
+    return Math.sqrt(dx * dx + dy * dy);
+  };
+
   const pointerDown = (event) => {
-    dragging = true;
-    lastX = event.clientX;
-    lastY = event.clientY;
-    container.classList.add("is-dragging");
+    activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    if (activePointers.size === 1) {
+      dragging = true;
+      lastX = event.clientX;
+      lastY = event.clientY;
+      container.classList.add("is-dragging");
+    }
     renderer.domElement.setPointerCapture?.(event.pointerId);
   };
+  
   const pointerMove = (event) => {
+    if (activePointers.has(event.pointerId)) {
+      activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    }
+    if (activePointers.size === 2) {
+      const currentDistance = getPinchDistance();
+      if (lastPinchDistance > 0) {
+        const delta = lastPinchDistance - currentDistance;
+        targetScale = clamp(targetScale - delta * .005, .28, 2.35);
+      }
+      lastPinchDistance = currentDistance;
+      return;
+    }
     if (!dragging) return;
     targetRotationY += (event.clientX - lastX) * .008;
     targetRotationX = clamp(targetRotationX + (event.clientY - lastY) * .006, -.65, .45);
     lastX = event.clientX;
     lastY = event.clientY;
   };
-  const pointerUp = () => {
-    dragging = false;
-    container.classList.remove("is-dragging");
+  
+  const pointerUp = (event) => {
+    activePointers.delete(event.pointerId);
+    if (activePointers.size < 2) {
+      lastPinchDistance = 0;
+    }
+    if (activePointers.size === 1) {
+      const remaining = Array.from(activePointers.values())[0];
+      lastX = remaining.x;
+      lastY = remaining.y;
+    }
+    if (activePointers.size === 0) {
+      dragging = false;
+      container.classList.remove("is-dragging");
+    }
   };
   const wheel = (event) => {
+    event.preventDefault();
     targetScale = clamp(targetScale - event.deltaY * .0022, .28, 2.35);
   };
   renderer.domElement.addEventListener("pointerdown", pointerDown);
