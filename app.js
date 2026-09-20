@@ -5,14 +5,14 @@
 
 /* ── data ────────────────────────────────────── */
 const services = [
-  { icon: "📈", name: "Mutual Funds",      desc: "Grow your wealth with expert guidance.", details: "Our Mutual Fund advisory helps you select the best equity, debt, and hybrid funds based on your risk profile and financial goals. We provide regular portfolio rebalancing and performance tracking to ensure you stay on the path to wealth creation." },
-  { icon: "🛡️", name: "Term Insurance",    desc: "Financial security for your loved ones.", details: "Protect your family's financial future with comprehensive term insurance plans. We help you calculate the optimal cover amount and choose policies with high claim settlement ratios at the most competitive premiums." },
-  { icon: "❤️", name: "Health Insurance",   desc: "Better health. Brighter tomorrow.", details: "Medical emergencies shouldn't drain your savings. We guide you through selecting robust health insurance plans that offer extensive coverage, cashless hospitalization, and no hidden sub-limits for complete peace of mind." },
-  { icon: "💼", name: "PMS",               desc: "Personalised wealth management.", details: "For high-net-worth individuals, our Portfolio Management Services offer customized investment strategies. Benefit from direct equity exposure, active fund management by seasoned experts, and exclusive investment opportunities." },
-  { icon: "📊", name: "AIF",               desc: "Access alternative investment opportunities.", details: "Diversify beyond traditional asset classes with Alternative Investment Funds. We provide access to private equity, real estate, hedge funds, and venture capital, designed for sophisticated investors seeking alpha." },
-  { icon: "💰", name: "SIP",               desc: "Small steps. Big wealth.", details: "Systematic Investment Plans (SIPs) are the most disciplined way to build wealth. By investing a fixed amount regularly, you benefit from rupee cost averaging and the incredible power of compounding over time." },
-  { icon: "🏛️", name: "NPS",              desc: "Plan for a peaceful retirement.", details: "The National Pension System (NPS) offers a highly tax-efficient way to build your retirement corpus. We help you choose the right pension fund manager and asset allocation to ensure a steady income in your golden years." },
-  { icon: "📋", name: "Fixed Deposits",    desc: "Stable returns. Lower risk.", details: "Preserve your capital and earn guaranteed returns with corporate and bank Fixed Deposits. We handpick high-rated FDs that offer better interest rates than traditional savings accounts while ensuring maximum safety." },
+  { icon: "📈", name: "Mutual Funds", desc: "Grow your wealth with expert guidance.", details: "Our Mutual Fund advisory helps you select the best equity, debt, and hybrid funds based on your risk profile and financial goals. We provide regular portfolio rebalancing and performance tracking to ensure you stay on the path to wealth creation." },
+  { icon: "🛡️", name: "Term Insurance", desc: "Financial security for your loved ones.", details: "Protect your family's financial future with comprehensive term insurance plans. We help you calculate the optimal cover amount and choose policies with high claim settlement ratios at the most competitive premiums." },
+  { icon: "❤️", name: "Health Insurance", desc: "Better health. Brighter tomorrow.", details: "Medical emergencies shouldn't drain your savings. We guide you through selecting robust health insurance plans that offer extensive coverage, cashless hospitalization, and no hidden sub-limits for complete peace of mind." },
+  { icon: "💼", name: "PMS", desc: "Personalised wealth management.", details: "For high-net-worth individuals, our Portfolio Management Services offer customized investment strategies. Benefit from direct equity exposure, active fund management by seasoned experts, and exclusive investment opportunities." },
+  { icon: "📊", name: "AIF", desc: "Access alternative investment opportunities.", details: "Diversify beyond traditional asset classes with Alternative Investment Funds. We provide access to private equity, real estate, hedge funds, and venture capital, designed for sophisticated investors seeking alpha." },
+  { icon: "💰", name: "SIP", desc: "Small steps. Big wealth.", details: "Systematic Investment Plans (SIPs) are the most disciplined way to build wealth. By investing a fixed amount regularly, you benefit from rupee cost averaging and the incredible power of compounding over time." },
+  { icon: "🏛️", name: "NPS", desc: "Plan for a peaceful retirement.", details: "The National Pension System (NPS) offers a highly tax-efficient way to build your retirement corpus. We help you choose the right pension fund manager and asset allocation to ensure a steady income in your golden years." },
+  { icon: "📋", name: "Fixed Deposits", desc: "Stable returns. Lower risk.", details: "Preserve your capital and earn guaranteed returns with corporate and bank Fixed Deposits. We handpick high-rated FDs that offer better interest rates than traditional savings accounts while ensuring maximum safety." },
   { icon: "🔗", name: "Loan Against\nMutual Funds", desc: "Unlock the value of your investments.", details: "Need urgent liquidity? Don't sell your mutual funds. We help you secure an overdraft facility against your mutual fund holdings at attractive interest rates, so your investments continue to grow while you meet short-term cash needs." },
 ];
 
@@ -27,15 +27,15 @@ const partners = [
 ];
 
 const testimonials = [
-  { name: "Rahul Mehta",   role: "Software Engineer",  stars: 5, text: "MIMAG helped me plan my investments with clarity. Their guidance on mutual funds and SIPs has truly made a difference in my financial journey.", img: "./assets/profile_rahul.png" },
-  { name: "Priya Sharma",  role: "Business Owner",     stars: 5, text: "The term and health insurance advice is outstanding. I really feel financially secure for my family's future.", img: "./assets/profile_priya.png" },
-  { name: "Amit Kulkarni", role: "Entrepreneur",       stars: 5, text: "Professional, transparent, and always available. I highly recommend MIMAG for anyone serious about long-term financial planning.", img: "./assets/profile_amit.png" },
+  { name: "Rahul Mehta", role: "Software Engineer", stars: 5, text: "MIMAG helped me plan my investments with clarity. Their guidance on mutual funds and SIPs has truly made a difference in my financial journey.", img: "./assets/profile_rahul.png" },
+  { name: "Priya Sharma", role: "Business Owner", stars: 5, text: "The term and health insurance advice is outstanding. I really feel financially secure for my family's future.", img: "./assets/profile_priya.png" },
+  { name: "Amit Kulkarni", role: "Entrepreneur", stars: 5, text: "Professional, transparent, and always available. I highly recommend MIMAG for anyone serious about long-term financial planning.", img: "./assets/profile_amit.png" },
 ];
 
 const insights = [
-  { tag: "Equity",    title: "The Power of SIPs in Building Long-Term Wealth",  date: "Aug 26, 2024", image: "./assets/insights_blog_1.png" },
-  { tag: "Insurance", title: "Why Term Insurance is a Must-Have in 2024",        date: "Aug 20, 2024", image: "./assets/insights_blog_2.png" },
-  { tag: "Funds",     title: "NPS vs Mutual Funds: Which is Right for You?",    date: "Aug 12, 2024", image: "./assets/finance-building.jpg" },
+  { tag: "Equity", title: "The Power of SIPs in Building Long-Term Wealth", date: "Aug 26, 2024", image: "./assets/insights_blog_1.png" },
+  { tag: "Insurance", title: "Why Term Insurance is a Must-Have in 2024", date: "Aug 20, 2024", image: "./assets/insights_blog_2.png" },
+  { tag: "Funds", title: "NPS vs Mutual Funds: Which is Right for You?", date: "Aug 12, 2024", image: "./assets/finance-building.jpg" },
 ];
 
 const funds = [
@@ -66,10 +66,20 @@ const tickers = [
   { name: "NIFTY BANK", val: "48,159.10", change: "+1.20%" },
 ];
 
+const journeySteps = [
+  { num: "01", title: "Understand", desc: "We begin by understanding your current financial situation, goals, risks and aspirations.", checks: ["Income & Expenses", "Existing Investments", "Risk Profile", "Short & Long-Term Goals"], cta: "Start Your Journey →" },
+  { num: "02", title: "Plan", desc: "Build a strategy around your goals and priorities.", checks: ["Financial Goals", "Time Horizon", "Risk Capacity", "Asset Allocation"], cta: null },
+  { num: "03", title: "Invest", desc: "Put your money to work with the right products.", checks: ["Investment Selection", "Diversification", "SIP Strategy", "Portfolio Construction"], cta: null },
+  { num: "04", title: "Protect", desc: "Secure what you've built against the unexpected.", checks: ["Life Insurance", "Health Insurance", "Emergency Fund", "Risk Management"], cta: null },
+  { num: "05", title: "Grow", desc: "Unlock new opportunities and optimise returns.", checks: ["Portfolio Review", "Optimization", "Tax Efficiency", "Long-Term Growth"], cta: null },
+  { num: "06", title: "Achieve", desc: "Live the future you envision.", checks: ["Goal Tracking", "Portfolio Review", "Wealth Preservation", "Legacy Planning"], cta: null },
+];
+const journeyThresholds = [0, 0.15, 0.32, 0.49, 0.66, 0.82];
+
 /* ── math helpers ─────────────────────────────── */
 const formatINR = v => `₹ ${Math.round(v).toLocaleString("en-IN")}`;
-const sipFV = (m, r, y) => { const n=y*12, mr=r/12/100; return mr===0 ? m*n : m*(((1+mr)**n-1)/mr)*(1+mr); };
-const lsFV  = (p, r, y) => p * ((1 + r/100) ** y);
+const sipFV = (m, r, y) => { const n = y * 12, mr = r / 12 / 100; return mr === 0 ? m * n : m * (((1 + mr) ** n - 1) / mr) * (1 + mr); };
+const lsFV = (p, r, y) => p * ((1 + r / 100) ** y);
 
 function animateValue(el, start, end, duration) {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -193,6 +203,89 @@ const render = () => {
       </div>
     </div>
 
+  </section>
+
+  <!-- ═══ FINANCIAL JOURNEY ═══ -->
+  <section class="journey" id="journey">
+    
+    <div class="journey-mountain" id="journeyMountain">
+      <div class="journey-mountain-bg">
+        <img src="./assets/journey-mountain.png" alt="Mountain landscape" class="journey-mountain-img" id="journeyMountainImg">
+        <div class="journey-mountain-overlay"></div>
+      </div>
+      <svg class="journey-svg" id="journeySvg" viewBox="0 0 600 800" preserveAspectRatio="xMaxYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="journeyGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="6" />
+          </filter>
+        </defs>
+        <!-- Glow path -->
+        <path id="journeyPathGlow" class="journey-path-glow"
+          d="M -170 750 C -150 700, -110 680, -90 640 C -70 600, -120 570, -80 530 C -40 490, 10 500, 30 460 C 50 420, 0 390, 40 350 C 80 310, 130 320, 150 280 C 170 240, 120 210, 160 170 C 200 130, 250 140, 270 100"
+          stroke="var(--gold)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#journeyGlow)" opacity="0.25" />
+        <!-- Main path -->
+        <path id="journeyPath" class="journey-path-main"
+          d="M -170 750 C -150 700, -110 680, -90 640 C -70 600, -120 570, -80 530 C -40 490, 10 500, 30 460 C 50 420, 0 390, 40 350 C 80 310, 130 320, 150 280 C 170 240, 120 210, 160 170 C 200 130, 250 140, 270 100"
+          stroke="var(--gold)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        <!-- Waypoints (positioned by JS) -->
+        ${journeySteps.map((s, i) => `
+        <g class="journey-waypoint" id="jw${i}" data-wp="${i}" opacity="0.3">
+          <circle class="jw-glow" r="18" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.4" />
+          <circle class="jw-ring" r="10" fill="none" stroke="var(--gold)" stroke-width="2" />
+          <circle class="jw-dot" r="4" fill="var(--gold)" />
+          <text class="jw-label" y="-24" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="11" font-weight="700" font-family="Outfit, sans-serif">${s.title.toUpperCase()}</text>
+        </g>`).join('')}
+      </svg>
+      <canvas class="journey-particles" id="journeyParticles"></canvas>
+      <div class="journey-float-words">
+        <span>CLEARER</span>
+        <span>PATH</span>
+        <span>A BRIGHTER</span>
+        <span>TOMORROW</span>
+      </div>
+    </div>
+
+    <!-- 2. Header -->
+    <div class="journey-header">
+      <div class="container">
+        <p class="eyebrow eyebrow--gold">OUR APPROACH</p>
+        <h2 style="color:#fff;">Your Financial<br><strong>Journey</strong></h2>
+        <p class="sec-sub" style="color:rgba(255,255,255,0.6);">A structured path to help you move from where you are today to where you want to be tomorrow.</p>
+      </div>
+    </div>
+
+    <!-- 3. Interactive Content -->
+    <div class="journey-sticky" id="journeySticky">
+      <!-- LEFT: step nav -->
+      <div class="journey-nav" id="journeyNav">
+        <div class="journey-nav-track">
+          <div class="journey-nav-line"></div>
+          <div class="journey-nav-fill" id="journeyNavFill"></div>
+        </div>
+        <div class="journey-nav-steps">
+          ${journeySteps.map((s, i) => `
+          <div class="journey-step-item${i === 0 ? ' active' : ''}" data-step="${i}">
+            <span class="jsn">${s.num}</span>
+            <span class="jsl">${s.title}</span>
+          </div>`).join('')}
+        </div>
+      </div>
+
+      <!-- CENTER: content card -->
+      <div class="journey-content" id="journeyContent">
+        ${journeySteps.map((s, i) => `
+        <div class="journey-card${i === 0 ? ' active' : ''}" data-card="${i}">
+          <span class="journey-card-num">${s.num}</span>
+          <h3>${s.title}</h3>
+          <p>${s.desc}</p>
+          <ul class="journey-checks">
+            ${s.checks.map(c => `<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> ${c}</li>`).join('')}
+          </ul>
+          ${s.cta ? `<a class="btn btn--gold btn--sm" href="#contact" style="margin-top:20px;">${s.cta}</a>` : ''}
+        </div>`).join('')}
+      </div>
+
+    </div>
   </section>
 
   <!-- ═══ SERVICES ═══ -->
@@ -431,7 +524,7 @@ const render = () => {
       </div>
       <div class="testi-masonry">
         ${testimonials.map((t, i) => `
-        <div class="testi-card reveal reveal-delay-${i+1}">
+        <div class="testi-card reveal reveal-delay-${i + 1}">
           <div style="color:var(--gold); font-size:32px; font-family:Georgia,serif; line-height:1; margin-bottom:12px;">“</div>
           <p style="margin-bottom:24px;">${t.text}</p>
           <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -613,7 +706,7 @@ function runCalc() {
   const elTot = document.querySelector("#rTot");
 
   const pInv = elInv.dataset.val ? parseFloat(elInv.dataset.val) : null;
-  
+
   if (pInv === null) {
     elInv.textContent = formatINR(invested);
     elRet.textContent = formatINR(returns);
@@ -622,7 +715,7 @@ function runCalc() {
     animateValue(elInv, pInv, invested, 500);
     animateValue(elRet, parseFloat(elRet.dataset.val), returns, 500);
     animateValue(elTot, parseFloat(elTot.dataset.val), total, 500);
-    
+
     // Highlight flash
     [elInv, elRet, elTot].forEach(el => {
       el.classList.remove('highlight-flash');
@@ -723,7 +816,7 @@ if (modal) {
 }
 
 // Service Modal Logic
-window.openServiceModal = function(index) {
+window.openServiceModal = function (index) {
   const service = services[index];
   if (!service) return;
   document.getElementById('smIcon').textContent = service.icon;
@@ -829,3 +922,210 @@ if (!isReduced && window.matchMedia("(hover: hover)").matches) {
     }
   });
 }
+
+/* ═══════════════════════════════════════════════
+   FINANCIAL JOURNEY — GSAP ScrollTrigger
+   ═══════════════════════════════════════════════ */
+function initJourney() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    console.warn('GSAP/ScrollTrigger not loaded — journey animation disabled');
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+
+  const section = document.getElementById('journey');
+  const sticky = document.getElementById('journeySticky');
+  const pathEl = document.getElementById('journeyPath');
+  const glowEl = document.getElementById('journeyPathGlow');
+  const navFill = document.getElementById('journeyNavFill');
+  const canvas = document.getElementById('journeyParticles');
+  const mtnImg = document.getElementById('journeyMountainImg');
+  if (!section || !pathEl) return;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = window.innerWidth <= 768;
+
+  /* ── Position waypoints on the path ─────────── */
+  const pathLen = pathEl.getTotalLength();
+  const wpFractions = [0.0, 0.17, 0.34, 0.51, 0.68, 0.85];
+  const waypoints = journeySteps.map((_, i) => document.getElementById('jw' + i));
+
+  waypoints.forEach((wp, i) => {
+    if (!wp) return;
+    const pt = pathEl.getPointAtLength(pathLen * wpFractions[i]);
+    wp.setAttribute('transform', `translate(${pt.x}, ${pt.y})`);
+  });
+
+  /* ── Set initial dash state ─────────────────── */
+  pathEl.style.strokeDasharray = pathLen;
+  pathEl.style.strokeDashoffset = pathLen;
+  glowEl.style.strokeDasharray = pathLen;
+  glowEl.style.strokeDashoffset = pathLen;
+
+  /* ── Refs for step tracking ─────────────────── */
+  let currentStep = 0;
+  const navItems = document.querySelectorAll('.journey-step-item');
+  const cards = document.querySelectorAll('.journey-card');
+
+  function setActiveStep(idx) {
+    if (idx === currentStep) return;
+    const prev = currentStep;
+    currentStep = idx;
+
+    // Nav items
+    navItems.forEach((el, i) => el.classList.toggle('active', i <= idx));
+
+    // Content cards — animate transition
+    const outCard = cards[prev];
+    const inCard = cards[idx];
+    if (outCard && inCard) {
+      gsap.to(outCard, { opacity: 0, y: -15, duration: 0.35, ease: 'power2.in', onComplete: () => outCard.classList.remove('active') });
+      inCard.classList.add('active');
+      gsap.fromTo(inCard, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', delay: 0.1 });
+    }
+
+    // Waypoints
+    waypoints.forEach((wp, i) => {
+      if (!wp) return;
+      if (i === idx) {
+        gsap.to(wp, { attr: { opacity: 1 }, duration: 0.4, ease: 'power2.out' });
+        gsap.fromTo(wp.querySelector('.jw-ring'), { attr: { r: 10 } }, { attr: { r: 13 }, duration: 0.3, ease: 'power2.out', yoyo: true, repeat: 1 });
+        gsap.to(wp.querySelector('.jw-glow'), { attr: { opacity: 0.8, r: 22 }, duration: 0.5, ease: 'power2.out' });
+      } else if (i < idx) {
+        gsap.to(wp, { attr: { opacity: 0.85 }, duration: 0.3 });
+        gsap.to(wp.querySelector('.jw-glow'), { attr: { opacity: 0.3, r: 18 }, duration: 0.3 });
+      } else {
+        gsap.to(wp, { attr: { opacity: 0.3 }, duration: 0.3 });
+        gsap.to(wp.querySelector('.jw-glow'), { attr: { opacity: 0.15, r: 18 }, duration: 0.3 });
+      }
+    });
+  }
+
+  /* ── Determine step from progress ───────────── */
+  function stepFromProgress(p) {
+    for (let i = journeyThresholds.length - 1; i >= 0; i--) {
+      if (p >= journeyThresholds[i]) return i;
+    }
+    return 0;
+  }
+
+  /* ── Atmospheric Particles ──────────────────── */
+  let particles = [];
+  let animFrameId;
+  if (canvas && !reducedMotion && !isMobile) {
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width * window.devicePixelRatio;
+      canvas.height = rect.height * window.devicePixelRatio;
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = rect.height + 'px';
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const w = () => canvas.width / window.devicePixelRatio;
+    const h = () => canvas.height / window.devicePixelRatio;
+
+    for (let i = 0; i < 22; i++) {
+      particles.push({
+        x: Math.random() * 600,
+        y: Math.random() * 800,
+        r: Math.random() * 2 + 0.5,
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: -(Math.random() * 0.2 + 0.05),
+        alpha: Math.random() * 0.35 + 0.1,
+      });
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, w(), h());
+      const cw = w(), ch = h();
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.y < -10) { p.y = ch + 10; p.x = Math.random() * cw; }
+        if (p.x < -10) p.x = cw + 10;
+        if (p.x > cw + 10) p.x = -10;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(247, 195, 83, ${p.alpha})`;
+        ctx.fill();
+      });
+      animFrameId = requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+  }
+
+  /* ── GSAP ScrollTrigger ─────────────────────── */
+  if (reducedMotion) {
+    // Show everything immediately
+    pathEl.style.strokeDashoffset = '0';
+    glowEl.style.strokeDashoffset = '0';
+    if (navFill) navFill.style.height = '100%';
+    waypoints.forEach(wp => { if (wp) wp.setAttribute('opacity', '1'); });
+    cards.forEach((c, i) => { c.classList.toggle('active', i === 0); if (i === 0) { c.style.opacity = '1'; c.style.transform = 'none'; } });
+    navItems.forEach(n => n.classList.add('active'));
+    return;
+  }
+
+  // 1. Scrub animation based on the overall section progress
+  ScrollTrigger.create({
+    trigger: section,
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: 1,
+    onUpdate: (self) => {
+      const p = self.progress;
+
+      // Draw path
+      const offset = pathLen * (1 - p);
+      pathEl.style.strokeDashoffset = offset;
+      glowEl.style.strokeDashoffset = offset;
+
+      // Nav fill
+      if (navFill) navFill.style.height = (p * 100) + '%';
+
+      // Step activation
+      const step = stepFromProgress(p);
+      if (step !== currentStep) setActiveStep(step);
+
+      // Mountain parallax
+      if (mtnImg) {
+        mtnImg.style.transform = `translateY(${p * -40}px) scale(${1 + p * 0.05})`;
+      }
+    }
+  });
+
+  // 2. Pin the mountain background for the entire section
+  ScrollTrigger.create({
+    trigger: section,
+    start: 'top top',
+    end: 'bottom bottom',
+    pin: document.getElementById('journeyMountain'),
+    pinSpacing: false
+  });
+
+  // 3. Pin the sticky content precisely when it reaches the top
+  ScrollTrigger.create({
+    trigger: sticky,
+    start: 'top top',
+    endTrigger: section,
+    end: 'bottom bottom',
+    pin: true,
+    pinSpacing: false
+  });
+
+  // Handle cleanup if page navigates
+  window.addEventListener('beforeunload', () => {
+    ScrollTrigger.getAll().forEach(st => st.kill());
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+  });
+}
+
+// Init journey after short delay to ensure layout
+requestAnimationFrame(() => {
+  setTimeout(initJourney, 200);
+});
