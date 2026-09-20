@@ -5,31 +5,31 @@
 
 /* ── data ────────────────────────────────────── */
 const services = [
-  { icon: "📈", name: "Mutual Funds",      desc: "Grow your wealth with expert guidance." },
-  { icon: "🛡️", name: "Term Insurance",    desc: "Financial security for your loved ones." },
-  { icon: "❤️", name: "Health Insurance",   desc: "Better health. Brighter tomorrow." },
-  { icon: "💼", name: "PMS",               desc: "Personalised wealth management." },
-  { icon: "📊", name: "AIF",               desc: "Access alternative investment opportunities." },
-  { icon: "💰", name: "SIP",               desc: "Small steps. Big wealth." },
-  { icon: "🏛️", name: "NPS",              desc: "Plan for a peaceful retirement." },
-  { icon: "📋", name: "Fixed Deposits",    desc: "Stable returns. Lower risk." },
-  { icon: "🔗", name: "Loan Against\nMutual Funds", desc: "Unlock the value of your investments." },
+  { icon: "📈", name: "Mutual Funds",      desc: "Grow your wealth with expert guidance.", details: "Our Mutual Fund advisory helps you select the best equity, debt, and hybrid funds based on your risk profile and financial goals. We provide regular portfolio rebalancing and performance tracking to ensure you stay on the path to wealth creation." },
+  { icon: "🛡️", name: "Term Insurance",    desc: "Financial security for your loved ones.", details: "Protect your family's financial future with comprehensive term insurance plans. We help you calculate the optimal cover amount and choose policies with high claim settlement ratios at the most competitive premiums." },
+  { icon: "❤️", name: "Health Insurance",   desc: "Better health. Brighter tomorrow.", details: "Medical emergencies shouldn't drain your savings. We guide you through selecting robust health insurance plans that offer extensive coverage, cashless hospitalization, and no hidden sub-limits for complete peace of mind." },
+  { icon: "💼", name: "PMS",               desc: "Personalised wealth management.", details: "For high-net-worth individuals, our Portfolio Management Services offer customized investment strategies. Benefit from direct equity exposure, active fund management by seasoned experts, and exclusive investment opportunities." },
+  { icon: "📊", name: "AIF",               desc: "Access alternative investment opportunities.", details: "Diversify beyond traditional asset classes with Alternative Investment Funds. We provide access to private equity, real estate, hedge funds, and venture capital, designed for sophisticated investors seeking alpha." },
+  { icon: "💰", name: "SIP",               desc: "Small steps. Big wealth.", details: "Systematic Investment Plans (SIPs) are the most disciplined way to build wealth. By investing a fixed amount regularly, you benefit from rupee cost averaging and the incredible power of compounding over time." },
+  { icon: "🏛️", name: "NPS",              desc: "Plan for a peaceful retirement.", details: "The National Pension System (NPS) offers a highly tax-efficient way to build your retirement corpus. We help you choose the right pension fund manager and asset allocation to ensure a steady income in your golden years." },
+  { icon: "📋", name: "Fixed Deposits",    desc: "Stable returns. Lower risk.", details: "Preserve your capital and earn guaranteed returns with corporate and bank Fixed Deposits. We handpick high-rated FDs that offer better interest rates than traditional savings accounts while ensuring maximum safety." },
+  { icon: "🔗", name: "Loan Against\nMutual Funds", desc: "Unlock the value of your investments.", details: "Need urgent liquidity? Don't sell your mutual funds. We help you secure an overdraft facility against your mutual fund holdings at attractive interest rates, so your investments continue to grow while you meet short-term cash needs." },
 ];
 
 const partners = [
-  { name: "UTI", color: "#d4380d" },
-  { name: "HDFC", color: "#004b87" },
-  { name: "SBI", color: "#1a237e" },
-  { name: "ICICI Prudential", color: "#f57f17" },
-  { name: "Kotak", color: "#e53935" },
-  { name: "LIC", color: "#1b5e20" },
-  { name: "Axis", color: "#880e4f" },
+  { name: "UTI", color: "#d4380d", img: "https://logo.uplead.com/utimf.com" },
+  { name: "HDFC", color: "#004b87", img: "https://logo.uplead.com/hdfcbank.com" },
+  { name: "SBI", color: "#1a237e", img: "https://logo.uplead.com/sbi.co.in" },
+  { name: "ICICI Prudential", color: "#f57f17", img: "https://logo.uplead.com/icicibank.com" },
+  { name: "Kotak", color: "#e53935", img: "https://logo.uplead.com/kotak.com" },
+  { name: "LIC", color: "#1b5e20", img: "https://logo.uplead.com/licindia.in" },
+  { name: "Axis", color: "#880e4f", img: "https://logo.uplead.com/axisbank.com" },
 ];
 
 const testimonials = [
-  { name: "Rahul Mehta",   role: "Software Engineer",  stars: 5, text: "MIMAG helped me plan my investments with clarity. Their guidance on mutual funds and SIPs has truly made a difference in my financial journey." },
-  { name: "Priya Sharma",  role: "Business Owner",     stars: 5, text: "The term and health insurance advice is outstanding. I really feel financially secure for my family's future." },
-  { name: "Amit Kulkarni", role: "Entrepreneur",       stars: 5, text: "Professional, transparent, and always available. I highly recommend MIMAG for anyone serious about long-term financial planning." },
+  { name: "Rahul Mehta",   role: "Software Engineer",  stars: 5, text: "MIMAG helped me plan my investments with clarity. Their guidance on mutual funds and SIPs has truly made a difference in my financial journey.", img: "./assets/profile_rahul.png" },
+  { name: "Priya Sharma",  role: "Business Owner",     stars: 5, text: "The term and health insurance advice is outstanding. I really feel financially secure for my family's future.", img: "./assets/profile_priya.png" },
+  { name: "Amit Kulkarni", role: "Entrepreneur",       stars: 5, text: "Professional, transparent, and always available. I highly recommend MIMAG for anyone serious about long-term financial planning.", img: "./assets/profile_amit.png" },
 ];
 
 const insights = [
@@ -71,15 +71,39 @@ const formatINR = v => `₹ ${Math.round(v).toLocaleString("en-IN")}`;
 const sipFV = (m, r, y) => { const n=y*12, mr=r/12/100; return mr===0 ? m*n : m*(((1+mr)**n-1)/mr)*(1+mr); };
 const lsFV  = (p, r, y) => p * ((1 + r/100) ** y);
 
+function animateValue(el, start, end, duration) {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    el.textContent = formatINR(end);
+    return;
+  }
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    const current = start + (end - start) * ease;
+    el.textContent = formatINR(current);
+    if (progress < 1) window.requestAnimationFrame(step);
+    else el.textContent = formatINR(end);
+  };
+  window.requestAnimationFrame(step);
+}
+
 /* ── render ───────────────────────────────────── */
 const render = () => {
   document.querySelector("#app").innerHTML = `
+  <div id="scroll-progress"></div>
 
   <!-- ═══ TICKER ═══ -->
   <div class="ticker-wrap">
     <div class="ticker">
-      ${tickers.map(t => `<div class="ticker-item"><span>${t.name}</span><strong>${t.val}</strong><em class="${t.change.startsWith('+') ? 'up' : 'down'}">${t.change}</em></div>`).join("")}
-      ${tickers.map(t => `<div class="ticker-item"><span>${t.name}</span><strong>${t.val}</strong><em class="${t.change.startsWith('+') ? 'up' : 'down'}">${t.change}</em></div>`).join("")}
+      ${[...tickers, ...tickers, ...tickers, ...tickers].map(t => `
+      <div class="ticker-item">
+        <span>${t.name}</span>
+        <strong>${t.val}</strong>
+        <em class="${t.change.startsWith('-') ? 'down' : 'up'}">${t.change}</em>
+      </div>
+      `).join("")}
     </div>
   </div>
 
@@ -87,18 +111,20 @@ const render = () => {
   <header class="hdr">
     <div class="container hdr-inner">
       <a class="brand" href="#top">
-        <span class="brand-mark">M</span>
-        <span class="brand-txt">MIMAG<small>Finance</small></span>
+        <img src="./assets/logo-finvista.png" alt="FinVista" style="height: 72px; width: auto;">
       </a>
-      <nav class="nav" id="mainNav">
-        <a href="#top">About Us</a>
-        <a href="#services">Our Services</a>
-        <a href="#calc">SIP Calculator</a>
-        <a href="#insights">Insights</a>
-        <a href="#contact">Careers</a>
-      </nav>
+      <div class="nav-wrap">
+        <nav class="nav" id="mainNav">
+          <div class="nav-highlight" id="navHighlight"></div>
+          <a href="#top">About Us</a>
+          <a href="#services">Our Services <span style="font-size:10px">▼</span></a>
+          <a href="#calc">SIP Calculator</a>
+          <a href="#insights">Insights</a>
+          <a href="#contact">Careers</a>
+        </nav>
+      </div>
       <div class="hdr-right">
-        <a class="btn btn--gold" href="#contact">Book a Consultation</a>
+        <a class="btn btn--gold" href="#contact">Book a Consultation ↗</a>
         <button class="hamburger" id="menuBtn" aria-label="Menu">☰</button>
       </div>
     </div>
@@ -108,100 +134,139 @@ const render = () => {
 
   <!-- ═══ HERO ═══ -->
   <section class="hero" id="top">
-    <img class="hero-bg" src="./assets/hero_finance_bg.png" alt="" />
+    <img src="./assets/hero-bg-custom.jpg" alt="Hero Background" class="hero-bg" id="heroBgImage" style="opacity: 1; z-index: 0; will-change: transform, opacity;">
+    <div class="hero-glow" id="heroGlow"></div>
+    <div class="bubble-deco bd-1"></div>
+    <div class="bubble-deco bd-2"></div>
+    <div class="bubble-deco bd-3"></div>
     <div class="hero-overlay"></div>
-    <div id="globe-scene"></div>
-
-    <div class="hero-float">
-      <span style="top:8%;right:18%;font-size:14px;opacity:.18">DISCIPLINE</span>
-      <span style="top:15%;right:6%;font-size:12px;opacity:.14;transform:rotate(12deg)">FREEDOM</span>
-      <span style="top:28%;right:22%;font-size:16px;opacity:.2">PROTECTION</span>
-      <span style="top:42%;right:10%;font-size:11px;opacity:.14;transform:rotate(-8deg)">PROSPERITY</span>
-      <span style="top:56%;right:25%;font-size:13px;opacity:.16">LEGACY</span>
-      <span style="top:68%;right:8%;font-size:10px;opacity:.12;transform:rotate(6deg)">GROWTH</span>
-      <em style="top:36%;right:4%;font-size:24px;opacity:.12;font-style:italic">Your Confidence</em>
-    </div>
 
     <div class="container hero-body">
       <div class="hero-content">
-        <p class="eyebrow hero-eyebrow"><span class="dot"></span>MORE THAN INVESTMENTS</p>
-        <h1>A More Secure,<br><strong>Confident You.</strong></h1>
-        <p class="hero-sub">Comprehensive financial solutions — from mutual funds and insurance to PMS, SIP, NPS, FD and loans against mutual funds — designed around your life goals.</p>
-        <div class="hero-btns">
-          <a class="btn btn--magenta" href="#services">Explore Our Services ↗</a>
+        <p class="eyebrow hero-eyebrow hero-reveal">MORE THAN INVESTMENTS</p>
+        <h1 class="hero-reveal">A More Secure,<br><strong>Confident You.</strong></h1>
+        <p class="hero-sub hero-reveal" style="max-width: 600px; line-height: 1.6; margin-bottom: 32px; font-size: 18px; color: rgba(255,255,255,0.7);">Comprehensive financial solutions — from mutual funds and insurance to PMS, AIF, SIP, NPS, FD and loans against mutual funds — designed around your life goals.</p>
+        <div class="hero-btns hero-reveal">
+          <a class="btn btn--gold" href="#services">Explore Our Services ↗</a>
           <a class="btn btn--outline-light" href="#calc">Calculate Your SIP →</a>
         </div>
+
+        <div class="hero-strip hero-reveal" style="display:flex; align-items:center; flex-wrap:wrap; gap:32px; padding-top:24px; margin-top:40px; border-top:1px solid rgba(255,255,255,0.1);">
+          <div class="hstrip-item" style="display:flex; align-items:center; gap:12px; padding-right:32px; border-right:1px solid rgba(255,255,255,0.1);">
+            <span class="hstrip-ico" style="display:flex; color:var(--gold);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span>
+            <span style="font-size:13px; line-height:1.3; color:rgba(255,255,255,0.8); font-weight:500;">Plan<br>Better</span>
+          </div>
+          <div class="hstrip-item" style="display:flex; align-items:center; gap:12px; padding-right:32px; border-right:1px solid rgba(255,255,255,0.1);">
+            <span class="hstrip-ico" style="display:flex; color:var(--gold);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></span>
+            <span style="font-size:13px; line-height:1.3; color:rgba(255,255,255,0.8); font-weight:500;">Invest<br>Smarter</span>
+          </div>
+          <div class="hstrip-item" style="display:flex; align-items:center; gap:12px; padding-right:32px; border-right:1px solid rgba(255,255,255,0.1);">
+            <span class="hstrip-ico" style="display:flex; color:var(--gold);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg></span>
+            <span style="font-size:13px; line-height:1.3; color:rgba(255,255,255,0.8); font-weight:500;">Stay<br>Protected</span>
+          </div>
+          <div class="hstrip-item" style="display:flex; align-items:center; gap:12px;">
+            <span class="hstrip-ico" style="display:flex; color:var(--gold);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></span>
+            <span style="font-size:13px; line-height:1.3; color:rgba(255,255,255,0.8); font-weight:500;">Achieve<br>More</span>
+          </div>
+        </div>
+
+        <div class="hero-metrics hero-reveal" style="display:flex; flex-wrap:wrap; gap:48px; margin-top:48px; animation-delay:0.5s;">
+          <div>
+            <div style="font-size:32px; font-weight:700; color:#fff; line-height:1;">₹500<span style="color:var(--gold)">+</span> Cr</div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.6); margin-top:8px; text-transform:uppercase; letter-spacing:0.05em;">Assets Under Management</div>
+          </div>
+          <div>
+            <div style="font-size:32px; font-weight:700; color:#fff; line-height:1;">10k<span style="color:var(--gold)">+</span></div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.6); margin-top:8px; text-transform:uppercase; letter-spacing:0.05em;">Happy Families</div>
+          </div>
+          <div>
+            <div style="font-size:32px; font-weight:700; color:#fff; line-height:1;">15<span style="color:var(--gold)">+</span></div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.6); margin-top:8px; text-transform:uppercase; letter-spacing:0.05em;">Years of Excellence</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-float-text">
+        <span>DISCIPLINE</span>
+        <span>TODAY</span>
+        <span>FREEDOM</span>
+        <span>TOMORROW</span>
       </div>
     </div>
 
-    <div class="hero-strip">
-      <div class="container hero-strip-inner">
-        <div class="hstrip-item"><span class="hstrip-ico">📋</span><span>Plan<br>Smart</span></div>
-        <div class="hstrip-item"><span class="hstrip-ico">📊</span><span>Invest<br>Smarter</span></div>
-        <div class="hstrip-item"><span class="hstrip-ico">🛡️</span><span>Stay<br>Protected</span></div>
-        <div class="hstrip-item"><span class="hstrip-ico">✨</span><span>Add More<br>Value</span></div>
-        <a class="hstrip-cta" href="#calc">Open your investment desk <b>↗</b></a>
-      </div>
-    </div>
   </section>
 
   <!-- ═══ SERVICES ═══ -->
-  <section class="sec sec--cream" id="services">
-    <div class="container">
+  <section class="sec sec--cream" id="services" style="position:relative; overflow:hidden;">
+    <div class="float-text" style="top: 10%; left: 5%; font-size: 42px; --rot: -10deg; --dur: 7s;">Wealth Creation</div>
+    <div class="float-text" style="top: 35%; right: 8%; font-size: 46px; --rot: 8deg; --dur: 8.5s;">Secure Future</div>
+    <div class="float-text" style="top: 60%; left: -2%; font-size: 40px; --rot: -12deg; --dur: 6.5s;">Strategic Planning</div>
+    <div class="float-text" style="bottom: 15%; right: 15%; font-size: 44px; --rot: 10deg; --dur: 9s;">Financial Freedom</div>
+    <div class="float-text" style="bottom: 5%; left: 30%; font-size: 48px; --rot: -5deg; --dur: 7.5s;">Legacy Building</div>
+    
+    <div class="container" style="position:relative; z-index:1;">
       <div class="sec-head reveal">
         <div>
           <p class="eyebrow">OUR SERVICES</p>
           <h2>Complete Financial Solutions<br><strong>Under One Roof.</strong></h2>
           <p class="sec-sub">Whether you want to grow your wealth, protect what matters, or plan for the future — we offer a wide range of financial solutions tailored to your goals.</p>
         </div>
-        <a class="link-arrow" href="#contact">Explore All Services</a>
+        <div style="text-align: right;">
+          <a class="link-arrow" href="#contact" style="display:block; margin-bottom: 24px; position:relative; z-index:2;">Explore All Services</a>
+          <div style="font-family: 'Great Vibes', 'Brush Script MT', cursive; font-size: 42px; color: var(--muted); transform: rotate(-8deg); opacity: 0.7; padding-right: 24px; margin-top: 16px; line-height: 1.1; display: inline-block;">Your Goals<br>Our Guidance</div>
+        </div>
       </div>
       <div class="svc-grid">
-        ${services.map(s => `
-        <div class="svc-card reveal reveal-delay-${(s.id % 5) || 1}">
+        ${services.map((s, i) => `
+        <div class="svc-card reveal reveal-delay-${(i % 5) + 1}" data-index="${i}" style="cursor:pointer;" onclick="openServiceModal(${i})">
           <span class="svc-ico">${s.icon}</span>
           <h3>${s.name}</h3>
           <p>${s.desc}</p>
+          <div style="text-align: right; margin-top: auto; color: var(--gold); font-size: 16px;">→</div>
         </div>`).join("")}
-        <div class="svc-card svc-card--cta reveal reveal-delay-2">
+        <div class="svc-card svc-card--cta reveal reveal-delay-5" style="cursor:pointer;" onclick="document.getElementById('contactModal').classList.add('active')">
           <p>Not sure<br>what's right for you?</p>
           <strong>Talk to our experts for personalised advice.</strong>
-          <a class="btn btn--gold btn--sm" href="#contact">Get Advice ↗</a>
+          <div style="margin-top:auto; width:36px; height:36px; border-radius:50%; background:var(--gold); display:grid; place-items:center; color:var(--black); font-size:16px;">→</div>
         </div>
       </div>
     </div>
   </section>
 
+
+
   <!-- ═══ FEATURED FUNDS ═══ -->
-  <section class="sec sec--dark-bg" id="funds">
+  <section class="sec sec--dark-bg" id="funds" style="background:#111; color:#fff;">
     <div class="container">
       <div class="sec-head reveal">
         <div>
-          <p class="eyebrow eyebrow--blue">TOP PERFORMERS</p>
-          <h2>Featured Investment<br><strong>Opportunities.</strong></h2>
-          <p class="sec-sub">Discover hand-picked mutual funds and portfolios that have consistently delivered outstanding returns.</p>
+          <p class="eyebrow eyebrow--gold">TOP PERFORMERS</p>
+          <h2 style="color:#fff;">Featured Mutual<br><strong>Funds.</strong></h2>
+          <p class="sec-sub">Handpicked by our experts for consistent performance and long-term growth potential.</p>
         </div>
+        <a class="link-arrow" href="#contact" style="color:var(--gold);">View All Funds</a>
       </div>
       <div class="funds-grid">
-        ${funds.map(f => `
-        <div class="fund-card reveal reveal-delay-1">
-          <div class="fund-tag">${f.tag}</div>
+        ${funds.map((f, i) => `
+        <div class="fund-card reveal reveal-delay-${i + 1}">
+          <span class="fund-tag">${f.tag}</span>
           <h3>${f.name}</h3>
-          <p class="fund-cat">${f.category}</p>
+          <p class="fund-cat">${f.category} • ${f.risk}</p>
           <div class="fund-stats">
             <div class="f-stat"><span>5Y Return</span><strong class="text-green">${f.return5y}</strong></div>
-            <div class="f-stat"><span>Risk</span><strong>${f.risk}</strong></div>
             <div class="f-stat"><span>Min SIP</span><strong>${f.minSip}</strong></div>
           </div>
           <div class="fund-chart"></div>
-          <div class="fund-bot"><span>NAV: ₹${f.nav}</span><a href="#contact" class="btn btn--outline-light btn--sm">Invest Now</a></div>
+          <div class="fund-bot">
+            <span>NAV: ${f.nav}</span>
+            <span style="color:var(--gold); font-size:18px;">+</span>
+          </div>
         </div>`).join("")}
       </div>
     </div>
   </section>
 
   <!-- ═══ PARTNERS ═══ -->
-  <section class="sec sec--dark-bg" id="partners">
+  <section class="sec sec--partners" id="partners">
     <div class="container">
       <div class="sec-head reveal">
         <div>
@@ -211,8 +276,16 @@ const render = () => {
         </div>
         <a class="link-arrow" href="#contact">View All Partners</a>
       </div>
-      <div class="partners-row">
-        ${partners.map(p => `<div class="partner-logo" style="--pc:${p.color}"><span>${p.name}</span></div>`).join("")}
+      <div class="partners-row" style="display: flex; gap: 24px; align-items: center; padding-left: 5%; flex-wrap: wrap;">
+        ${partners.map(p => `
+          <div class="partner-logo" style="--pc:${p.color}; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; overflow: hidden; padding: 12px; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; width: 140px; height: 70px;">
+            <img src="${p.img}" alt="${p.name}" style="max-width: 100%; max-height: 100%; object-fit: contain; filter: grayscale(100%) brightness(150%); opacity: 0.7; transition: all 0.3s;" onmouseover="this.style.filter='grayscale(0) brightness(100%)'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%) brightness(150%)'; this.style.opacity='0.7'">
+          </div>
+        `).join("")}
+        <div class="partner-logo" style="flex-direction:column; gap:6px; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; justify-content: center; align-items: center; width: 140px; height: 70px;">
+          <div style="width:32px;height:32px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);display:grid;place-items:center;">+</div>
+          <span style="font-size:10px;color:rgba(255,255,255,0.6);font-weight:600;text-align:center;">and more</span>
+        </div>
       </div>
     </div>
   </section>
@@ -220,85 +293,105 @@ const render = () => {
   <!-- ═══ CALCULATOR ═══ -->
   <section class="sec sec--cream" id="calc">
     <div class="container">
-      <div class="calc-top">
+      <div class="calc-layout">
         <div class="calc-intro">
           <p class="eyebrow">OUR CALCULATOR</p>
           <h2>See the Power of<br><strong>Compounding.</strong></h2>
           <p class="sec-sub">Find out how your small, consistent investments can grow into something big over time.</p>
-          <div class="calc-deco"><em>Small Investments,</em><br><em>Big Results</em></div>
+          <div class="calc-deco" style="margin-top: 40px; font-family: 'Great Vibes', 'Brush Script MT', cursive; font-size: 40px; color: var(--muted); transform: rotate(-8deg); opacity: 0.6; line-height: 1;">Small Steps<br>Big Possibilities</div>
         </div>
-        <div class="calc-panel reveal reveal-delay-1">
-          <div class="calc-tabs">
-            <button class="calc-tab active" data-mode="sip">SIP Calculator</button>
-            <button class="calc-tab" data-mode="ls">Lumpsum Calculator</button>
+        
+        <div class="calc-center">
+          <div class="calc-panel reveal reveal-delay-1">
+            <div class="calc-tabs">
+              <button class="calc-tab active" data-mode="sip">SIP Calculator</button>
+              <button class="calc-tab" data-mode="ls">Lumpsum Calculator</button>
+            </div>
+            <div class="calc-form" id="calcForm">
+              <label class="calc-field">
+                <span>Monthly Investment</span>
+                <div class="calc-input"><span class="pre">₹</span><input type="number" id="cIn1" value="5000" min="500" max="100000" step="500"></div>
+              </label>
+              <label class="calc-field">
+                <span>Expected Return (p.a.)</span>
+                <div class="calc-input"><input type="number" id="cIn2" value="12" min="1" max="30" step="0.5"><span class="suf">%</span></div>
+              </label>
+              <label class="calc-field">
+                <span>Time Period</span>
+                <div class="calc-input"><input type="number" id="cIn3" value="20" min="1" max="30" step="1"><span class="suf">Years</span></div>
+              </label>
+              <button class="btn btn--gold btn--block" id="calcBtn" type="button">Calculate Now →</button>
+            </div>
           </div>
-          <div class="calc-form" id="calcForm">
-            <label class="calc-field">
-              <span>Monthly Investment</span>
-              <div class="calc-input"><span class="pre">₹</span><input type="number" id="cIn1" value="5000" min="500" max="100000" step="500"></div>
-            </label>
-            <label class="calc-field">
-              <span>Expected Return</span>
-              <div class="calc-input"><input type="number" id="cIn2" value="12" min="1" max="30" step="0.5"><span class="suf">%</span></div>
-            </label>
-            <label class="calc-field">
-              <span>Time Period</span>
-              <div class="calc-input"><input type="number" id="cIn3" value="20" min="1" max="30" step="1"><span class="suf">Years</span></div>
-            </label>
-            <button class="btn btn--gold btn--block" id="calcBtn" type="button">Calculate Now →</button>
+          <div class="calc-results-row" id="calcResults">
+            <div class="calc-res-item"><strong id="rInv">₹ 12,00,000</strong><span>Total Investment</span></div>
+            <div class="calc-res-item"><strong id="rRet">₹ 34,71,332</strong><span>Estimated Returns</span></div>
+            <div class="calc-res-item"><strong id="rTot">₹ 46,71,332</strong><span>Total Value</span></div>
           </div>
+        </div>
+
+        <div class="calc-right">
+          <div class="calc-deco-right" style="margin-top: 40px; font-family: 'Great Vibes', 'Brush Script MT', cursive; font-size: 40px; color: var(--muted); transform: rotate(-8deg); opacity: 0.6; text-align: right; line-height: 1;">Invest<br>today<br>for a brighter<br>tomorrow</div>
+          <!-- We don't have the plant image, so we just use the text layout as close as possible -->
         </div>
       </div>
-      <div class="calc-results" id="calcResults">
-        <div class="calc-res-box"><strong id="rInv">₹ 12,00,000</strong><span>Total Investment</span></div>
-        <div class="calc-res-box"><strong id="rRet">₹ 34,71,332</strong><span>Estimated Returns</span></div>
-        <div class="calc-res-box calc-res-box--hl"><strong id="rTot">₹ 46,71,332</strong><span>Total Value</span></div>
+    </div>
+  </section>
+
+  <!-- ═══ PLATFORM MOCKUP ═══ -->
+  <section class="sec platform-sec" style="background:var(--dark-bg);">
+    <div class="container">
+      <div class="platform-layout">
+        <div class="plat-left reveal">
+          <p class="eyebrow eyebrow--gold">OUR PLATFORM</p>
+          <h2>Manage Everything<br><strong>In One Place.</strong></h2>
+          <p>Experience seamless investing and portfolio tracking with our state-of-the-art digital platform, built for both beginners and experts.</p>
+          <ul class="plat-features">
+            <li><strong>Unified Dashboard</strong> - Track MFs, Insurance, FDs, and NPS together.</li>
+            <li><strong>Bank-Grade Security</strong> - Your data is encrypted and secure.</li>
+            <li><strong>Smart Analytics</strong> - Get insights on asset allocation and risks.</li>
+            <li><strong>1-Click Execution</strong> - Fast, paperless, and hassle-free.</li>
+          </ul>
+        </div>
+        <div class="plat-right reveal reveal-delay-2">
+          <div class="mockup-frame">
+            <div class="mockup-inner">
+              <div class="mk-top">
+                <span>Total Net Worth</span>
+                <strong>₹ 46,71,332</strong>
+                <small>+1.2% Today</small>
+              </div>
+              <div class="mk-chart"></div>
+              <div class="mk-assets">
+                <div class="mk-asset"><div class="mk-ic">📈</div><div>Equity<small>₹ 28L</small></div></div>
+                <div class="mk-asset"><div class="mk-ic">🛡️</div><div>Debt<small>₹ 12L</small></div></div>
+                <div class="mk-asset"><div class="mk-ic">🏦</div><div>Cash<small>₹ 6L</small></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ═══ WHY CHOOSE US ═══ -->
   <section class="sec sec--dark-brown" id="why">
-    <div class="container why-layout">
-      <div class="why-left">
-        <p class="eyebrow eyebrow--gold">WHY CHOOSE US</p>
-        <h2>More Than Investments.<br><strong>A Partner for Life.</strong></h2>
-        <p class="why-sub">We combine expertise, technology, and a client-first approach to help you make smarter financial decisions.</p>
+    <div class="container">
+      <div class="why-layout">
+        <div class="why-left reveal">
+          <p class="eyebrow">WHY CHOOSE US</p>
+          <h2>More Than Investments.<br><strong>A Partner for Life.</strong></h2>
+        </div>
+        <div class="why-right reveal reveal-delay-1" style="display:flex; justify-content:space-between; align-items:flex-end;">
+          <p class="why-sub" style="margin:0;">We combine expertise, technology, and a client-first approach<br>to help you make smarter financial decisions.</p>
+          <a class="link-arrow" href="#about" style="color:var(--gold);">Learn More</a>
+        </div>
       </div>
       <div class="why-grid">
-        <div class="why-card reveal reveal-delay-1"><span class="why-ico">🎓</span><h3>Expert Guidance</h3><p>Backed by research and experience.</p></div>
-        <div class="why-card reveal reveal-delay-1"><span class="why-ico">🔍</span><h3>Transparent Process</h3><p>Clear, honest, and always in your best interest.</p></div>
-        <div class="why-card reveal reveal-delay-1"><span class="why-ico">🎯</span><h3>Personalised Solutions</h3><p>Tailored to your unique goals.</p></div>
-        <div class="why-card reveal reveal-delay-1"><span class="why-ico">🔭</span><h3>Long-Term Focus</h3><p>Because your tomorrow matters.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ PLATFORM MOCKUP ═══ -->
-  <section class="sec sec--dark-bg platform-sec" id="platform">
-    <div class="container platform-layout">
-      <div class="plat-left reveal">
-        <p class="eyebrow eyebrow--blue">YOUR DIGITAL WEALTH</p>
-        <h2>Track Your Portfolio,<br><strong>Anytime, Anywhere.</strong></h2>
-        <p>Experience our state-of-the-art digital platform. Get real-time updates on your mutual funds, insurance policies, and alternative investments all in one unified dashboard.</p>
-        <ul class="plat-features">
-          <li><strong>Real-time Tracking:</strong> Live NAV updates and portfolio valuation.</li>
-          <li><strong>Goal Mapping:</strong> Track progress towards your financial goals.</li>
-          <li><strong>One-Click Invest:</strong> Seamlessly start new SIPs or lumpsums.</li>
-        </ul>
-      </div>
-      <div class="plat-right reveal reveal-delay-2">
-        <div class="mockup-frame">
-          <div class="mockup-inner">
-            <div class="mk-top"><span>Good Morning, Rahul</span><strong>₹ 46,71,332</strong><small>+12.4% All Time</small></div>
-            <div class="mk-chart"></div>
-            <div class="mk-assets">
-              <div class="mk-asset"><div class="mk-ic">📈</div><div>Mutual Funds<br><small>₹ 24.5L</small></div></div>
-              <div class="mk-asset"><div class="mk-ic">🛡️</div><div>Term Plan<br><small>Cover: ₹ 2Cr</small></div></div>
-              <div class="mk-asset"><div class="mk-ic">🏛️</div><div>NPS Tier I<br><small>₹ 4.2L</small></div></div>
-            </div>
-          </div>
-        </div>
+        <div class="why-item reveal reveal-delay-1"><span class="why-ico">👥</span><div><h3>Expert Guidance</h3><p>Backed by research<br>and experience</p></div></div>
+        <div class="why-item reveal reveal-delay-2"><span class="why-ico">🛡️</span><div><h3>Transparent Process</h3><p>Clear, honest, and<br>in your best interest</p></div></div>
+        <div class="why-item reveal reveal-delay-3"><span class="why-ico">⚙️</span><div><h3>Personalized Solutions</h3><p>Tailored to your<br>unique goals</p></div></div>
+        <div class="why-item reveal reveal-delay-4"><span class="why-item-ico" style="font-size: 32px; color: var(--gold);">📈</span><div><h3>Long-Term Focus</h3><p>Because your<br>tomorrow matters</p></div></div>
       </div>
     </div>
   </section>
@@ -307,14 +400,14 @@ const render = () => {
   <section class="sec sec--cream" id="process">
     <div class="container">
       <div class="sec-head reveal">
-        <div>
+        <div style="margin: 0 auto; text-align: center;">
           <p class="eyebrow">HOW IT WORKS</p>
-          <h2>A Simple Path to<br><strong>Financial Freedom.</strong></h2>
+          <h2>Your Journey to<br><strong>Financial Freedom.</strong></h2>
         </div>
       </div>
       <div class="process-grid">
         ${processSteps.map((p, i) => `
-        <div class="process-step reveal reveal-delay-${(i%4)+1}">
+        <div class="process-step reveal reveal-delay-${i + 1}">
           <div class="step-num">${p.step}</div>
           <h3>${p.title}</h3>
           <p>${p.desc}</p>
@@ -328,31 +421,48 @@ const render = () => {
     <div class="container">
       <div class="testi-header reveal">
         <div>
-          <p class="eyebrow">WALL OF LOVE</p>
-          <h2 class="testi-h">Trusted by Thousands.</h2>
+          <p class="eyebrow">TESTIMONIALS</p>
+          <h2>What Our Clients Say.</h2>
         </div>
-        <div class="trust-badge">
-          <strong>4.9/5</strong>
-          <div class="testi-stars">★★★★★</div>
-          <span>Based on 500+ Reviews</span>
+        <div style="display:flex; gap:12px;">
+          <button style="width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--white);color:var(--muted);font-size:18px;display:grid;place-items:center;cursor:pointer;">←</button>
+          <button style="width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--white);color:var(--muted);font-size:18px;display:grid;place-items:center;cursor:pointer;">→</button>
         </div>
       </div>
       <div class="testi-masonry">
         ${testimonials.map((t, i) => `
-        <div class="testi-card reveal reveal-delay-${(i%3)+1}">
-          <div class="testi-q">❝</div>
-          <div class="testi-stars">${"★".repeat(t.stars)}${"☆".repeat(5 - t.stars)}</div>
-          <p>${t.text}</p>
-          <div class="testi-author">
-            <div class="testi-avatar">${t.name[0]}</div>
-            <div><strong>${t.name}</strong><span>${t.role}</span></div>
+        <div class="testi-card reveal reveal-delay-${i+1}">
+          <div style="color:var(--gold); font-size:32px; font-family:Georgia,serif; line-height:1; margin-bottom:12px;">“</div>
+          <p style="margin-bottom:24px;">${t.text}</p>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div class="author">
+              <img src="${t.img}" alt="${t.name}">
+              <div><strong>${t.name}</strong><span>${t.role}</span></div>
+            </div>
+            <div class="stars" style="margin:0; font-size:12px; color:var(--gold);">★★★★★</div>
           </div>
         </div>`).join("")}
-        <div class="testi-card reveal reveal-delay-2" style="background: var(--c-navy); color: white;">
-          <h3 style="margin-bottom:10px;">Join our growing community!</h3>
-          <p style="color:rgba(255,255,255,0.8);margin-bottom:20px;">Experience financial peace of mind.</p>
-          <a class="btn btn--gold btn--sm" href="#contact">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ACCORDION ═══ -->
+  <section class="sec sec--white" id="faq">
+    <div class="container">
+      <div class="sec-head reveal" style="text-align: center; justify-content: center;">
+        <div>
+          <p class="eyebrow">GOT QUESTIONS?</p>
+          <h2>Frequently Asked<br><strong>Questions.</strong></h2>
         </div>
+      </div>
+      <div class="faq-list">
+        ${faqs.map((f, i) => `
+        <div class="faq-item reveal reveal-delay-${(i % 4) + 1}">
+          <button class="faq-btn">${f.q} <i class="faq-icon">+</i></button>
+          <div class="faq-content">
+            <p>${f.a}</p>
+          </div>
+        </div>`).join("")}
       </div>
     </div>
   </section>
@@ -369,53 +479,40 @@ const render = () => {
         <a class="link-arrow" href="#insights">View All Insights</a>
       </div>
       <div class="ins-grid">
-        ${insights.map(a => `
-        <a class="ins-card reveal reveal-delay-1" href="#insights">
-          <div class="ins-img" style="background-image:url('${a.image}')">
-            <span class="ins-tag">${a.tag}</span>
+        ${insights.map((n, i) => `
+        <div class="ins-card reveal reveal-delay-${(i % 3) + 1}">
+          <div class="ins-img" style="background-image:url('${n.image}')">
+            <span class="ins-tag">${n.tag}</span>
           </div>
-          <div class="ins-body">
-            <h3>${a.title}</h3>
-            <span class="ins-date">${a.date}</span>
+          <div class="ins-body" style="display:flex; flex-direction:column; min-height: 140px;">
+            <h3 style="margin-bottom:24px;">${n.title}</h3>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:auto;">
+              <span class="ins-date">${n.date}</span>
+              <span style="color:var(--gold); font-size:16px;">→</span>
+            </div>
           </div>
-        </a>`).join("")}
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ FAQ ═══ -->
-  <section class="sec sec--cream" id="faq">
-    <div class="container">
-      <div class="sec-head reveal">
-        <div>
-          <p class="eyebrow">GOT QUESTIONS?</p>
-          <h2>Frequently Asked<br><strong>Questions.</strong></h2>
-        </div>
-      </div>
-      <div class="faq-list">
-        ${faqs.map((f, i) => `
-        <div class="faq-item reveal reveal-delay-${(i%4)+1}">
-          <button class="faq-btn"><span>${f.q}</span><i class="faq-icon">+</i></button>
-          <div class="faq-content"><p>${f.a}</p></div>
         </div>`).join("")}
       </div>
     </div>
   </section>
 
+
+
   <!-- ═══ CTA ═══ -->
-  <section class="sec sec--dark-bg cta-sec" id="contact">
-    <div class="container cta-layout">
-      <div class="cta-left reveal">
-        <p class="eyebrow eyebrow--blue">READY TO TAKE THE NEXT STEP?</p>
-        <h2>Let's Build Your<br><strong>Brighter Tomorrow.</strong></h2>
-        <p>Connect with our financial experts and get a personalised plan for your goals.</p>
-        <a class="btn btn--gold" href="mailto:hello@mimag.finance?subject=Free%20Consultation">Book a Free Consultation ↗</a>
-      </div>
-      <div class="cta-right reveal reveal-delay-2">
-        <span class="cta-pill">INVEST</span>
-        <span class="cta-pill">PROTECT</span>
-        <span class="cta-pill">GROW</span>
-        <span class="cta-pill">BELONG</span>
+  <section class="sec sec--cta" id="contact">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:40px;">
+        <div class="cta-left reveal">
+          <p class="eyebrow eyebrow--gold">READY TO TAKE THE NEXT STEP?</p>
+          <h2 style="color:#fff;">Let's Build Your<br><strong>Brighter Tomorrow.</strong></h2>
+        </div>
+        <div class="cta-center reveal reveal-delay-1" style="max-width:320px;">
+          <p class="sec-sub" style="margin:0 0 24px 0; color: rgba(255,255,255,0.95);">Connect with our financial experts and get a personalised plan for your goals.</p>
+          <a class="btn btn--gold" href="#contact">Book a Free Consultation ↗</a>
+        </div>
+        <div class="cta-right-float reveal reveal-delay-2" style="text-align:right; font-size:10px; font-weight:700; letter-spacing:0.3em; color:rgba(255,255,255,0.85); line-height:2.4;">
+          SAME.<br>GOALS.<br>A BRIGHTER.<br>TOMORROW.
+        </div>
       </div>
     </div>
   </section>
@@ -426,7 +523,7 @@ const render = () => {
   <footer class="ftr">
     <div class="container ftr-top">
       <div class="ftr-brand">
-        <a class="brand" href="#top"><span class="brand-mark">M</span><span class="brand-txt">MIMAG<small>Finance</small></span></a>
+        <a class="brand" href="#top"><img src="./assets/logo-finvista.png" alt="FinVista" style="height: 72px; width: auto;"></a>
         <p>Plan Today. Wealth Tomorrow.</p>
         <div class="ftr-socials">
           <a href="#">in</a><a href="#">▶</a><a href="#">𝕏</a><a href="#">◎</a>
@@ -435,8 +532,17 @@ const render = () => {
       <div class="ftr-cols">
         <div class="ftr-col"><span>Quick Links</span><a href="#top">Home</a><a href="#top">About Us</a><a href="#services">Our Services</a><a href="#calc">SIP Calculator</a></div>
         <div class="ftr-col"><span>Our Services</span><a href="#services">Mutual Funds</a><a href="#services">Insurance</a><a href="#services">PMS &amp; AIF</a><a href="#services">NPS &amp; FD</a><a href="#services">Loan Against MF</a></div>
-        <div class="ftr-col ftr-nl"><span>Newsletter</span><p>Get the latest updates and insights.</p>
-          <form class="nl-form" id="nlForm"><input type="email" placeholder="Enter your email" required><button type="submit">→</button></form>
+        <div class="ftr-col">
+          <h3>Newsletter</h3>
+          <p style="color:#888; font-size:13px; line-height:1.5; margin-bottom:16px;">Get the latest updates and insights.</p>
+          <form class="nl-form" id="nlForm" style="display:flex; gap:8px;">
+            <input type="email" placeholder="Enter your email" required style="flex:1; padding:0 16px; border-radius:4px; border:1px solid #333; background:transparent; color:#fff; height:48px;">
+            <button type="submit" style="width:48px;height:48px;background:var(--gold);border:none;border-radius:4px;color:var(--black);font-size:16px;cursor:pointer;">↗</button>
+          </form>
+        </div>
+        
+        <div class="ftr-col" style="text-align:right; font-size:11px; letter-spacing:0.3em; line-height:2.4; font-weight:700; color:#888; padding-top:16px;">
+          INVEST<br>PROTECT<br>GROW<br>BELONG
         </div>
       </div>
     </div>
@@ -446,7 +552,40 @@ const render = () => {
     </div>
   </footer>
 
-  <a class="fab" href="mailto:hello@mimag.finance"><span>◎</span> Talk to a Money Guide <b>↗</b></a>
+  <button class="fab" id="fabBtn"><span>◎</span> Talk to a Money Guide <b>↗</b></button>  <!-- Service Info Modal -->
+  <div class="modal-overlay" id="serviceModal" onclick="if(event.target===this) this.classList.remove('active')">
+    <div class="modal-content" style="text-align: center; max-width: 500px;">
+      <button class="modal-close" onclick="document.getElementById('serviceModal').classList.remove('active')">✕</button>
+      <div id="smIcon" style="font-size: 48px; margin-bottom: 24px;"></div>
+      <h3 id="smTitle" style="color: #fff; font-size: 28px; margin-bottom: 12px;"></h3>
+      <p id="smDesc" style="color: var(--gold); font-size: 16px; font-weight: 700; margin-bottom: 24px;"></p>
+      <div id="smDetails" style="color: var(--muted); line-height: 1.6; font-size: 15px;"></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="contactModal">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">✕</button>
+      <h3>Talk to a Money Guide</h3>
+      <p>Leave your details below and our expert will get in touch with you shortly.</p>
+      <form class="contact-form" id="moneyGuideForm">
+        <label>
+          <span>Name</span>
+          <input type="text" id="mgName" required placeholder="John Doe">
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" id="mgEmail" required placeholder="john@example.com">
+        </label>
+        <label>
+          <span>Phone Number</span>
+          <input type="tel" id="mgPhone" required placeholder="+91 98765 43210">
+        </label>
+        <button type="submit" class="btn btn--gold btn--block" style="margin-top: 16px;">Request Callback</button>
+      </form>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
   `;
 };
@@ -468,9 +607,33 @@ function runCalc() {
     total = lsFV(v1, v2, v3);
   }
   const returns = total - invested;
-  document.querySelector("#rInv").textContent = formatINR(invested);
-  document.querySelector("#rRet").textContent = formatINR(returns);
-  document.querySelector("#rTot").textContent = formatINR(total);
+
+  const elInv = document.querySelector("#rInv");
+  const elRet = document.querySelector("#rRet");
+  const elTot = document.querySelector("#rTot");
+
+  const pInv = elInv.dataset.val ? parseFloat(elInv.dataset.val) : null;
+  
+  if (pInv === null) {
+    elInv.textContent = formatINR(invested);
+    elRet.textContent = formatINR(returns);
+    elTot.textContent = formatINR(total);
+  } else {
+    animateValue(elInv, pInv, invested, 500);
+    animateValue(elRet, parseFloat(elRet.dataset.val), returns, 500);
+    animateValue(elTot, parseFloat(elTot.dataset.val), total, 500);
+    
+    // Highlight flash
+    [elInv, elRet, elTot].forEach(el => {
+      el.classList.remove('highlight-flash');
+      void el.offsetWidth;
+      el.classList.add('highlight-flash');
+    });
+  }
+
+  elInv.dataset.val = invested;
+  elRet.dataset.val = returns;
+  elTot.dataset.val = total;
 }
 
 function switchCalcMode(mode) {
@@ -534,6 +697,42 @@ document.querySelector("#nlForm").addEventListener("submit", e => {
   toast("Thanks! You're subscribed to MIMAG Finance insights.");
 });
 
+// Modal Logic
+const modal = document.getElementById("contactModal");
+const modalClose = document.getElementById("modalClose");
+const mgForm = document.getElementById("moneyGuideForm");
+const contactTriggers = document.querySelectorAll('a[href="#contact"], #fabBtn');
+
+if (modal) {
+  contactTriggers.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      modal.classList.add("active");
+    });
+  });
+  modalClose.addEventListener("click", () => modal.classList.remove("active"));
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) modal.classList.remove("active");
+  });
+  mgForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    modal.classList.remove("active");
+    toast("Request sent successfully! Our guide will contact you soon.");
+    mgForm.reset();
+  });
+}
+
+// Service Modal Logic
+window.openServiceModal = function(index) {
+  const service = services[index];
+  if (!service) return;
+  document.getElementById('smIcon').textContent = service.icon;
+  document.getElementById('smTitle').textContent = service.name;
+  document.getElementById('smDesc').textContent = service.desc;
+  document.getElementById('smDetails').textContent = service.details;
+  document.getElementById('serviceModal').classList.add('active');
+};
+
 // Scroll Animations
 const observerOptions = { root: null, rootMargin: "0px", threshold: 0.15 };
 const observer = new IntersectionObserver((entries, observer) => {
@@ -547,12 +746,86 @@ const observer = new IntersectionObserver((entries, observer) => {
 
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
+// Parallax & Scroll Progress
+const progEl = document.getElementById('scroll-progress');
+const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (!isReduced) {
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const scrolled = window.scrollY;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        if (progEl) progEl.style.width = (scrolled / maxScroll * 100) + '%';
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+}
+
 // FAQ Accordion
 document.querySelectorAll(".faq-btn").forEach(btn => {
   btn.addEventListener("click", () => {
-    const parent = btn.parentElement;
-    const wasActive = parent.classList.contains("active");
-    document.querySelectorAll(".faq-item").forEach(item => item.classList.remove("active"));
-    if (!wasActive) parent.classList.add("active");
+    const item = btn.closest(".faq-item");
+    const active = document.querySelector(".faq-item.active");
+    if (active && active !== item) active.classList.remove("active");
+    item.classList.toggle("active");
   });
 });
+
+// Phase 4: Advanced Interaction JS
+if (!isReduced && window.matchMedia("(hover: hover)").matches) {
+  // Nav Highlight
+  const nav = document.getElementById("mainNav");
+  const highlight = document.getElementById("navHighlight");
+  const links = nav.querySelectorAll("a");
+
+  links.forEach(link => {
+    link.addEventListener("mouseenter", (e) => {
+      highlight.style.opacity = "1";
+      highlight.style.width = e.target.offsetWidth + "px";
+      highlight.style.transform = `translateX(${e.target.offsetLeft}px)`;
+    });
+  });
+  nav.addEventListener("mouseleave", () => {
+    highlight.style.opacity = "0";
+  });
+
+  // Hero Glow
+  const hero = document.getElementById("top");
+  const glow = document.getElementById("heroGlow");
+  if (hero && glow) {
+    hero.addEventListener("mousemove", (e) => {
+      const rect = hero.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      glow.style.setProperty('--x', x + "px");
+      glow.style.setProperty('--y', y + "px");
+    });
+  }
+
+  // Magnetic Buttons
+  document.querySelectorAll('.btn:not(.no-magnet)').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  });
+
+  // Header compact on scroll
+  const hdr = document.querySelector(".hdr");
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      hdr.classList.add("scrolled");
+    } else {
+      hdr.classList.remove("scrolled");
+    }
+  });
+}
