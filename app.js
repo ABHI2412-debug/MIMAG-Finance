@@ -219,22 +219,24 @@ const render = () => {
             <feGaussianBlur in="SourceGraphic" stdDeviation="6" />
           </filter>
         </defs>
-        <!-- Glow path -->
-        <path id="journeyPathGlow" class="journey-path-glow"
-          d="M -170 750 C -150 700, -110 680, -90 640 C -70 600, -120 570, -80 530 C -40 490, 10 500, 30 460 C 50 420, 0 390, 40 350 C 80 310, 130 320, 150 280 C 170 240, 120 210, 160 170 C 200 130, 250 140, 270 100"
-          stroke="var(--gold)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#journeyGlow)" opacity="0.25" />
-        <!-- Main path -->
-        <path id="journeyPath" class="journey-path-main"
-          d="M -170 750 C -150 700, -110 680, -90 640 C -70 600, -120 570, -80 530 C -40 490, 10 500, 30 460 C 50 420, 0 390, 40 350 C 80 310, 130 320, 150 280 C 170 240, 120 210, 160 170 C 200 130, 250 140, 270 100"
-          stroke="var(--gold)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-        <!-- Waypoints (positioned by JS) -->
-        ${journeySteps.map((s, i) => `
-        <g class="journey-waypoint" id="jw${i}" data-wp="${i}" opacity="0.3">
-          <circle class="jw-glow" r="18" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.4" />
-          <circle class="jw-ring" r="10" fill="none" stroke="var(--gold)" stroke-width="2" />
-          <circle class="jw-dot" r="4" fill="var(--gold)" />
-          <text class="jw-label" y="-24" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="11" font-weight="700" font-family="Outfit, sans-serif">${s.title.toUpperCase()}</text>
-        </g>`).join('')}
+        <g id="journeyRouteGroup">
+          <!-- Glow path -->
+          <path id="journeyPathGlow" class="journey-path-glow"
+            d="M -170 750 C -70 700, -30 680, -10 640 C 10 600, -40 570, 0 530 C 40 490, 90 500, 110 460 C 130 420, 80 390, 120 350 C 160 310, 210 320, 230 280 C 250 220, 200 190, 240 150 C 280 120, 330 110, 350 75"
+            stroke="var(--gold)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#journeyGlow)" opacity="0.25" />
+          <!-- Main path -->
+          <path id="journeyPath" class="journey-path-main"
+            d="M -170 750 C -70 700, -30 680, -10 640 C 10 600, -40 570, 0 530 C 40 490, 90 500, 110 460 C 130 420, 80 390, 120 350 C 160 310, 210 320, 230 280 C 250 220, 200 190, 240 150 C 280 120, 330 110, 350 75"
+            stroke="var(--gold)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          <!-- Waypoints (positioned by JS) -->
+          ${journeySteps.map((s, i) => `
+          <g class="journey-waypoint" id="jw${i}" data-wp="${i}" opacity="0.3">
+            <circle class="jw-glow" r="18" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.4" />
+            <circle class="jw-ring" r="10" fill="none" stroke="var(--gold)" stroke-width="2" />
+            <circle class="jw-dot" r="4" fill="var(--gold)" />
+            <text class="jw-label" y="-24" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="11" font-weight="700" font-family="Outfit, sans-serif">${s.title.toUpperCase()}</text>
+          </g>`).join('')}
+        </g>
       </svg>
       <canvas class="journey-particles" id="journeyParticles"></canvas>
       <div class="journey-float-words">
@@ -947,14 +949,24 @@ function initJourney() {
 
   /* ── Position waypoints on the path ─────────── */
   const pathLen = pathEl.getTotalLength();
-  const wpFractions = [0.0, 0.17, 0.34, 0.51, 0.68, 0.85];
+  const wpFractions = [0.0, 0.17, 0.34, 0.51, 0.68, 1.0];
   const waypoints = journeySteps.map((_, i) => document.getElementById('jw' + i));
 
   waypoints.forEach((wp, i) => {
     if (!wp) return;
     const pt = pathEl.getPointAtLength(pathLen * wpFractions[i]);
-    wp.setAttribute('transform', `translate(${pt.x}, ${pt.y})`);
+    wp.setAttribute('transform', `translate(${pt.x}, ${pt.y}) rotate(-5)`);
   });
+
+  const routeGroup = document.getElementById('journeyRouteGroup');
+  if (routeGroup) {
+    const pivot = pathEl.getPointAtLength(pathLen * wpFractions[0]);
+    const JOURNEY_ROTATION = 5;
+    routeGroup.setAttribute(
+      "transform",
+      `rotate(${JOURNEY_ROTATION} ${pivot.x} ${pivot.y})`
+    );
+  }
 
   /* ── Set initial dash state ─────────────────── */
   pathEl.style.strokeDasharray = pathLen;
@@ -1080,8 +1092,9 @@ function initJourney() {
     onUpdate: (self) => {
       const p = self.progress;
 
-      // Draw path
-      const offset = pathLen * (1 - p);
+      // Draw path - scale p so it finishes drawing early (e.g. at 0.85)
+      const drawP = Math.min(p / 0.85, 1.0);
+      const offset = pathLen * (1 - drawP);
       pathEl.style.strokeDashoffset = offset;
       glowEl.style.strokeDashoffset = offset;
 
