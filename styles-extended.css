@@ -2,14 +2,14 @@
    TICKER
    ══════════════════════════════════════════════ */
 .ticker-wrap { width: 100%; overflow: hidden; background: #111; color: #fff; padding: 10px 0; border-bottom: 1px solid #333; display: flex; align-items: center; }
-.ticker { display: flex; white-space: nowrap; animation: ticker 25s linear infinite; }
+.ticker { display: flex; white-space: nowrap; animation: ticker 25s linear infinite; will-change: transform; }
 .ticker-item { display: inline-flex; align-items: center; gap: 8px; margin-right: 40px; font-size: 13px; font-family: monospace; }
 .ticker-item span { color: #888; }
 .ticker-item strong { color: #fff; font-weight: 700; }
 .ticker-item em { font-style: normal; font-weight: 700; }
 .ticker-item .up { color: #4ade80; }
 .ticker-item .down { color: #f87171; }
-@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
 
 /* ══════════════════════════════════════════════
    FEATURED FUNDS

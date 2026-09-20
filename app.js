@@ -66,15 +66,7 @@ const tickers = [
   { name: "NIFTY BANK", val: "48,159.10", change: "+1.20%" },
 ];
 
-const journeySteps = [
-  { num: "01", title: "Understand", desc: "We begin by understanding your current financial situation, goals, risks and aspirations.", checks: ["Income & Expenses", "Existing Investments", "Risk Profile", "Short & Long-Term Goals"], cta: "Start Your Journey →" },
-  { num: "02", title: "Plan", desc: "Build a strategy around your goals and priorities.", checks: ["Financial Goals", "Time Horizon", "Risk Capacity", "Asset Allocation"], cta: null },
-  { num: "03", title: "Invest", desc: "Put your money to work with the right products.", checks: ["Investment Selection", "Diversification", "SIP Strategy", "Portfolio Construction"], cta: null },
-  { num: "04", title: "Protect", desc: "Secure what you've built against the unexpected.", checks: ["Life Insurance", "Health Insurance", "Emergency Fund", "Risk Management"], cta: null },
-  { num: "05", title: "Grow", desc: "Unlock new opportunities and optimise returns.", checks: ["Portfolio Review", "Optimization", "Tax Efficiency", "Long-Term Growth"], cta: null },
-  { num: "06", title: "Achieve", desc: "Live the future you envision.", checks: ["Goal Tracking", "Portfolio Review", "Wealth Preservation", "Legacy Planning"], cta: null },
-];
-const journeyThresholds = [0, 0.15, 0.32, 0.49, 0.66, 0.82];
+
 
 /* ── math helpers ─────────────────────────────── */
 const formatINR = v => `₹ ${Math.round(v).toLocaleString("en-IN")}`;
@@ -205,90 +197,7 @@ const render = () => {
 
   </section>
 
-  <!-- ═══ FINANCIAL JOURNEY ═══ -->
-  <section class="journey" id="journey">
-    
-    <div class="journey-mountain" id="journeyMountain">
-      <div class="journey-mountain-bg">
-        <img src="./assets/journey-mountain.png" alt="Mountain landscape" class="journey-mountain-img" id="journeyMountainImg">
-        <div class="journey-mountain-overlay"></div>
-      </div>
-      <svg class="journey-svg" id="journeySvg" viewBox="0 0 600 800" preserveAspectRatio="xMaxYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="journeyGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="6" />
-          </filter>
-        </defs>
-        <g id="journeyRouteGroup">
-          <!-- Glow path -->
-          <path id="journeyPathGlow" class="journey-path-glow"
-            d="M -170 750 C -70 700, -30 680, -10 640 C 10 600, -40 570, 0 530 C 40 490, 90 500, 110 460 C 130 420, 80 390, 120 350 C 160 310, 210 320, 230 280 C 250 220, 200 190, 240 150 C 280 120, 330 110, 350 75"
-            stroke="var(--gold)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#journeyGlow)" opacity="0.25" />
-          <!-- Main path -->
-          <path id="journeyPath" class="journey-path-main"
-            d="M -170 750 C -70 700, -30 680, -10 640 C 10 600, -40 570, 0 530 C 40 490, 90 500, 110 460 C 130 420, 80 390, 120 350 C 160 310, 210 320, 230 280 C 250 220, 200 190, 240 150 C 280 120, 330 110, 350 75"
-            stroke="var(--gold)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-          <!-- Waypoints (positioned by JS) -->
-          ${journeySteps.map((s, i) => `
-          <g class="journey-waypoint" id="jw${i}" data-wp="${i}" opacity="0.3">
-            <circle class="jw-glow" r="18" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.4" />
-            <circle class="jw-ring" r="10" fill="none" stroke="var(--gold)" stroke-width="2" />
-            <circle class="jw-dot" r="4" fill="var(--gold)" />
-            <text class="jw-label" y="-24" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="11" font-weight="700" font-family="Outfit, sans-serif">${s.title.toUpperCase()}</text>
-          </g>`).join('')}
-        </g>
-      </svg>
-      <canvas class="journey-particles" id="journeyParticles"></canvas>
-      <div class="journey-float-words">
-        <span>CLEARER</span>
-        <span>PATH</span>
-        <span>A BRIGHTER</span>
-        <span>TOMORROW</span>
-      </div>
-    </div>
 
-    <!-- 2. Header -->
-    <div class="journey-header">
-      <div class="container">
-        <p class="eyebrow eyebrow--gold">OUR APPROACH</p>
-        <h2 style="color:#fff;">Your Financial<br><strong>Journey</strong></h2>
-        <p class="sec-sub" style="color:rgba(255,255,255,0.6);">A structured path to help you move from where you are today to where you want to be tomorrow.</p>
-      </div>
-    </div>
-
-    <!-- 3. Interactive Content -->
-    <div class="journey-sticky" id="journeySticky">
-      <!-- LEFT: step nav -->
-      <div class="journey-nav" id="journeyNav">
-        <div class="journey-nav-track">
-          <div class="journey-nav-line"></div>
-          <div class="journey-nav-fill" id="journeyNavFill"></div>
-        </div>
-        <div class="journey-nav-steps">
-          ${journeySteps.map((s, i) => `
-          <div class="journey-step-item${i === 0 ? ' active' : ''}" data-step="${i}">
-            <span class="jsn">${s.num}</span>
-            <span class="jsl">${s.title}</span>
-          </div>`).join('')}
-        </div>
-      </div>
-
-      <!-- CENTER: content card -->
-      <div class="journey-content" id="journeyContent">
-        ${journeySteps.map((s, i) => `
-        <div class="journey-card${i === 0 ? ' active' : ''}" data-card="${i}">
-          <span class="journey-card-num">${s.num}</span>
-          <h3>${s.title}</h3>
-          <p>${s.desc}</p>
-          <ul class="journey-checks">
-            ${s.checks.map(c => `<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> ${c}</li>`).join('')}
-          </ul>
-          ${s.cta ? `<a class="btn btn--gold btn--sm" href="#contact" style="margin-top:20px;">${s.cta}</a>` : ''}
-        </div>`).join('')}
-      </div>
-
-    </div>
-  </section>
 
   <!-- ═══ SERVICES ═══ -->
   <section class="sec sec--cream" id="services" style="position:relative; overflow:hidden;">
@@ -892,26 +801,37 @@ if (!isReduced && window.matchMedia("(hover: hover)").matches) {
   const hero = document.getElementById("top");
   const glow = document.getElementById("heroGlow");
   if (hero && glow) {
+    let heroRect;
+    hero.addEventListener("mouseenter", () => {
+      heroRect = hero.getBoundingClientRect();
+    });
     hero.addEventListener("mousemove", (e) => {
-      const rect = hero.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      if (!heroRect) heroRect = hero.getBoundingClientRect();
+      const x = e.clientX - heroRect.left;
+      const y = e.clientY - heroRect.top;
       glow.style.setProperty('--x', x + "px");
       glow.style.setProperty('--y', y + "px");
     });
+    window.addEventListener("resize", () => { heroRect = null; });
   }
 
   // Magnetic Buttons
   document.querySelectorAll('.btn:not(.no-magnet)').forEach(btn => {
+    let btnRect;
+    btn.addEventListener('mouseenter', () => {
+      btnRect = btn.getBoundingClientRect();
+    });
     btn.addEventListener('mousemove', (e) => {
-      const rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
+      if (!btnRect) btnRect = btn.getBoundingClientRect();
+      const x = e.clientX - btnRect.left - btnRect.width / 2;
+      const y = e.clientY - btnRect.top - btnRect.height / 2;
       btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
     });
     btn.addEventListener('mouseleave', () => {
       btn.style.transform = '';
+      btnRect = null;
     });
+    window.addEventListener("resize", () => { btnRect = null; });
   });
 
   // Header compact on scroll
@@ -925,220 +845,3 @@ if (!isReduced && window.matchMedia("(hover: hover)").matches) {
   });
 }
 
-/* ═══════════════════════════════════════════════
-   FINANCIAL JOURNEY — GSAP ScrollTrigger
-   ═══════════════════════════════════════════════ */
-function initJourney() {
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-    console.warn('GSAP/ScrollTrigger not loaded — journey animation disabled');
-    return;
-  }
-  gsap.registerPlugin(ScrollTrigger);
-
-  const section = document.getElementById('journey');
-  const sticky = document.getElementById('journeySticky');
-  const pathEl = document.getElementById('journeyPath');
-  const glowEl = document.getElementById('journeyPathGlow');
-  const navFill = document.getElementById('journeyNavFill');
-  const canvas = document.getElementById('journeyParticles');
-  const mtnImg = document.getElementById('journeyMountainImg');
-  if (!section || !pathEl) return;
-
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isMobile = window.innerWidth <= 768;
-
-  /* ── Position waypoints on the path ─────────── */
-  const pathLen = pathEl.getTotalLength();
-  const wpFractions = [0.0, 0.17, 0.34, 0.51, 0.68, 1.0];
-  const waypoints = journeySteps.map((_, i) => document.getElementById('jw' + i));
-
-  waypoints.forEach((wp, i) => {
-    if (!wp) return;
-    const pt = pathEl.getPointAtLength(pathLen * wpFractions[i]);
-    wp.setAttribute('transform', `translate(${pt.x}, ${pt.y}) rotate(-5)`);
-  });
-
-  const routeGroup = document.getElementById('journeyRouteGroup');
-  if (routeGroup) {
-    const pivot = pathEl.getPointAtLength(pathLen * wpFractions[0]);
-    const JOURNEY_ROTATION = 5;
-    routeGroup.setAttribute(
-      "transform",
-      `rotate(${JOURNEY_ROTATION} ${pivot.x} ${pivot.y})`
-    );
-  }
-
-  /* ── Set initial dash state ─────────────────── */
-  pathEl.style.strokeDasharray = pathLen;
-  pathEl.style.strokeDashoffset = pathLen;
-  glowEl.style.strokeDasharray = pathLen;
-  glowEl.style.strokeDashoffset = pathLen;
-
-  /* ── Refs for step tracking ─────────────────── */
-  let currentStep = 0;
-  const navItems = document.querySelectorAll('.journey-step-item');
-  const cards = document.querySelectorAll('.journey-card');
-
-  function setActiveStep(idx) {
-    if (idx === currentStep) return;
-    const prev = currentStep;
-    currentStep = idx;
-
-    // Nav items
-    navItems.forEach((el, i) => el.classList.toggle('active', i <= idx));
-
-    // Content cards — animate transition
-    const outCard = cards[prev];
-    const inCard = cards[idx];
-    if (outCard && inCard) {
-      gsap.to(outCard, { opacity: 0, y: -15, duration: 0.35, ease: 'power2.in', onComplete: () => outCard.classList.remove('active') });
-      inCard.classList.add('active');
-      gsap.fromTo(inCard, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', delay: 0.1 });
-    }
-
-    // Waypoints
-    waypoints.forEach((wp, i) => {
-      if (!wp) return;
-      if (i === idx) {
-        gsap.to(wp, { attr: { opacity: 1 }, duration: 0.4, ease: 'power2.out' });
-        gsap.fromTo(wp.querySelector('.jw-ring'), { attr: { r: 10 } }, { attr: { r: 13 }, duration: 0.3, ease: 'power2.out', yoyo: true, repeat: 1 });
-        gsap.to(wp.querySelector('.jw-glow'), { attr: { opacity: 0.8, r: 22 }, duration: 0.5, ease: 'power2.out' });
-      } else if (i < idx) {
-        gsap.to(wp, { attr: { opacity: 0.85 }, duration: 0.3 });
-        gsap.to(wp.querySelector('.jw-glow'), { attr: { opacity: 0.3, r: 18 }, duration: 0.3 });
-      } else {
-        gsap.to(wp, { attr: { opacity: 0.3 }, duration: 0.3 });
-        gsap.to(wp.querySelector('.jw-glow'), { attr: { opacity: 0.15, r: 18 }, duration: 0.3 });
-      }
-    });
-  }
-
-  /* ── Determine step from progress ───────────── */
-  function stepFromProgress(p) {
-    for (let i = journeyThresholds.length - 1; i >= 0; i--) {
-      if (p >= journeyThresholds[i]) return i;
-    }
-    return 0;
-  }
-
-  /* ── Atmospheric Particles ──────────────────── */
-  let particles = [];
-  let animFrameId;
-  if (canvas && !reducedMotion && !isMobile) {
-    const ctx = canvas.getContext('2d');
-    function resizeCanvas() {
-      const rect = canvas.parentElement.getBoundingClientRect();
-      canvas.width = rect.width * window.devicePixelRatio;
-      canvas.height = rect.height * window.devicePixelRatio;
-      canvas.style.width = rect.width + 'px';
-      canvas.style.height = rect.height + 'px';
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    const w = () => canvas.width / window.devicePixelRatio;
-    const h = () => canvas.height / window.devicePixelRatio;
-
-    for (let i = 0; i < 22; i++) {
-      particles.push({
-        x: Math.random() * 600,
-        y: Math.random() * 800,
-        r: Math.random() * 2 + 0.5,
-        vx: (Math.random() - 0.5) * 0.15,
-        vy: -(Math.random() * 0.2 + 0.05),
-        alpha: Math.random() * 0.35 + 0.1,
-      });
-    }
-
-    function drawParticles() {
-      ctx.clearRect(0, 0, w(), h());
-      const cw = w(), ch = h();
-      particles.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.y < -10) { p.y = ch + 10; p.x = Math.random() * cw; }
-        if (p.x < -10) p.x = cw + 10;
-        if (p.x > cw + 10) p.x = -10;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(247, 195, 83, ${p.alpha})`;
-        ctx.fill();
-      });
-      animFrameId = requestAnimationFrame(drawParticles);
-    }
-    drawParticles();
-  }
-
-  /* ── GSAP ScrollTrigger ─────────────────────── */
-  if (reducedMotion) {
-    // Show everything immediately
-    pathEl.style.strokeDashoffset = '0';
-    glowEl.style.strokeDashoffset = '0';
-    if (navFill) navFill.style.height = '100%';
-    waypoints.forEach(wp => { if (wp) wp.setAttribute('opacity', '1'); });
-    cards.forEach((c, i) => { c.classList.toggle('active', i === 0); if (i === 0) { c.style.opacity = '1'; c.style.transform = 'none'; } });
-    navItems.forEach(n => n.classList.add('active'));
-    return;
-  }
-
-  // 1. Scrub animation based on the overall section progress
-  ScrollTrigger.create({
-    trigger: section,
-    start: 'top top',
-    end: 'bottom bottom',
-    scrub: 1,
-    onUpdate: (self) => {
-      const p = self.progress;
-
-      // Draw path - scale p so it finishes drawing early (e.g. at 0.85)
-      const drawP = Math.min(p / 0.85, 1.0);
-      const offset = pathLen * (1 - drawP);
-      pathEl.style.strokeDashoffset = offset;
-      glowEl.style.strokeDashoffset = offset;
-
-      // Nav fill
-      if (navFill) navFill.style.height = (p * 100) + '%';
-
-      // Step activation
-      const step = stepFromProgress(p);
-      if (step !== currentStep) setActiveStep(step);
-
-      // Mountain parallax
-      if (mtnImg) {
-        mtnImg.style.transform = `translateY(${p * -40}px) scale(${1 + p * 0.05})`;
-      }
-    }
-  });
-
-  // 2. Pin the mountain background for the entire section
-  ScrollTrigger.create({
-    trigger: section,
-    start: 'top top',
-    end: 'bottom bottom',
-    pin: document.getElementById('journeyMountain'),
-    pinSpacing: false
-  });
-
-  // 3. Pin the sticky content precisely when it reaches the top
-  ScrollTrigger.create({
-    trigger: sticky,
-    start: 'top top',
-    endTrigger: section,
-    end: 'bottom bottom',
-    pin: true,
-    pinSpacing: false
-  });
-
-  // Handle cleanup if page navigates
-  window.addEventListener('beforeunload', () => {
-    ScrollTrigger.getAll().forEach(st => st.kill());
-    if (animFrameId) cancelAnimationFrame(animFrameId);
-  });
-}
-
-// Init journey after short delay to ensure layout
-requestAnimationFrame(() => {
-  setTimeout(initJourney, 200);
-});

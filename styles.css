@@ -32,7 +32,7 @@ button{cursor:pointer}
 img{display:block;max-width:100%}
 
 /* ── layout ──────────────────────────────────── */
-.container{width:min(1160px,100% - 64px);margin:0 auto}
+.container{width:min(1440px,100% - 64px);margin:0 auto}
 .sec,.ftr{position:relative;z-index:2}
 .sec{padding:100px 0} /* Compact padding for editorial feel */
 
@@ -111,7 +111,7 @@ img{display:block;max-width:100%}
 /* ══════════════════════════════════════════════
    HERO
    ══════════════════════════════════════════════ */
-.hero{position:sticky;top:0;z-index:1;min-height:max(100vh, 800px);display:flex;flex-direction:column;justify-content:center;overflow:hidden;background:#050505}
+.hero{position:sticky;top:0;z-index:1;min-height:max(100vh, 600px);display:flex;flex-direction:column;justify-content:center;overflow:hidden;background:#050505}
 .hero-glow{position:absolute;inset:0;pointer-events:none;z-index:3;background:radial-gradient(circle 600px at var(--x, 50%) var(--y, 50%), rgba(247,195,83,0.06), transparent 80%);opacity:0;transition:opacity 0.6s;}
 .hero:hover .hero-glow{opacity:1;}
 .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.4}
@@ -361,7 +361,7 @@ h1.hero-reveal{animation-delay:0.2s;}
   .hstrip-item{padding:20px 24px}
   .hstrip-cta{margin:16px 0;width:100%;text-align:center;justify-content:center}
   .svc-grid{grid-template-columns:repeat(2,1fr)}
-  .calc-top{grid-template-columns:1fr;gap:40px}
+  .calc-layout{grid-template-columns:1fr;gap:40px}
   .calc-deco{display:none}
   .why-layout{grid-template-columns:1fr;gap:48px}
   .testi-grid{grid-template-columns:1fr 1fr}
@@ -372,6 +372,13 @@ h1.hero-reveal{animation-delay:0.2s;}
   .ftr-cols{flex-wrap:wrap;gap:40px}
   .sec-head{flex-direction:column;align-items:flex-start;gap:24px}
   .partners-row{justify-content:flex-start}
+  .journey-sticky{grid-template-columns:35% 65%;}
+}
+@media(max-width:768px){
+  .journey-sticky{grid-template-columns:100%;}
+  .journey-nav{display:none;}
+  .journey-card{max-width:480px;margin:0 auto;left:0;right:0;position:absolute;}
+  .journey-content{padding:120px 24px;}
 }
 @media(max-width:600px){
   .container{width:min(100% - 32px,480px)}
@@ -576,367 +583,3 @@ h1.hero-reveal{animation-delay:0.2s;}
 }
 .contact-form input:focus { outline: none; border-color: var(--gold); }
 
-/* ══════════════════════════════════════════════
-   FINANCIAL JOURNEY
-   ══════════════════════════════════════════════ */
-.journey {
-  position: relative;
-  z-index: 2;
-  height: 550vh;
-  background: #0a0908;
-}
-/* Mountain Background - Pinned by GSAP */
-.journey-mountain {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: 1;
-  overflow: hidden;
-}
-
-/* Scroll Wrapper to overlay the mountain */
-.journey-scroll-wrap {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-}
-.journey-scroll-wrap > * {
-  pointer-events: auto;
-}
-
-.journey-header {
-  position: relative;
-  z-index: 3;
-  padding: 100px 0 40px;
-  text-align: left;
-}
-.journey-header h2 { color: #fff; }
-
-/* Sticky container pinned by GSAP */
-.journey-sticky {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 22% 28% 1fr;
-  gap: 0;
-  z-index: 5;
-}
-
-/* ── LEFT: Step Navigation ─────────────────── */
-.journey-nav {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  padding: 160px 24px 60px 48px;
-  z-index: 5;
-}
-.journey-nav-track {
-  position: relative;
-  width: 3px;
-  flex-shrink: 0;
-  margin-right: 20px;
-}
-.journey-nav-line {
-  position: absolute;
-  top: 0; bottom: 0; left: 0;
-  width: 3px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 2px;
-}
-.journey-nav-fill {
-  position: absolute;
-  top: 0; left: 0;
-  width: 3px;
-  height: 0%;
-  background: var(--gold);
-  border-radius: 2px;
-  transition: height 0.1s linear;
-  box-shadow: 0 0 10px rgba(247,195,83,0.5);
-}
-.journey-nav-steps {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex: 1;
-}
-.journey-step-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: default;
-  transition: opacity 0.4s ease;
-  opacity: 0.35;
-}
-.journey-step-item.active {
-  opacity: 1;
-}
-.jsn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.5);
-  font-size: 12px;
-  font-weight: 700;
-  flex-shrink: 0;
-  transition: border-color 0.4s, color 0.4s, background 0.4s;
-}
-.journey-step-item.active .jsn {
-  border-color: var(--gold);
-  color: var(--gold);
-  background: rgba(247,195,83,0.1);
-}
-.jsl {
-  color: rgba(255,255,255,0.5);
-  font-size: 14px;
-  font-weight: 600;
-  transition: color 0.4s;
-}
-.journey-step-item.active .jsl {
-  color: #fff;
-}
-
-/* ── CENTER: Content Card ──────────────────── */
-.journey-content {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  padding: 160px 32px;
-  z-index: 5;
-}
-.journey-card {
-  position: absolute;
-  top: 160px;
-  max-width: 340px;
-  padding: 36px 32px;
-  background: rgba(20, 18, 15, 0.8);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(20px);
-  transition: none;
-}
-.journey-card.active {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-.journey-card-num {
-  display: block;
-  color: var(--gold);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  margin-bottom: 8px;
-}
-.journey-card h3 {
-  color: #fff;
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  line-height: 1.2;
-}
-.journey-card p {
-  color: rgba(255,255,255,0.6);
-  font-size: 14px;
-  line-height: 1.7;
-  margin-bottom: 20px;
-}
-.journey-checks {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.journey-checks li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: rgba(255,255,255,0.75);
-  font-size: 13px;
-  font-weight: 500;
-}
-.journey-checks li svg {
-  flex-shrink: 0;
-}
-
-/* ── RIGHT: Mountain + SVG Path (Now at section top) ─── */
-.journey-mountain-bg {
-  position: absolute;
-  inset: 0;
-}
-.journey-mountain-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  will-change: transform;
-}
-.journey-mountain-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(10, 9, 8, 0.95) 0%,
-    rgba(10, 9, 8, 0.5) 30%,
-    rgba(10, 9, 8, 0.1) 60%,
-    rgba(10, 9, 8, 0.3) 100%
-  ),
-  linear-gradient(
-    to bottom,
-    rgba(10, 9, 8, 0.6) 0%,
-    rgba(10, 9, 8, 0.1) 40%,
-    rgba(10, 9, 8, 0.8) 100%
-  );
-  pointer-events: none;
-}
-
-/* Let the SVG take up the whole background space, wait, it's inside journey-mountain which is already positioned! */
-
-.journey-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-  pointer-events: none;
-}
-.journey-path-main {
-  will-change: stroke-dashoffset;
-}
-.journey-path-glow {
-  will-change: stroke-dashoffset;
-}
-
-.journey-waypoint {
-  transition: opacity 0.3s;
-}
-
-.journey-particles {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 4;
-  pointer-events: none;
-}
-
-.journey-float-words {
-  position: absolute;
-  top: 15%;
-  right: 8%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: flex-end;
-  text-align: right;
-  z-index: 5;
-  pointer-events: none;
-}
-.journey-float-words span {
-  color: rgba(255,255,255,0.2);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-}
-
-/* ── Journey Responsive ────────────────────── */
-@media (max-width: 1200px) {
-  .journey-sticky {
-    grid-template-columns: 20% 30% 1fr;
-  }
-  .journey-nav {
-    padding-left: 24px;
-  }
-}
-
-@media (max-width: 992px) {
-  .journey { height: 450vh; }
-  .journey-sticky {
-    grid-template-columns: 18% 32% 1fr;
-  }
-  .journey-nav {
-    padding: 40px 16px 40px 24px;
-  }
-  .jsl { font-size: 12px; }
-  .journey-card { max-width: 280px; padding: 28px 24px; }
-  .journey-card h3 { font-size: 22px; }
-  .journey-float-words { display: none; }
-}
-
-@media (max-width: 768px) {
-  .journey {
-    height: auto;
-    padding-bottom: 60px;
-  }
-  .journey-sticky {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    position: relative;
-  }
-  .journey-nav {
-    flex-direction: row;
-    padding: 24px 16px;
-    gap: 0;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .journey-nav-track { display: none; }
-  .journey-nav-steps {
-    flex-direction: row;
-    gap: 16px;
-    white-space: nowrap;
-  }
-  .journey-step-item { gap: 6px; }
-  .jsn { width: 28px; height: 28px; font-size: 11px; }
-  .jsl { font-size: 12px; }
-
-  .journey-content {
-    position: relative;
-    padding: 0 16px;
-    min-height: 280px;
-  }
-  .journey-card {
-    position: relative;
-    max-width: 100%;
-    display: none;
-    opacity: 1;
-    transform: none;
-    pointer-events: auto;
-  }
-  .journey-card.active { display: block; }
-
-  .journey-mountain {
-    position: relative;
-    height: 50vh;
-    min-height: 300px;
-  }
-  .journey-svg { z-index: 3; }
-  .journey-particles { display: none; }
-  .journey-float-words { display: none; }
-}
-
-@media (max-width: 480px) {
-  .journey-nav {
-    padding: 16px 12px;
-  }
-  .journey-content {
-    padding: 0 12px;
-  }
-  .journey-card { padding: 24px 20px; }
-  .journey-card h3 { font-size: 20px; }
-  .journey-mountain { height: 40vh; min-height: 250px; }
-}

@@ -190,13 +190,16 @@ export function initGlobe(container) {
   renderer.domElement.addEventListener("pointerleave", pointerUp);
   renderer.domElement.addEventListener("wheel", wheel, { passive: false });
 
+  const targetScaleVec = new THREE.Vector3();
+
   const animate = (now) => {
     const delta = Math.min((now - previousTime) / 1000, .05);
     previousTime = now;
     if (!dragging) targetRotationY += delta * .18;
     root.rotation.x += (targetRotationX - root.rotation.x) * .08;
     root.rotation.y += (targetRotationY - root.rotation.y) * .075;
-    root.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), .09);
+    targetScaleVec.set(targetScale, targetScale, targetScale);
+    root.scale.lerp(targetScaleVec, .09);
     arcs.rotation.z += delta * .12;
     arcs.children.forEach((line, index) => {
       line.rotation.z += delta * line.userData.speed * (index % 2 ? .28 : -.2);
