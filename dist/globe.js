@@ -38,15 +38,15 @@ function isLand(longitude, latitude) {
 function buildGlobePoints(radius) {
   const positions = [];
   const colors = [];
-  for (let latitude = -78; latitude <= 80; latitude += 0.95) {
-    for (let longitude = -180; longitude < 180; longitude += 0.95) {
+  for (let latitude = -78; latitude <= 80; latitude += 1.45) {
+    for (let longitude = -180; longitude < 180; longitude += 1.45) {
       if (!isLand(longitude, latitude)) continue;
       const random = Math.abs(Math.sin(longitude * 12.9898 + latitude * 78.233) * 43758.5453) % 1;
       if (random > 0.41) continue;
       const point = latitudeLongitudeToVector(latitude + (random - .5) * .55, longitude + (random - .5) * .55, radius);
       positions.push(point.x, point.y, point.z);
-      // Slightly brighter continent points for better visibility
-      colors.push(0.35, 0.35, 0.35);
+      const color = new THREE.Color().setHSL(.12 + random * .02, .8, .6 + random * .2);
+      colors.push(color.r, color.g, color.b);
     }
   }
   const geometry = new THREE.BufferGeometry();
@@ -54,53 +54,28 @@ function buildGlobePoints(radius) {
   geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
   return new THREE.Points(
     geometry,
-    new THREE.PointsMaterial({ size: .018, vertexColors: true, transparent: true, opacity: .9, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true })
+    new THREE.PointsMaterial({ size: .029, vertexColors: true, transparent: true, opacity: .95, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true })
   );
 }
 
-function buildNetwork(radius) {
-  const group = new THREE.Group();
-  
-  const cityData = [
-    { id: 'ny', lat: 40.71, lon: -74.00 },
-    { id: 'london', lat: 51.50, lon: -0.12 },
-    { id: 'dubai', lat: 25.20, lon: 55.27 },
-    { id: 'mumbai', lat: 19.07, lon: 72.87 },
-    { id: 'sg', lat: 1.35, lon: 103.81 },
-    { id: 'tokyo', lat: 35.68, lon: 139.69 },
-    { id: 'sydney', lat: -33.87, lon: 151.21 },
-    { id: 'saopaulo', lat: -23.55, lon: -46.63 },
-    { id: 'capetown', lat: -33.92, lon: 18.42 },
-    { id: 'frankfurt', lat: 50.11, lon: 8.68 },
-    { id: 'beijing', lat: 39.90, lon: 116.40 },
-    { id: 'moscow', lat: 55.75, lon: 37.61 },
-    { id: 'losangeles', lat: 34.05, lon: -118.24 },
-    { id: 'buenosaires', lat: -34.60, lon: -58.38 },
-    { id: 'cairo', lat: 30.04, lon: 31.23 },
-    { id: 'jakarta', lat: -6.20, lon: 106.81 }
-  ];
-
-  const cityVectors = {};
-  cityData.forEach(c => {
-    const v = latitudeLongitudeToVector(c.lat, c.lon, radius * 1.01);
-    cityVectors[c.id] = v;
-  });
-
-  const dotPositions = [];
-  ['tokyo', 'sydney', 'saopaulo', 'capetown', 'frankfurt', 'beijing', 'moscow', 'losangeles', 'buenosaires', 'cairo', 'jakarta'].forEach(id => {
-    dotPositions.push(cityVectors[id].x, cityVectors[id].y, cityVectors[id].z);
-  });
-  const dotGeometry = new THREE.BufferGeometry();
-  dotGeometry.setAttribute("position", new THREE.Float32BufferAttribute(dotPositions, 3));
-  const dotMaterial = new THREE.PointsMaterial({
-    color: 0xF7C353,
-    size: 0.08,
-    transparent: true,
-    opacity: 0.8
-  });
-  group.add(new THREE.Points(dotGeometry, dotMaterial));
-
-  return { networkGroup: group, cityVectors };
+function buildOrbit(index, radius) {
+  const points = [];
+  const start = -Math.PI * (.15 + index * .032);
+  const end = start + Math.PI * (1.24 + (index % 3) * .22);
+  const orbitRadiusX = radius * (1.12 + (index % 4) * .055);
+  const orbitRadiusY = radius * (.72 + (index % 3) * .12);
+  for (let step = 0; step <= 108; step += 1) {
+    const progress = step / 108;
+    const angle = THREE.MathUtils.lerp(start, end, progress);
+    points.push(new THREE.Vector3(Math.cos(angle) * orbitRadiusX, Math.sin(angle) * orbitRadiusY, 0));
+  }
+  const geometry = new THREE.BufferGeometry().setFromPoints(points);
+  const material = new THREE.LineDashedMaterial({ color: new THREE.Color().setHSL(.12 + (index % 3) * .02, .8, .6), dashSize: .13, gapSize: .25, transparent: true, opacity: .45, depthWrite: false, blending: THREE.AdditiveBlending });
+  const line = new THREE.Line(geometry, material);
+  line.computeLineDistances();
+  line.rotation.set(toRadians(20 + index * 14), toRadians(-28 + index * 27), toRadians(index * 31));
+  line.userData = { speed: .2 + index * .035, material };
+  return line;
 }
 
 export function initGlobe(container) {
@@ -114,7 +89,7 @@ export function initGlobe(container) {
   container.appendChild(renderer.domElement);
 
   const root = new THREE.Group();
-  root.rotation.set(toRadians(15), toRadians(-45), 0);
+  root.rotation.set(toRadians(-8), toRadians(-26), toRadians(7));
   root.scale.set(0.01, 0.01, 0.01);
   scene.add(root);
   const radius = 2.15;
@@ -122,28 +97,12 @@ export function initGlobe(container) {
   root.add(globe);
   const atmosphere = new THREE.Mesh(
     new THREE.SphereGeometry(radius * 1.012, 44, 44),
-    new THREE.MeshBasicMaterial({ color: 0x111111, transparent: true, opacity: .4, side: THREE.BackSide, depthWrite: false, blending: THREE.AdditiveBlending })
+    new THREE.MeshBasicMaterial({ color: 0xf7c353, transparent: true, opacity: .035, side: THREE.BackSide, depthWrite: false, blending: THREE.AdditiveBlending })
   );
   root.add(atmosphere);
-
-  // Geometric Wireframe Mesh
-  const geoMesh = new THREE.LineSegments(
-    new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(radius * 1.015, 3)),
-    new THREE.LineBasicMaterial({ color: 0xF7C353, transparent: true, opacity: 0.35, blending: THREE.AdditiveBlending })
-  );
-  root.add(geoMesh);
-
-  const { networkGroup, cityVectors } = buildNetwork(radius);
-  root.add(networkGroup);
-  
-  const labelElements = {
-    'ny': document.querySelector('.label-ny'),
-    'london': document.querySelector('.label-london'),
-    'dubai': document.querySelector('.label-dubai'),
-    'mumbai': document.querySelector('.label-mumbai'),
-    'sg': document.querySelector('.label-sg')
-  };
-  const tempV = new THREE.Vector3();
+  const arcs = new THREE.Group();
+  for (let index = 0; index < 10; index += 1) arcs.add(buildOrbit(index, radius));
+  root.add(arcs);
 
   let targetScale = 1;
   let targetRotationX = root.rotation.x;
@@ -211,11 +170,6 @@ export function initGlobe(container) {
     if (activePointers.size < 2) {
       lastPinchDistance = 0;
     }
-    if (activePointers.size === 1) {
-      const remaining = Array.from(activePointers.values())[0];
-      lastX = remaining.x;
-      lastY = remaining.y;
-    }
     if (activePointers.size === 0) {
       dragging = false;
       container.classList.remove("is-dragging");
@@ -231,55 +185,18 @@ export function initGlobe(container) {
   renderer.domElement.addEventListener("pointerleave", pointerUp);
   renderer.domElement.addEventListener("wheel", wheel, { passive: false });
 
-  const targetScaleVec = new THREE.Vector3();
-
   const animate = (now) => {
     const delta = Math.min((now - previousTime) / 1000, .05);
     previousTime = now;
-    if (!dragging) targetRotationY += delta * .12;
+    if (!dragging) targetRotationY += delta * .18;
     root.rotation.x += (targetRotationX - root.rotation.x) * .08;
     root.rotation.y += (targetRotationY - root.rotation.y) * .075;
-    targetScaleVec.set(targetScale, targetScale, targetScale);
-    root.scale.lerp(targetScaleVec, .09);
-    
-    // Sync labels
-    const halfW = container.clientWidth / 2;
-    const halfH = container.clientHeight / 2;
-    Object.keys(labelElements).forEach(id => {
-      const el = labelElements[id];
-      const vec = cityVectors[id];
-      if (el && vec) {
-        tempV.copy(vec);
-        // Apply root's transforms
-        tempV.applyMatrix4(root.matrixWorld);
-        // Project to screen
-        tempV.project(camera);
-        
-        // Hide if behind the globe
-        if (tempV.z > 1 || tempV.z < -1) {
-          el.style.opacity = '0';
-          el.style.pointerEvents = 'none';
-        } else {
-          // A rough check if point is behind the center of the sphere in camera view
-          // Actually, if we apply world transform, we can just check if Z < 0 relative to camera
-          const dir = tempV.clone().sub(camera.position).normalize();
-          const dot = dir.dot(new THREE.Vector3(0,0,-1));
-          // For a sphere at origin, a simple trick is comparing world Z
-          const worldPos = vec.clone().applyMatrix4(root.matrixWorld);
-          if (worldPos.z < 0) {
-            el.style.opacity = '0';
-            el.style.pointerEvents = 'none';
-          } else {
-            el.style.opacity = '1';
-            el.style.pointerEvents = 'auto';
-            const x = (tempV.x * halfW) + halfW;
-            const y = -(tempV.y * halfH) + halfH;
-            el.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
-          }
-        }
-      }
+    root.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), .09);
+    arcs.rotation.z += delta * .12;
+    arcs.children.forEach((line, index) => {
+      line.rotation.z += delta * line.userData.speed * (index % 2 ? .28 : -.2);
+      line.rotation.x += delta * line.userData.speed * .06;
     });
-
     renderer.render(scene, camera);
     animationFrame = requestAnimationFrame(animate);
   };

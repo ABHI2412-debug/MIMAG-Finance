@@ -42,6 +42,9 @@ const funds = [
   { name: "MIMAG High-Growth Equity", category: "Equity - Large & Mid Cap", risk: "Very High", return5y: "18.4%", minSip: "₹ 1,000", nav: "124.55", tag: "Top Rated" },
   { name: "MIMAG Tax Saver 80C", category: "ELSS - Tax Saving", risk: "High", return5y: "15.2%", minSip: "₹ 500", nav: "86.12", tag: "Tax Saver" },
   { name: "MIMAG Stable Debt Fund", category: "Debt - Corporate Bond", risk: "Low to Moderate", return5y: "7.8%", minSip: "₹ 1,000", nav: "32.40", tag: "Low Risk" },
+  { name: "MIMAG Bluechip Equity Fund", category: "Equity - Large Cap", risk: "High", return5y: "14.6%", minSip: "₹ 1,000", nav: "192.30", tag: "Consistent" },
+  { name: "MIMAG Flexi Cap Growth", category: "Equity - Flexi Cap", risk: "Very High", return5y: "16.8%", minSip: "₹ 500", nav: "115.80", tag: "Popular" },
+  { name: "MIMAG Liquid Cash Fund", category: "Debt - Liquid", risk: "Low", return5y: "6.2%", minSip: "₹ 1,000", nav: "1024.15", tag: "Short Term" },
 ];
 
 const faqs = [
@@ -66,7 +69,17 @@ const tickers = [
   { name: "NIFTY BANK", val: "48,159.10", change: "+1.20%" },
 ];
 
-
+const lifeStages = [
+  { img: "./assets/ls_first_investment.png", title: "First Investment", desc: "Start your wealth journey with confidence." },
+  { img: "./assets/ls_growing_family.png", title: "Growing Family", desc: "Secure what matters most." },
+  { img: "./assets/ls_retirement_planning.png", title: "Retirement Planning", desc: "Turn today's planning into tomorrow's freedom." },
+  { img: "./assets/ls_tax_efficiency.png", title: "Tax Efficiency", desc: "Keep more of what you earn." },
+  { img: "./assets/ls_legacy_planning.png", title: "Legacy Planning", desc: "Create a lasting impact for generations." },
+  { img: "./assets/ls_wealth_accumulation.png", title: "Wealth Accumulation", desc: "Build a strong foundation for your future." },
+  { img: "./assets/ls_education_planning.png", title: "Education Planning", desc: "Invest in a brighter future." },
+  { img: "./assets/ls_business_expansion.png", title: "Business Expansion", desc: "Fuel your enterprise's growth." },
+  { img: "./assets/ls_debt_management.png", title: "Debt Management", desc: "Overcome financial hurdles with ease." }
+];
 
 /* ── math helpers ─────────────────────────────── */
 const formatINR = v => `₹ ${Math.round(v).toLocaleString("en-IN")}`;
@@ -197,8 +210,6 @@ const render = () => {
 
   </section>
 
-
-
   <!-- ═══ SERVICES ═══ -->
   <section class="sec sec--cream" id="services" style="position:relative; overflow:hidden;">
     <div class="float-text" style="top: 10%; left: 5%; font-size: 42px; --rot: -10deg; --dur: 7s;">Wealth Creation</div>
@@ -236,9 +247,147 @@ const render = () => {
     </div>
   </section>
 
+  <!-- ═══ LIFE STAGES ═══ -->
+  <section class="lifestage-section" id="lifestages">
+    <div class="lifestage-container">
+      <div class="lifestage-left reveal">
+        <p class="eyebrow eyebrow--gold">YOUR LIFE STAGE</p>
+        <h2>Where are you on<br>your financial journey?</h2>
+        <p>Get personalized guidance tailored to your goals, no matter where you are in life.</p>
+        <div class="lifestage-controls">
+          <button class="ls-btn" id="ls-prev" aria-label="Previous">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="ls-btn" id="ls-next" aria-label="Next">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+      
+      <div class="lifestage-carousel" id="ls-carousel">
+        ${[...lifeStages, ...lifeStages, ...lifeStages].map((s, i) => `
+        <div class="ls-card reveal reveal-delay-${(i % 5) + 1}">
+          <div class="ls-img-wrap">
+            <img src="${s.img}" alt="${s.title}">
+          </div>
+          <div class="ls-content">
+            <h3>${s.title}</h3>
+            <p>${s.desc}</p>
+          </div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </section>
 
 
-  <!-- ═══ FEATURED FUNDS ═══ -->
+
+  
+  <!-- ═══ WAYPOINTS ═══ -->
+  <section class="sec waypoint-sec" id="waypoints">
+    <div class="container" style="position:relative; z-index:1;">
+      <div class="wp-layout reveal">
+        <!-- Left Column: Header + Featured Card -->
+        <div class="wp-col-left" style="display: flex; flex-direction: column; gap: 32px;">
+          <div class="wp-header-left">
+            <p class="wp-eyebrow">COMPREHENSIVE SOLUTIONS</p>
+            <h2 class="wp-title">Financial Waypoints</h2>
+            <p class="wp-subtitle">Everything you need. All in one place.</p>
+          </div>
+          
+          <div class="wp-featured" style="flex: 1;">
+            <div class="wp-feat-bg"></div>
+            <div class="wp-feat-badge">CORE PATHWAY</div>
+            <div class="wp-feat-content">
+              <h3>Financial Planning</h3>
+              <p>A holistic plan for your present<br>and future. We align your money<br>with your goals.</p>
+              <a href="#" class="wp-feat-btn">Learn More ↗</a>
+            </div>
+            <div class="wp-feat-watermark">
+              PLANS<br>PEOPLE<br>PROGRESS
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Link + Services Grid -->
+        <div class="wp-col-right reveal-delay-1" style="display: flex; flex-direction: column;">
+          <div class="wp-header-right" style="text-align: right; margin-bottom: 32px;">
+            <a href="#" class="wp-link">View All Services <span style="margin-left:4px;">→</span></a>
+          </div>
+          
+          <div class="wp-grid">
+          <div class="wp-card">
+            <div class="wp-card-top">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wp-icon"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path><path d="M22 4L12 14l-6-6-4 4"></path></svg>
+              <span class="wp-card-arrow">↗</span>
+            </div>
+            <h4>Investments</h4>
+            <p>Mutual Funds, PMS, AIF<br>and more</p>
+            <div class="wp-card-footer">
+              <span class="wp-card-tag">Wealth Growth</span>
+            </div>
+          </div>
+          <div class="wp-card">
+            <div class="wp-card-top">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wp-icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <span class="wp-card-arrow">↗</span>
+            </div>
+            <h4>Insurance</h4>
+            <p>Life, Health and General<br>Insurance</p>
+            <div class="wp-card-footer">
+              <span class="wp-card-tag">Risk Protection</span>
+            </div>
+          </div>
+          <div class="wp-card">
+            <div class="wp-card-top">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wp-icon"><circle cx="12" cy="12" r="10"></circle><path d="M22 12h-10l5-9"></path></svg>
+              <span class="wp-card-arrow">↗</span>
+            </div>
+            <h4>Retirement</h4>
+            <p>Build a financially<br>independent tomorrow</p>
+            <div class="wp-card-footer">
+              <span class="wp-card-tag">Independence</span>
+            </div>
+          </div>
+          <div class="wp-card">
+            <div class="wp-card-top">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wp-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              <span class="wp-card-arrow">↗</span>
+            </div>
+            <h4>Taxes</h4>
+            <p>Strategic tax planning<br>for greater savings</p>
+            <div class="wp-card-footer">
+              <span class="wp-card-tag">Tax Efficiency</span>
+            </div>
+          </div>
+          <div class="wp-card">
+            <div class="wp-card-top">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wp-icon"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+              <span class="wp-card-arrow">↗</span>
+            </div>
+            <h4>Estate Planning</h4>
+            <p>Protect your legacy<br>for generations</p>
+            <div class="wp-card-footer">
+              <span class="wp-card-tag">Legacy Preservation</span>
+            </div>
+          </div>
+          <div class="wp-card">
+            <div class="wp-card-top">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wp-icon"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle><rect x="18" y="3" width="4" height="4" rx="1"></rect></svg>
+              <span class="wp-card-arrow">↗</span>
+            </div>
+            <h4>Loans & Credit</h4>
+            <p>Finance your goals<br>with confidence</p>
+            <div class="wp-card-footer">
+              <span class="wp-card-tag">Capital Access</span>
+            </div>
+          </div>
+        </div> <!-- end wp-card -->
+      </div> <!-- end wp-grid -->
+    </div> <!-- end wp-col-right -->
+  </div> <!-- end wp-layout -->
+</div> <!-- end container -->
+</section>
+\n\n<!-- ═══ FEATURED FUNDS ═══ -->
   <section class="sec sec--dark-bg" id="funds" style="background:#111; color:#fff;">
     <div class="container">
       <div class="sec-head reveal">
@@ -295,49 +444,147 @@ const render = () => {
   </section>
 
   <!-- ═══ CALCULATOR ═══ -->
-  <section class="sec sec--cream" id="calc">
+  <section class="sec sip-sec" id="calc">
     <div class="container">
-      <div class="calc-layout">
-        <div class="calc-intro">
-          <p class="eyebrow">OUR CALCULATOR</p>
-          <h2>See the Power of<br><strong>Compounding.</strong></h2>
-          <p class="sec-sub">Find out how your small, consistent investments can grow into something big over time.</p>
-          <div class="calc-deco" style="margin-top: 40px; font-family: 'Great Vibes', 'Brush Script MT', cursive; font-size: 40px; color: var(--muted); transform: rotate(-8deg); opacity: 0.6; line-height: 1;">Small Steps<br>Big Possibilities</div>
-        </div>
+      <div class="sip-layout">
         
-        <div class="calc-center">
-          <div class="calc-panel reveal reveal-delay-1">
-            <div class="calc-tabs">
-              <button class="calc-tab active" data-mode="sip">SIP Calculator</button>
-              <button class="calc-tab" data-mode="ls">Lumpsum Calculator</button>
-            </div>
-            <div class="calc-form" id="calcForm">
-              <label class="calc-field">
-                <span>Monthly Investment</span>
-                <div class="calc-input"><span class="pre">₹</span><input type="number" id="cIn1" value="5000" min="500" max="100000" step="500"></div>
-              </label>
-              <label class="calc-field">
-                <span>Expected Return (p.a.)</span>
-                <div class="calc-input"><input type="number" id="cIn2" value="12" min="1" max="30" step="0.5"><span class="suf">%</span></div>
-              </label>
-              <label class="calc-field">
-                <span>Time Period</span>
-                <div class="calc-input"><input type="number" id="cIn3" value="20" min="1" max="30" step="1"><span class="suf">Years</span></div>
-              </label>
-              <button class="btn btn--gold btn--block" id="calcBtn" type="button">Calculate Now →</button>
-            </div>
+        <!-- Left Column: Intro Text -->
+        <div class="sip-intro">
+          <p class="sip-eyebrow">FINANCIAL TOOLS</p>
+          <h2 class="sip-title">Plan Smarter.<br>See Further.</h2>
+          <p class="sip-sub">Use our easy-to-use calculators to visualize your goals and make informed decisions.</p>
+        </div>
+
+        <!-- Center Column: Calculator Card -->
+        <div class="sip-card-container">
+          <div class="sip-tabs">
+            <button class="sip-tab active" data-mode="sip">SIP Calculator</button>
+            <button class="sip-tab" data-mode="lumpsum">Lumpsum</button>
+            <button class="sip-tab" data-mode="retirement">Retirement</button>
+            <button class="sip-tab" data-mode="goal">Goal Planner</button>
+            <button class="sip-tab" data-mode="education">Education</button>
+            <button class="sip-tab" data-mode="tax">Tax Savings</button>
           </div>
-          <div class="calc-results-row" id="calcResults">
-            <div class="calc-res-item"><strong id="rInv">₹ 12,00,000</strong><span>Total Investment</span></div>
-            <div class="calc-res-item"><strong id="rRet">₹ 34,71,332</strong><span>Estimated Returns</span></div>
-            <div class="calc-res-item"><strong id="rTot">₹ 46,71,332</strong><span>Total Value</span></div>
+
+          <div class="sip-card-body">
+            <!-- Left: Inputs Form -->
+            <div class="sip-form">
+              <div class="sip-field">
+                <label id="lbl1">Monthly Investment</label>
+                <div class="sip-input-wrap">
+                  <span class="sip-prefix">₹</span>
+                  <input type="text" id="sipVal1" value="10,000" />
+                </div>
+              </div>
+
+              <div class="sip-field">
+                <label id="lbl2">Expected Return (p.a.)</label>
+                <div class="sip-input-wrap">
+                  <input type="number" id="sipVal2" value="12" step="0.5" />
+                  <span class="sip-suffix">%</span>
+                </div>
+              </div>
+
+              <div class="sip-field">
+                <label id="lbl3">Time Period</label>
+                <div class="sip-input-wrap">
+                  <input type="number" id="sipVal3" value="20" min="1" max="30" />
+                  <span class="sip-suffix" id="lbl3Suffix">Years</span>
+                </div>
+              </div>
+
+              <button class="sip-btn" id="sipCalcBtn" type="button">
+                Calculate Now <span>↗</span>
+              </button>
+            </div>
+
+            <!-- Right: Results & Chart -->
+            <div class="sip-results">
+              <div class="sip-res-header">
+                <span class="sip-res-label">Your Investment Growth</span>
+                <div class="sip-res-amount" id="sipTotalVal">₹ 75,97,000</div>
+              </div>
+
+              <div class="sip-legend">
+                <div class="sip-legend-item">
+                  <span class="sip-dot sip-dot--invested"></span>
+                  <span>Invested Amount</span>
+                </div>
+                <div class="sip-legend-item">
+                  <span class="sip-dot sip-dot--returns"></span>
+                  <span>Estimated Returns</span>
+                </div>
+              </div>
+
+              <div class="sip-chart-container" id="sipChart">
+                <!-- SVG stacked bar chart rendered via JS -->
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="calc-right">
-          <div class="calc-deco-right" style="margin-top: 40px; font-family: 'Great Vibes', 'Brush Script MT', cursive; font-size: 40px; color: var(--muted); transform: rotate(-8deg); opacity: 0.6; text-align: right; line-height: 1;">Invest<br>today<br>for a brighter<br>tomorrow</div>
-          <!-- We don't have the plant image, so we just use the text layout as close as possible -->
+        <!-- Right Column: Poster Card -->
+        <div class="sip-poster">
+          <div class="sip-poster-bg" style="background-image: url('./assets/sip_card_banner.jpg');"></div>
+          <div class="sip-poster-overlay"></div>
+          <div class="sip-poster-content">
+            <h3>Small Steps<br>Big Possibilities</h3>
+            <p>Plan today for<br>a brighter tomorrow.</p>
+          </div>
         </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GLOBAL PERSPECTIVE ═══ -->
+  <section class="sec global-sec">
+    <div class="container">
+      <div class="global-layout">
+        
+        <!-- Left Column -->
+        <div class="global-left reveal">
+          <p class="eyebrow eyebrow--gold" style="letter-spacing:0.2em; font-size:11px; margin-bottom:8px;">GLOBAL PERSPECTIVE</p>
+          <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size:44px; line-height:1.15; font-weight:400; margin-bottom:16px;">A World of<br>Opportunities</h2>
+          <p style="color:rgba(255,255,255,0.7); font-size:14px; line-height:1.6; max-width:85%; margin-bottom:32px;">Your goals aren't limited by borders.<br>We help you explore global markets<br>and emerging investment themes.</p>
+          <a href="#" class="btn btn-gold-outline" style="display:inline-flex; align-items:center; gap:8px; padding:12px 24px; border:1px solid #D4AF37; color:#D4AF37; font-size:13px; font-weight:500; letter-spacing:0.02em; background:transparent; border-radius:4px;">Explore Global Opportunities <span>↗</span></a>
+        </div>
+
+        <!-- Center Column -->
+        <div class="global-center reveal reveal-delay-1">
+          <div id="globe-scene"></div>
+          
+          <div class="globe-labels">
+            <div class="globe-label label-ny"><span>New York</span><div class="globe-dot"></div></div>
+            <div class="globe-label label-london"><span>London</span><div class="globe-dot"></div></div>
+            <div class="globe-label label-dubai"><span>Dubai</span><div class="globe-dot"></div></div>
+            <div class="globe-label label-mumbai active"><span>Mumbai</span></div>
+            <div class="globe-label label-sg"><span>Singapore</span><div class="globe-dot"></div></div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="global-right reveal reveal-delay-2">
+          <div class="global-stats">
+            <div class="global-stat">
+              <h4>6+</h4>
+              <p>Global Markets We Track</p>
+            </div>
+            <div class="global-stat">
+              <h4>100+</h4>
+              <p>Investment Themes</p>
+            </div>
+            <div class="global-stat" style="border:none;">
+              <h4>Infinite</h4>
+              <p>Possibilities</p>
+            </div>
+          </div>
+          
+          <div class="global-card">
+            <img src="./assets/global_portrait_card.jpg" alt="Cityscape" style="border-radius: 12px; display: block;">
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -594,72 +841,207 @@ const render = () => {
   `;
 };
 
-/* ── calculator logic ────────────────────────── */
-let calcMode = "sip";
+/* ── SIP CALCULATOR LOGIC (1:1 Reference Implementation) ── */
+let sipMode = "sip";
 
-function runCalc() {
-  const v1 = Math.max(1, Number(document.querySelector("#cIn1").value) || 0);
-  const v2 = Math.max(1, Number(document.querySelector("#cIn2").value) || 0);
-  const v3 = Math.max(1, Number(document.querySelector("#cIn3").value) || 0);
-
-  let invested, total;
-  if (calcMode === "sip") {
-    invested = v1 * v3 * 12;
-    total = sipFV(v1, v2, v3);
-  } else {
-    invested = v1;
-    total = lsFV(v1, v2, v3);
-  }
-  const returns = total - invested;
-
-  const elInv = document.querySelector("#rInv");
-  const elRet = document.querySelector("#rRet");
-  const elTot = document.querySelector("#rTot");
-
-  const pInv = elInv.dataset.val ? parseFloat(elInv.dataset.val) : null;
-
-  if (pInv === null) {
-    elInv.textContent = formatINR(invested);
-    elRet.textContent = formatINR(returns);
-    elTot.textContent = formatINR(total);
-  } else {
-    animateValue(elInv, pInv, invested, 500);
-    animateValue(elRet, parseFloat(elRet.dataset.val), returns, 500);
-    animateValue(elTot, parseFloat(elTot.dataset.val), total, 500);
-
-    // Highlight flash
-    [elInv, elRet, elTot].forEach(el => {
-      el.classList.remove('highlight-flash');
-      void el.offsetWidth;
-      el.classList.add('highlight-flash');
-    });
-  }
-
-  elInv.dataset.val = invested;
-  elRet.dataset.val = returns;
-  elTot.dataset.val = total;
+function parseRawNumber(str) {
+  if (typeof str === 'number') return str;
+  return parseFloat(String(str).replace(/,/g, '')) || 0;
 }
 
-function switchCalcMode(mode) {
-  calcMode = mode;
-  document.querySelectorAll(".calc-tab").forEach(b => b.classList.toggle("active", b.dataset.mode === mode));
-  const form = document.querySelector("#calcForm");
-  if (mode === "sip") {
-    form.innerHTML = `
-      <label class="calc-field"><span>Monthly Investment</span><div class="calc-input"><span class="pre">₹</span><input type="number" id="cIn1" value="5000" min="500" max="100000" step="500"></div></label>
-      <label class="calc-field"><span>Expected Return</span><div class="calc-input"><input type="number" id="cIn2" value="12" min="1" max="30" step="0.5"><span class="suf">%</span></div></label>
-      <label class="calc-field"><span>Time Period</span><div class="calc-input"><input type="number" id="cIn3" value="20" min="1" max="30" step="1"><span class="suf">Years</span></div></label>
-      <button class="btn btn--gold btn--block" id="calcBtn" type="button">Calculate Now →</button>`;
+function runSipCalc() {
+  const in1 = document.querySelector("#sipVal1");
+  const in2 = document.querySelector("#sipVal2");
+  const in3 = document.querySelector("#sipVal3");
+  if (!in1 || !in2 || !in3) return;
+
+  const v1 = Math.max(100, parseRawNumber(in1.value));
+  const v2 = Math.max(0.1, parseRawNumber(in2.value));
+  const v3 = Math.max(1, Math.min(30, parseRawNumber(in3.value)));
+
+  let invested = 0;
+  let total = 0;
+
+  if (sipMode === "sip") {
+    invested = v1 * v3 * 12;
+    total = sipFV(v1, v2, v3);
+  } else if (sipMode === "lumpsum") {
+    invested = v1;
+    total = lsFV(v1, v2, v3);
   } else {
-    form.innerHTML = `
-      <label class="calc-field"><span>Investment Amount</span><div class="calc-input"><span class="pre">₹</span><input type="number" id="cIn1" value="500000" min="5000" max="10000000" step="5000"></div></label>
-      <label class="calc-field"><span>Expected Return</span><div class="calc-input"><input type="number" id="cIn2" value="12" min="1" max="30" step="0.5"><span class="suf">%</span></div></label>
-      <label class="calc-field"><span>Time Period</span><div class="calc-input"><input type="number" id="cIn3" value="10" min="1" max="30" step="1"><span class="suf">Years</span></div></label>
-      <button class="btn btn--gold btn--block" id="calcBtn" type="button">Calculate Now →</button>`;
+    invested = v1 * v3 * 12;
+    total = sipFV(v1, v2, v3);
   }
-  document.querySelector("#calcBtn").addEventListener("click", runCalc);
-  document.querySelectorAll("#calcForm input").forEach(i => i.addEventListener("input", runCalc));
-  runCalc();
+
+  const totalEl = document.querySelector("#sipTotalVal");
+  if (totalEl) {
+    totalEl.textContent = formatINR(Math.round(total));
+  }
+
+  renderSipChart(v1, v2, v3, sipMode);
+}
+
+function renderSipChart(v1, v2, years, mode) {
+  const container = document.querySelector("#sipChart");
+  if (!container) return;
+
+  const svgWidth = 340;
+  const svgHeight = 180;
+  const marginTop = 15;
+  const marginBottom = 25;
+  const marginLeft = 38;
+  const marginRight = 10;
+
+  const chartW = svgWidth - marginLeft - marginRight;
+  const chartH = svgHeight - marginTop - marginBottom;
+
+  const yearData = [];
+  let maxVal = 0;
+
+  for (let y = 1; y <= years; y++) {
+    let invY = 0;
+    let totY = 0;
+    if (mode === "lumpsum") {
+      invY = v1;
+      totY = lsFV(v1, v2, y);
+    } else {
+      invY = v1 * y * 12;
+      totY = sipFV(v1, v2, y);
+    }
+    const retY = Math.max(0, totY - invY);
+    if (totY > maxVal) maxVal = totY;
+    yearData.push({ year: y, invested: invY, returns: retY, total: totY });
+  }
+
+  if (maxVal === 0) maxVal = 100000;
+
+  // Y Axis ticks
+  const yTicksCount = 4;
+  const yStep = maxVal / yTicksCount;
+  let yGridHtml = '';
+
+  for (let k = 0; k <= yTicksCount; k++) {
+    const val = yStep * k;
+    const yPos = marginTop + chartH - (k / yTicksCount) * chartH;
+    let labelText = '';
+    if (val >= 10000000) {
+      labelText = (val / 10000000).toFixed(1) + 'Cr';
+    } else if (val >= 100000) {
+      labelText = Math.round(val / 100000) + 'L';
+    } else if (val >= 1000) {
+      labelText = Math.round(val / 1000) + 'k';
+    } else {
+      labelText = '0L';
+    }
+
+    yGridHtml += `
+      <line x1="${marginLeft}" y1="${yPos}" x2="${svgWidth - marginRight}" y2="${yPos}" stroke="#EAE5DC" stroke-width="1" stroke-dasharray="2 2" />
+      <text x="${marginLeft - 6}" y="${yPos + 4}" fill="#888888" font-size="10" font-family="sans-serif" text-anchor="end">${labelText}</text>
+    `;
+  }
+
+  // X Axis Ticks
+  let xGridHtml = '';
+  const numBars = yearData.length;
+  const barSpacing = chartW / numBars;
+  const barW = Math.max(3, barSpacing * 0.55);
+
+  let barsHtml = '';
+
+  yearData.forEach((d) => {
+    const xCenter = marginLeft + (d.year - 1) * barSpacing + barSpacing / 2;
+    const barX = xCenter - barW / 2;
+
+    const invH = (d.invested / maxVal) * chartH;
+    const retH = (d.returns / maxVal) * chartH;
+
+    const invYPos = marginTop + chartH - invH;
+    const retYPos = invYPos - retH;
+
+    barsHtml += `
+      <rect x="${barX}" y="${invYPos}" width="${barW}" height="${invH}" fill="#4A5A6A" rx="1.5" />
+      <rect x="${barX}" y="${retYPos}" width="${barW}" height="${retH}" fill="#E5B345" rx="1.5" />
+    `;
+
+    if (d.year === 1 || d.year % 5 === 0 || d.year === years) {
+      xGridHtml += `
+        <text x="${xCenter}" y="${svgHeight - 6}" fill="#888888" font-size="10" font-family="sans-serif" text-anchor="middle">${d.year}</text>
+      `;
+    }
+  });
+
+  const baseLineY = marginTop + chartH;
+
+  container.innerHTML = `
+    <svg width="100%" height="100%" viewBox="0 0 ${svgWidth} ${svgHeight}" preserveAspectRatio="none">
+      ${yGridHtml}
+      <line x1="${marginLeft}" y1="${baseLineY}" x2="${svgWidth - marginRight}" y2="${baseLineY}" stroke="#D8D2C6" stroke-width="1" />
+      ${barsHtml}
+      ${xGridHtml}
+    </svg>
+  `;
+}
+
+function switchSipTab(mode) {
+  sipMode = mode;
+  document.querySelectorAll(".sip-tab").forEach(b => {
+    b.classList.toggle("active", b.dataset.mode === mode);
+  });
+
+  const lbl1 = document.querySelector("#lbl1");
+  const in1 = document.querySelector("#sipVal1");
+  const in2 = document.querySelector("#sipVal2");
+  const in3 = document.querySelector("#sipVal3");
+
+  if (mode === "lumpsum") {
+    if (lbl1) lbl1.textContent = "Investment Amount";
+    if (in1) in1.value = "5,00,000";
+    if (in2) in2.value = "12";
+    if (in3) in3.value = "10";
+  } else if (mode === "retirement") {
+    if (lbl1) lbl1.textContent = "Monthly Savings";
+    if (in1) in1.value = "15,000";
+    if (in2) in2.value = "12";
+    if (in3) in3.value = "25";
+  } else if (mode === "goal") {
+    if (lbl1) lbl1.textContent = "Monthly Contribution";
+    if (in1) in1.value = "20,000";
+    if (in2) in2.value = "12";
+    if (in3) in3.value = "15";
+  } else if (mode === "education") {
+    if (lbl1) lbl1.textContent = "Monthly Fund";
+    if (in1) in1.value = "10,000";
+    if (in2) in2.value = "11";
+    if (in3) in3.value = "15";
+  } else if (mode === "tax") {
+    if (lbl1) lbl1.textContent = "Monthly ELSS";
+    if (in1) in1.value = "12,500";
+    if (in2) in2.value = "14";
+    if (in3) in3.value = "10";
+  } else {
+    if (lbl1) lbl1.textContent = "Monthly Investment";
+    if (in1) in1.value = "10,000";
+    if (in2) in2.value = "12";
+    if (in3) in3.value = "20";
+  }
+
+  runSipCalc();
+}
+
+function initSipEvents() {
+  const btn = document.querySelector("#sipCalcBtn");
+  if (btn) btn.addEventListener("click", runSipCalc);
+
+  ["#sipVal1", "#sipVal2", "#sipVal3"].forEach(id => {
+    const el = document.querySelector(id);
+    if (el) el.addEventListener("input", runSipCalc);
+  });
+
+  document.querySelectorAll(".sip-tab").forEach(b => {
+    b.addEventListener("click", () => switchSipTab(b.dataset.mode));
+  });
+
+  runSipCalc();
 }
 
 /* ── toast ────────────────────────────────────── */
@@ -673,11 +1055,8 @@ function toast(msg) {
 /* ── boot ─────────────────────────────────────── */
 render();
 
-// Calculator
-document.querySelector("#calcBtn").addEventListener("click", runCalc);
-document.querySelectorAll("#calcForm input").forEach(i => i.addEventListener("input", runCalc));
-document.querySelectorAll(".calc-tab").forEach(b => b.addEventListener("click", () => switchCalcMode(b.dataset.mode)));
-runCalc();
+// SIP Calculator
+initSipEvents();
 
 // Globe — delay init to ensure layout is settled
 requestAnimationFrame(() => {
@@ -843,5 +1222,224 @@ if (!isReduced && window.matchMedia("(hover: hover)").matches) {
       hdr.classList.remove("scrolled");
     }
   });
+
+  // Life Stage Carousel Scroll & Autorotate
+  const carousel = document.getElementById('ls-carousel');
+  const btnPrev = document.getElementById('ls-prev');
+  const btnNext = document.getElementById('ls-next');
+
+  if (carousel && btnPrev && btnNext) {
+    const scrollAmount = 324; // Card width + gap
+    const originalSetWidth = lifeStages.length * scrollAmount;
+
+    // Start in the middle set to allow immediate left/right infinite scroll
+    // Delay initialization slightly to ensure layout is done
+    setTimeout(() => {
+      carousel.scrollLeft = originalSetWidth;
+    }, 100);
+
+    let autoRotateInterval;
+
+    const scrollNext = () => {
+      // If we've scrolled near the end of the second set, jump back to first set seamlessly
+      if (carousel.scrollLeft >= originalSetWidth * 2 - scrollAmount) {
+        carousel.scrollBy({ left: -originalSetWidth, behavior: 'instant' });
+      }
+      setTimeout(() => {
+        carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }, 20);
+    };
+
+    const scrollPrev = () => {
+      // If we've scrolled near the start of the second set, jump forward seamlessly
+      if (carousel.scrollLeft <= scrollAmount) {
+        carousel.scrollBy({ left: originalSetWidth, behavior: 'instant' });
+      }
+      setTimeout(() => {
+        carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      }, 20);
+    };
+
+    const startAutoRotate = () => {
+      stopAutoRotate();
+      autoRotateInterval = setInterval(scrollNext, 1800); // 1.8 seconds
+    };
+
+    const stopAutoRotate = () => {
+      if (autoRotateInterval) clearInterval(autoRotateInterval);
+    };
+
+    btnPrev.addEventListener('click', () => {
+      scrollPrev();
+      startAutoRotate(); // Reset timer on manual click
+    });
+
+    btnNext.addEventListener('click', () => {
+      scrollNext();
+      startAutoRotate(); // Reset timer on manual click
+    });
+
+    // Pause on hover or touch
+    carousel.addEventListener('mouseenter', stopAutoRotate);
+    carousel.addEventListener('mouseleave', startAutoRotate);
+    carousel.addEventListener('touchstart', stopAutoRotate, { passive: true });
+    carousel.addEventListener('touchend', startAutoRotate);
+
+    // Start initially
+    startAutoRotate();
+  }
 }
+
+const hero = document.getElementById("top");
+const glow = document.getElementById("heroGlow");
+if (hero && glow) {
+  let heroRect;
+  hero.addEventListener("mouseenter", () => {
+    heroRect = hero.getBoundingClientRect();
+  });
+  hero.addEventListener("mousemove", (e) => {
+    if (!heroRect) heroRect = hero.getBoundingClientRect();
+    const x = e.clientX - heroRect.left;
+    const y = e.clientY - heroRect.top;
+    glow.style.setProperty('--x', x + "px");
+    glow.style.setProperty('--y', y + "px");
+  });
+  window.addEventListener("resize", () => { heroRect = null; });
+}
+
+// Magnetic Buttons
+document.querySelectorAll('.btn:not(.no-magnet)').forEach(btn => {
+  let btnRect;
+  btn.addEventListener('mouseenter', () => {
+    btnRect = btn.getBoundingClientRect();
+  });
+  btn.addEventListener('mousemove', (e) => {
+    if (!btnRect) btnRect = btn.getBoundingClientRect();
+    const x = e.clientX - btnRect.left - btnRect.width / 2;
+    const y = e.clientY - btnRect.top - btnRect.height / 2;
+    btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = '';
+    btnRect = null;
+  });
+  window.addEventListener("resize", () => { btnRect = null; });
+});
+
+// Header compact on scroll
+const hdr = document.querySelector(".hdr");
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    hdr.classList.add("scrolled");
+  } else {
+    hdr.classList.remove("scrolled");
+  }
+});
+
+// Life Stage Carousel Scroll & Autorotate
+const carousel = document.getElementById('ls-carousel');
+const btnPrev = document.getElementById('ls-prev');
+const btnNext = document.getElementById('ls-next');
+
+if (carousel && btnPrev && btnNext) {
+  const scrollAmount = 324; // Card width + gap
+  const originalSetWidth = lifeStages.length * scrollAmount;
+
+  // Start in the middle set to allow immediate left/right infinite scroll
+  // Delay initialization slightly to ensure layout is done
+  setTimeout(() => {
+    carousel.scrollLeft = originalSetWidth;
+  }, 100);
+
+  let autoRotateInterval;
+
+  const scrollNext = () => {
+    // If we've scrolled near the end of the second set, jump back to first set seamlessly
+    if (carousel.scrollLeft >= originalSetWidth * 2 - scrollAmount) {
+      carousel.scrollBy({ left: -originalSetWidth, behavior: 'instant' });
+    }
+    setTimeout(() => {
+      carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }, 20);
+  };
+
+  const scrollPrev = () => {
+    // If we've scrolled near the start of the second set, jump forward seamlessly
+    if (carousel.scrollLeft <= scrollAmount) {
+      carousel.scrollBy({ left: originalSetWidth, behavior: 'instant' });
+    }
+    setTimeout(() => {
+      carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    }, 20);
+  };
+
+  const startAutoRotate = () => {
+    stopAutoRotate();
+    autoRotateInterval = setInterval(scrollNext, 1800); // 1.8 seconds
+  };
+
+  const stopAutoRotate = () => {
+    if (autoRotateInterval) clearInterval(autoRotateInterval);
+  };
+
+  btnPrev.addEventListener('click', () => {
+    scrollPrev();
+    startAutoRotate(); // Reset timer on manual click
+  });
+
+  btnNext.addEventListener('click', () => {
+    scrollNext();
+    startAutoRotate(); // Reset timer on manual click
+  });
+
+  // Pause on hover or touch
+  carousel.addEventListener('mouseenter', stopAutoRotate);
+  carousel.addEventListener('mouseleave', startAutoRotate);
+  carousel.addEventListener('touchstart', stopAutoRotate, { passive: true });
+  carousel.addEventListener('touchend', startAutoRotate);
+
+  // Start initially
+  startAutoRotate();
+}
+
+// --- Hero Section Scroll Animation ---
+// The user loved the zoom-out effect specifically on the hero section, so we restore it here.
+const heroSection = document.querySelector('.hero');
+if (heroSection) {
+  ScrollTrigger.create({
+    trigger: heroSection,
+    start: "top top",
+    pin: true,
+    pinSpacing: false, // Next section scrolls over it
+    id: 'pin-hero'
+  });
+
+  gsap.to(heroSection, {
+    scale: 0.92,
+    opacity: 0.4,
+    ease: "none",
+    scrollTrigger: {
+      trigger: heroSection,
+      start: "top top",
+      end: () => `+=${heroSection.offsetHeight}`,
+      scrub: true,
+    }
+  });
+}
+
+// --- Image Parallax Effect ---
+// Add parallax to specific images for depth without lag
+const parallaxImages = gsap.utils.toArray('.global-card img, .parallax-img, .waypoints-bg');
+parallaxImages.forEach(img => {
+  gsap.to(img, {
+    yPercent: 15, // Move the image slightly down as we scroll
+    ease: "none",
+    scrollTrigger: {
+      trigger: img.parentElement,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true
+    }
+  });
+});
 
