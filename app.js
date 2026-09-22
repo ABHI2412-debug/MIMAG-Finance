@@ -110,8 +110,8 @@ const render = () => {
   <div id="scroll-progress"></div>
 
   <!-- ═══ TICKER ═══ -->
-  <div class="ticker-wrap">
-    <div class="ticker">
+  <div class="ticker-wrap" id="tickerWrap">
+    <div class="ticker" id="liveTicker">
       ${[...tickers, ...tickers, ...tickers, ...tickers].map(t => `
       <div class="ticker-item">
         <span>${t.name}</span>
@@ -210,42 +210,6 @@ const render = () => {
 
   </section>
 
-  <!-- ═══ SERVICES ═══ -->
-  <section class="sec sec--cream" id="services" style="position:relative; overflow:hidden;">
-    <div class="float-text" style="top: 10%; left: 5%; font-size: 42px; --rot: -10deg; --dur: 7s;">Wealth Creation</div>
-    <div class="float-text" style="top: 35%; right: 8%; font-size: 46px; --rot: 8deg; --dur: 8.5s;">Secure Future</div>
-    <div class="float-text" style="top: 60%; left: -2%; font-size: 40px; --rot: -12deg; --dur: 6.5s;">Strategic Planning</div>
-    <div class="float-text" style="bottom: 15%; right: 15%; font-size: 44px; --rot: 10deg; --dur: 9s;">Financial Freedom</div>
-    <div class="float-text" style="bottom: 5%; left: 30%; font-size: 48px; --rot: -5deg; --dur: 7.5s;">Legacy Building</div>
-    
-    <div class="container" style="position:relative; z-index:1;">
-      <div class="sec-head reveal">
-        <div>
-          <p class="eyebrow">OUR SERVICES</p>
-          <h2>Complete Financial Solutions<br><strong>Under One Roof.</strong></h2>
-          <p class="sec-sub">Whether you want to grow your wealth, protect what matters, or plan for the future — we offer a wide range of financial solutions tailored to your goals.</p>
-        </div>
-        <div style="text-align: right;">
-          <a class="link-arrow" href="#contact" style="display:block; margin-bottom: 24px; position:relative; z-index:2;">Explore All Services</a>
-          <div style="font-family: 'Great Vibes', 'Brush Script MT', cursive; font-size: 42px; color: var(--muted); transform: rotate(-8deg); opacity: 0.7; padding-right: 24px; margin-top: 16px; line-height: 1.1; display: inline-block;">Your Goals<br>Our Guidance</div>
-        </div>
-      </div>
-      <div class="svc-grid">
-        ${services.map((s, i) => `
-        <div class="svc-card reveal reveal-delay-${(i % 5) + 1}" data-index="${i}" style="cursor:pointer;" onclick="openServiceModal(${i})">
-          <span class="svc-ico">${s.icon}</span>
-          <h3>${s.name}</h3>
-          <p>${s.desc}</p>
-          <div style="text-align: right; margin-top: auto; color: var(--gold); font-size: 16px;">→</div>
-        </div>`).join("")}
-        <div class="svc-card svc-card--cta reveal reveal-delay-5" style="cursor:pointer;" onclick="document.getElementById('contactModal').classList.add('active')">
-          <p>Not sure<br>what's right for you?</p>
-          <strong>Talk to our experts for personalised advice.</strong>
-          <div style="margin-top:auto; width:36px; height:36px; border-radius:50%; background:var(--gold); display:grid; place-items:center; color:var(--black); font-size:16px;">→</div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ═══ LIFE STAGES ═══ -->
   <section class="lifestage-section" id="lifestages">
@@ -281,19 +245,88 @@ const render = () => {
 
 
 
+  <!-- ═══ OUR APPROACH ═══ -->
+  <section class="sec approach-sec" id="process">
+    <div class="mountain-marker" id="mountainMarker"><span class="marker-label" id="markerLabel"></span></div>
+    <div class="container approach-layout">
+      <div class="approach-header reveal">
+        <p class="fv-eyebrow">OUR APPROACH</p>
+        <h2>Your Financial Journey</h2>
+        <p>A structured path to help you move from where you are today<br>to where you want to be tomorrow.</p>
+      </div>
+      
+      <div class="approach-content reveal reveal-delay-1">
+        <!-- Left: Steps List -->
+        <div class="approach-steps" id="approachSteps">
+          <div class="approach-step active" data-step="0">
+            <div class="approach-step-line"></div>
+            <div class="approach-step-dot"></div>
+            <span class="approach-step-num">01</span>
+            <span class="approach-step-label">Understand</span>
+          </div>
+          <div class="approach-step" data-step="1">
+            <div class="approach-step-line"></div>
+            <div class="approach-step-dot"></div>
+            <span class="approach-step-num">02</span>
+            <span class="approach-step-label">Plan</span>
+          </div>
+          <div class="approach-step" data-step="2">
+            <div class="approach-step-line"></div>
+            <div class="approach-step-dot"></div>
+            <span class="approach-step-num">03</span>
+            <span class="approach-step-label">Invest</span>
+          </div>
+          <div class="approach-step" data-step="3">
+            <div class="approach-step-line"></div>
+            <div class="approach-step-dot"></div>
+            <span class="approach-step-num">04</span>
+            <span class="approach-step-label">Protect</span>
+          </div>
+          <div class="approach-step" data-step="4">
+            <div class="approach-step-line"></div>
+            <div class="approach-step-dot"></div>
+            <span class="approach-step-num">05</span>
+            <span class="approach-step-label">Grow</span>
+          </div>
+          <div class="approach-step" data-step="5">
+            <div class="approach-step-dot"></div>
+            <span class="approach-step-num">06</span>
+            <span class="approach-step-label">Achieve</span>
+          </div>
+        </div>
+
+        <!-- Right: Active Step Card -->
+        <div class="approach-card" id="approachCard">
+          <div class="card-num" id="acNum">01</div>
+          <h3 id="acTitle">Understand</h3>
+          <p id="acDesc">We begin by understanding your<br>current financial situation, goals,<br>values and aspirations.</p>
+          <ul class="card-list" id="acList">
+            <li><span class="card-check">✓</span> Income &amp; Expenses</li>
+            <li><span class="card-check">✓</span> Existing Investments</li>
+            <li><span class="card-check">✓</span> Risk Profile</li>
+            <li><span class="card-check">✓</span> Short &amp; Long Term Goals</li>
+          </ul>
+          <a href="#" class="btn btn--gold" style="width:100%; border-radius:4px; font-weight:600;">Start Your Journey ↗</a>
+        </div>
+      </div>
+    </div>
+    <div class="approach-right-text reveal">
+      A<br>CLEARER<br>PATH<br>A BRIGHTER<br>TOMORROW
+    </div>
+  </section>
   
   <!-- ═══ WAYPOINTS ═══ -->
   <section class="sec waypoint-sec" id="waypoints">
     <div class="container" style="position:relative; z-index:1;">
+      <div class="wp-main-header reveal" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 48px; text-align: center;">
+        <p class="wp-eyebrow">COMPREHENSIVE SOLUTIONS</p>
+        <h2 class="wp-title">Financial Waypoints</h2>
+        <p class="wp-subtitle" style="margin-bottom: 16px;">Everything you need. All in one place.</p>
+        <a href="#" class="wp-link">View All Services <span style="margin-left:4px;">→</span></a>
+      </div>
       <div class="wp-layout reveal">
-        <!-- Left Column: Header + Featured Card -->
-        <div class="wp-col-left" style="display: flex; flex-direction: column; gap: 32px;">
-          <div class="wp-header-left">
-            <p class="wp-eyebrow">COMPREHENSIVE SOLUTIONS</p>
-            <h2 class="wp-title">Financial Waypoints</h2>
-            <p class="wp-subtitle">Everything you need. All in one place.</p>
-          </div>
-          
+        <!-- Left Column: Featured Card -->
+        <div class="wp-col-left" style="display: flex; flex-direction: column;">
           <div class="wp-featured" style="flex: 1;">
             <div class="wp-feat-bg"></div>
             <div class="wp-feat-badge">CORE PATHWAY</div>
@@ -308,12 +341,8 @@ const render = () => {
           </div>
         </div>
 
-        <!-- Right Column: Link + Services Grid -->
+        <!-- Right Column: Services Grid -->
         <div class="wp-col-right reveal-delay-1" style="display: flex; flex-direction: column;">
-          <div class="wp-header-right" style="text-align: right; margin-bottom: 32px;">
-            <a href="#" class="wp-link">View All Services <span style="margin-left:4px;">→</span></a>
-          </div>
-          
           <div class="wp-grid">
           <div class="wp-card">
             <div class="wp-card-top">
@@ -387,57 +416,99 @@ const render = () => {
   </div> <!-- end wp-layout -->
 </div> <!-- end container -->
 </section>
-\n\n<!-- ═══ FEATURED FUNDS ═══ -->
-  <section class="sec sec--dark-bg" id="funds" style="background:#111; color:#fff;">
-    <div class="container">
-      <div class="sec-head reveal">
-        <div>
-          <p class="eyebrow eyebrow--gold">TOP PERFORMERS</p>
-          <h2 style="color:#fff;">Featured Mutual<br><strong>Funds.</strong></h2>
-          <p class="sec-sub">Handpicked by our experts for consistent performance and long-term growth potential.</p>
-        </div>
-        <a class="link-arrow" href="#contact" style="color:var(--gold);">View All Funds</a>
-      </div>
-      <div class="funds-grid">
-        ${funds.map((f, i) => `
-        <div class="fund-card reveal reveal-delay-${i + 1}">
-          <span class="fund-tag">${f.tag}</span>
-          <h3>${f.name}</h3>
-          <p class="fund-cat">${f.category} • ${f.risk}</p>
-          <div class="fund-stats">
-            <div class="f-stat"><span>5Y Return</span><strong class="text-green">${f.return5y}</strong></div>
-            <div class="f-stat"><span>Min SIP</span><strong>${f.minSip}</strong></div>
-          </div>
-          <div class="fund-chart"></div>
-          <div class="fund-bot">
-            <span>NAV: ${f.nav}</span>
-            <span style="color:var(--gold); font-size:18px;">+</span>
-          </div>
-        </div>`).join("")}
-      </div>
-    </div>
-  </section>
+
 
   <!-- ═══ PARTNERS ═══ -->
-  <section class="sec sec--partners" id="partners">
-    <div class="container">
-      <div class="sec-head reveal">
-        <div>
-          <p class="eyebrow">OUR TRUSTED PARTNERS</p>
-          <h2>Direct Access to Leading<br><strong>Financial Institutions.</strong></h2>
-          <p class="sec-sub">We work with India's most trusted asset management companies, insurance providers and financial institutions, giving you access to genuine products and the best opportunities.</p>
-        </div>
-        <a class="link-arrow" href="#contact">View All Partners</a>
-      </div>
-      <div class="partners-row" style="display: flex; gap: 24px; align-items: center; padding-left: 5%; flex-wrap: wrap;">
-        ${partners.map(p => `
-          <div class="partner-logo" style="--pc:${p.color}; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; overflow: hidden; padding: 12px; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; width: 140px; height: 70px;">
-            <img src="${p.img}" alt="${p.name}" style="max-width: 100%; max-height: 100%; object-fit: contain; filter: grayscale(100%) brightness(150%); opacity: 0.7; transition: all 0.3s;" onmouseover="this.style.filter='grayscale(0) brightness(100%)'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%) brightness(150%)'; this.style.opacity='0.7'">
+  <section class="sec--partners-new" id="partners">
+    <div class="pn-content reveal">
+      
+      <div class="pn-header">
+        <div class="pn-eyebrow">OUR TRUSTED PARTNERS</div>
+        <div class="pn-stats">
+          <div class="pn-stat">
+            <svg class="pn-stat-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div class="pn-stat-text">TRUSTED<br>INSTITUTIONS</div>
           </div>
-        `).join("")}
-        <div class="partner-logo" style="flex-direction:column; gap:6px; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; justify-content: center; align-items: center; width: 140px; height: 70px;">
-          <div style="width:32px;height:32px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);display:grid;place-items:center;">+</div>
-          <span style="font-size:10px;color:rgba(255,255,255,0.6);font-weight:600;text-align:center;">and more</span>
+          <div class="pn-stat-border"></div>
+          <div class="pn-stat">
+            <svg class="pn-stat-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <div class="pn-stat-text">STRONGER<br>TOGETHER</div>
+          </div>
+          <div class="pn-stat-border"></div>
+          <div class="pn-stat">
+            <svg class="pn-stat-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="18" y="3" width="4" height="18"/><rect x="10" y="8" width="4" height="13"/><rect x="2" y="13" width="4" height="8"/><polyline points="22 4 17 9 12 4 2 14"/></svg>
+            <div class="pn-stat-text">MORE<br>OPPORTUNITIES</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pn-main">
+        <h2>Building Trust Today,<br>For <i>A Brighter Tomorrow.</i></h2>
+        <p>We work with India's most trusted asset management companies, insurance providers and financial institutions, giving you access to genuine products, expert guidance and the best opportunities.</p>
+        <div class="pn-actions">
+          <a href="#contact" class="pn-btn">VIEW ALL PARTNERS &rarr;</a>
+          <a href="#" class="pn-btn-play">
+            <div class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+            <span>SEE HOW<br>WE CREATE VALUE</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="pn-glass-container">
+        <div class="pn-glass-left">
+          <h4>OUR PARTNERS</h4>
+          <p>India's most trusted<br>names, all in one place.</p>
+        </div>
+        <div class="pn-logos">
+          ${partners.map(p => `
+            <div class="pn-logo-box">
+              <img src="${p.img}" alt="${p.name}">
+            </div>
+          `).join("")}
+          <!-- We could render an axis bank logo here as seen in the image, but the dynamic array is sufficient -->
+          <div class="pn-logo-box" style="background:transparent; border-color:transparent;">
+            <div class="pn-logo-more">
+              <div class="circle">+</div>
+              <span>and more</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Background Elements -->
+    <div class="pn-script">Partners in<br>Your Progress</div>
+    
+    <svg class="pn-mountain-curve" viewBox="0 0 1000 600" preserveAspectRatio="none">
+      <path d="M480,180 Q560,300 640,400" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.6" />
+    </svg>
+
+    <div class="pn-milestone" style="top: 36%; left: 55%;">
+      <div class="pn-milestone-dot"></div>
+      <div class="pn-milestone-text">PEOPLE</div>
+    </div>
+    <div class="pn-milestone" style="top: 44%; left: 56.5%;">
+      <div class="pn-milestone-dot"></div>
+      <div class="pn-milestone-text">CAPITAL</div>
+    </div>
+    <div class="pn-milestone" style="top: 52%; left: 59%;">
+      <div class="pn-milestone-dot"></div>
+      <div class="pn-milestone-text">OPPORTUNITIES</div>
+    </div>
+    <div class="pn-milestone" style="top: 59%; left: 58.5%;">
+      <div class="pn-milestone-dot"></div>
+      <div class="pn-milestone-text" style="text-align:left;">A BRIGHTER<br>TOMORROW</div>
+    </div>
+
+    <div class="pn-footer">
+      <div class="pn-footer-left">TRUSTED PARTNERS. BRIGHTER POSSIBILITIES.</div>
+      <div class="pn-footer-right">
+        <div class="line"></div>
+        <span>01 / 03</span>
+        <div class="pn-footer-nav">
+          <button><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
+          <button><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
         </div>
       </div>
     </div>
@@ -542,15 +613,15 @@ const render = () => {
     <div class="container">
       <div class="global-layout">
         
-        <!-- Left Column -->
+        <!-- Left Column: Text -->
         <div class="global-left reveal">
-          <p class="eyebrow eyebrow--gold" style="letter-spacing:0.2em; font-size:11px; margin-bottom:8px;">GLOBAL PERSPECTIVE</p>
-          <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size:44px; line-height:1.15; font-weight:400; margin-bottom:16px;">A World of<br>Opportunities</h2>
-          <p style="color:rgba(255,255,255,0.7); font-size:14px; line-height:1.6; max-width:85%; margin-bottom:32px;">Your goals aren't limited by borders.<br>We help you explore global markets<br>and emerging investment themes.</p>
+          <p class="eyebrow eyebrow--gold" style="letter-spacing:0.2em; font-size:14px; margin-bottom:12px;">GLOBAL PERSPECTIVE</p>
+          <h2 style="font-family: 'Instrument Serif', 'Times New Roman', serif; font-size:56px; line-height:1.15; font-weight:400; margin-bottom:20px;">A World of<br>Opportunities</h2>
+          <p style="color:rgba(255,255,255,0.7); font-size:17px; line-height:1.6; max-width:85%; margin-bottom:32px;">Your goals aren't limited by borders.<br>We help you explore global markets<br>and emerging investment themes.</p>
           <a href="#" class="btn btn-gold-outline" style="display:inline-flex; align-items:center; gap:8px; padding:12px 24px; border:1px solid #D4AF37; color:#D4AF37; font-size:13px; font-weight:500; letter-spacing:0.02em; background:transparent; border-radius:4px;">Explore Global Opportunities <span>↗</span></a>
         </div>
 
-        <!-- Center Column -->
+        <!-- Center Column: Globe -->
         <div class="global-center reveal reveal-delay-1">
           <div id="globe-scene"></div>
           
@@ -563,8 +634,8 @@ const render = () => {
           </div>
         </div>
 
-        <!-- Right Column -->
-        <div class="global-right reveal reveal-delay-2">
+        <!-- Right Column: Stats -->
+        <div class="global-right reveal reveal-delay-2" style="display: flex; align-items: center;">
           <div class="global-stats">
             <div class="global-stat">
               <h4>6+</h4>
@@ -579,9 +650,155 @@ const render = () => {
               <p>Possibilities</p>
             </div>
           </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MARKET INTELLIGENCE ═══ -->
+  <section class="sec sec--cream" id="market-intelligence">
+    <div class="container">
+      <div class="mi-layout">
+        
+        <!-- Column 1 -->
+        <div class="mi-left reveal">
+          <p class="eyebrow eyebrow--gold" style="margin-bottom:8px;">MARKET INTELLIGENCE</p>
+          <h2 style="font-family: 'Instrument Serif', 'Times New Roman', serif; font-size: 32px; font-weight: 400; line-height: 1.2; margin-bottom: 24px; color: #111;">Stay informed.<br>Make better decisions.</h2>
           
-          <div class="global-card">
-            <img src="./assets/global_portrait_card.jpg" alt="Cityscape" style="border-radius: 12px; display: block;">
+          <div class="mi-card">
+            <div class="mi-tabs" style="display:flex; align-items:center; justify-content:space-between;">
+              <div style="display:flex; gap:4px;">
+                <button class="mi-tab active">Market Today</button>
+                <button class="mi-tab">Top Gainers</button>
+                <button class="mi-tab">Top Losers</button>
+              </div>
+              <span id="miLiveStatus" style="display:inline-flex; align-items:center; gap:5px; font-size:10px; font-weight:700; letter-spacing:0.08em; color:#888; padding:3px 8px; border-radius:99px; border:1px solid #e5e5e5; background:#f8f8f8;"><span id="miLiveDot" style="width:6px;height:6px;border-radius:50%;background:#ccc;display:inline-block;"></span><span id="miLiveLabel">–</span></span>
+            </div>
+            
+            <div class="mi-row" id="mi-row-nifty50">
+              <span class="mi-col-name">NIFTY 50</span>
+              <span class="mi-col-val" id="mi-val-nifty50">22,514.65</span>
+              <span class="mi-col-chg text-green" id="mi-chg-nifty50">+0.85%</span>
+            </div>
+            <div class="mi-row" id="mi-row-sensex">
+              <span class="mi-col-name">SENSEX</span>
+              <span class="mi-col-val" id="mi-val-sensex">74,226.02</span>
+              <span class="mi-col-chg text-red" id="mi-chg-sensex">-0.78%</span>
+            </div>
+            <div class="mi-row" id="mi-row-niftybank">
+              <span class="mi-col-name">NIFTY BANK</span>
+              <span class="mi-col-val" id="mi-val-niftybank">49,158.10</span>
+              <span class="mi-col-chg text-green" id="mi-chg-niftybank">+1.20%</span>
+            </div>
+            <div class="mi-row" id="mi-row-usdinr">
+              <span class="mi-col-name">USD/INR</span>
+              <span class="mi-col-val" id="mi-val-usdinr">83.45</span>
+              <span class="mi-col-chg text-red" id="mi-chg-usdinr">-0.05%</span>
+            </div>
+            <div class="mi-row" id="mi-row-gold">
+              <span class="mi-col-name">GOLD (10g)</span>
+              <span class="mi-col-val" id="mi-val-gold">71,450</span>
+              <span class="mi-col-chg text-red" id="mi-chg-gold">-0.12%</span>
+            </div>
+            
+            <a href="#" class="mi-link-right">View Live Markets →</a>
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="mi-center reveal reveal-delay-1">
+          <div class="mi-header-row">
+            <h3>Latest Insights</h3>
+            <a href="#">View All Insights →</a>
+          </div>
+          <div class="mi-insights-grid">
+            
+            <div class="mi-insight-card">
+              <img src="./assets/journey-mountain.png" alt="Mountains" class="mi-insight-img">
+              <div class="mi-insight-body">
+                <span class="mi-tag">MARKET INSIGHTS</span>
+                <h4 class="mi-insight-title">Will 2024 Be the Year of Value Investing?</h4>
+                <div class="mi-insight-meta">Aug 28, 2024 • 5 min read</div>
+              </div>
+            </div>
+            
+            <div class="mi-insight-card">
+              <img src="./assets/insights_blog_1.png" alt="Person on rock" class="mi-insight-img">
+              <div class="mi-insight-body">
+                <span class="mi-tag">RETIREMENT</span>
+                <h4 class="mi-insight-title">Why Early Retirement Planning Matters</h4>
+                <div class="mi-insight-meta">Aug 20, 2024 • 7 min read</div>
+              </div>
+            </div>
+            
+            <div class="mi-insight-card">
+              <img src="./assets/insights_blog_2.png" alt="Road" class="mi-insight-img">
+              <div class="mi-insight-body">
+                <span class="mi-tag">TAX PLANNING</span>
+                <h4 class="mi-insight-title">New Tax Regime vs Old Regime: A Guide</h4>
+                <div class="mi-insight-meta">Aug 18, 2024 • 6 min read</div>
+              </div>
+            </div>
+            
+          </div>
+          
+          <div style="margin-top: 24px; background: #FFFFFF; border-radius: 12px; padding: 24px; border: 1px solid rgba(0,0,0,0.03); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02);">
+            <div>
+              <h4 style="font-size: 16px; font-weight: 600; margin: 0 0 4px 0; color: #111;">Get Daily Updates</h4>
+              <p style="font-size: 13px; color: #666; margin: 0;">Subscribe to our morning newsletter for curated insights.</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <input type="email" placeholder="Email address" style="padding: 10px 16px; border: 1px solid #EBEBEB; border-radius: 6px; font-size: 13px; outline: none; width: 180px;">
+              <button class="btn" style="background: var(--gold); color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;">Subscribe</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="mi-right reveal reveal-delay-2">
+          <div class="mi-header-row">
+            <h3>What We're Watching</h3>
+          </div>
+          <div class="mi-list">
+            
+            <div class="mi-list-item">
+              <svg class="mi-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              <span class="mi-list-text">RBI policy outlook and interest rates</span>
+            </div>
+            
+            <div class="mi-list-item">
+              <svg class="mi-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              <span class="mi-list-text">Global market volatility</span>
+            </div>
+            
+            <div class="mi-list-item">
+              <svg class="mi-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              <span class="mi-list-text">Indian equities: opportunities in 2024</span>
+            </div>
+            
+            <div class="mi-list-item">
+              <svg class="mi-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              <span class="mi-list-text">Gold prices and safe-haven demand</span>
+            </div>
+            
+            <div class="mi-list-item">
+              <svg class="mi-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              <span class="mi-list-text">Upcoming union budget expectations</span>
+            </div>
+            
+            <div class="mi-list-item">
+              <svg class="mi-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              <span class="mi-list-text">Tech sector earnings reports</span>
+            </div>
+            
+            <div class="mi-list-item">
+              <svg class="mi-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              <span class="mi-list-text">FII / DII institutional flows</span>
+            </div>
+            
           </div>
         </div>
 
@@ -625,32 +842,13 @@ const render = () => {
     </div>
   </section>
 
-  <!-- ═══ WHY CHOOSE US ═══ -->
-  <section class="sec sec--dark-brown" id="why">
-    <div class="container">
-      <div class="why-layout">
-        <div class="why-left reveal">
-          <p class="eyebrow">WHY CHOOSE US</p>
-          <h2>More Than Investments.<br><strong>A Partner for Life.</strong></h2>
-        </div>
-        <div class="why-right reveal reveal-delay-1" style="display:flex; justify-content:space-between; align-items:flex-end;">
-          <p class="why-sub" style="margin:0;">We combine expertise, technology, and a client-first approach<br>to help you make smarter financial decisions.</p>
-          <a class="link-arrow" href="#about" style="color:var(--gold);">Learn More</a>
-        </div>
-      </div>
-      <div class="why-grid">
-        <div class="why-item reveal reveal-delay-1"><span class="why-ico">👥</span><div><h3>Expert Guidance</h3><p>Backed by research<br>and experience</p></div></div>
-        <div class="why-item reveal reveal-delay-2"><span class="why-ico">🛡️</span><div><h3>Transparent Process</h3><p>Clear, honest, and<br>in your best interest</p></div></div>
-        <div class="why-item reveal reveal-delay-3"><span class="why-ico">⚙️</span><div><h3>Personalized Solutions</h3><p>Tailored to your<br>unique goals</p></div></div>
-        <div class="why-item reveal reveal-delay-4"><span class="why-item-ico" style="font-size: 32px; color: var(--gold);">📈</span><div><h3>Long-Term Focus</h3><p>Because your<br>tomorrow matters</p></div></div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ═══ PROCESS TIMELINE ═══ -->
-  <section class="sec sec--cream" id="process">
+
+  <!-- [OLD PROCESS TIMELINE WAS HERE - COMMENTED OUT FOR REVERTABILITY] -->
+  <!-- 
+  <section class="sec sec--cream" id="process" style="padding: 60px 0;">
     <div class="container">
-      <div class="sec-head reveal">
+      <div class="sec-head reveal" style="margin-bottom: 40px;">
         <div style="margin: 0 auto; text-align: center;">
           <p class="eyebrow">HOW IT WORKS</p>
           <h2>Your Journey to<br><strong>Financial Freedom.</strong></h2>
@@ -666,86 +864,146 @@ const render = () => {
       </div>
     </div>
   </section>
+  -->
 
-  <!-- ═══ TESTIMONIALS ═══ -->
-  <section class="sec sec--cream" id="testimonials">
-    <div class="container">
-      <div class="testi-header reveal">
-        <div>
-          <p class="eyebrow">TESTIMONIALS</p>
-          <h2>What Our Clients Say.</h2>
-        </div>
-        <div style="display:flex; gap:12px;">
-          <button style="width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--white);color:var(--muted);font-size:18px;display:grid;place-items:center;cursor:pointer;">←</button>
-          <button style="width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--white);color:var(--muted);font-size:18px;display:grid;place-items:center;cursor:pointer;">→</button>
-        </div>
+
+  <!-- ═══ FINANCIAL GUIDES ═══ -->
+  <section class="sec guides-sec" id="guides">
+    <div class="guides-container">
+      <div class="guides-header reveal">
+        <h2>Meet Your Financial Guides</h2>
+        <p>Experienced professionals. A partner for life.</p>
       </div>
-      <div class="testi-masonry">
-        ${testimonials.map((t, i) => `
-        <div class="testi-card reveal reveal-delay-${i + 1}">
-          <div style="color:var(--gold); font-size:32px; font-family:Georgia,serif; line-height:1; margin-bottom:12px;">“</div>
-          <p style="margin-bottom:24px;">${t.text}</p>
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <div class="author">
-              <img src="${t.img}" alt="${t.name}">
-              <div><strong>${t.name}</strong><span>${t.role}</span></div>
+      
+      <div class="guides-grid reveal reveal-delay-1">
+        
+        <!-- Guide 1 -->
+        <div class="guide-card">
+          <img src="./assets/profile_rahul.png" alt="Rahul Mehta" class="guide-img">
+          <div class="guide-info">
+            <div>
+              <h4>Rahul Mehta</h4>
+              <div class="role">Founder & Wealth Advisor</div>
+              <div class="exp">15+ years experience</div>
             </div>
-            <div class="stars" style="margin:0; font-size:12px; color:var(--gold);">★★★★★</div>
-          </div>
-        </div>`).join("")}
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ FAQ ACCORDION ═══ -->
-  <section class="sec sec--white" id="faq">
-    <div class="container">
-      <div class="sec-head reveal" style="text-align: center; justify-content: center;">
-        <div>
-          <p class="eyebrow">GOT QUESTIONS?</p>
-          <h2>Frequently Asked<br><strong>Questions.</strong></h2>
-        </div>
-      </div>
-      <div class="faq-list">
-        ${faqs.map((f, i) => `
-        <div class="faq-item reveal reveal-delay-${(i % 4) + 1}">
-          <button class="faq-btn">${f.q} <i class="faq-icon">+</i></button>
-          <div class="faq-content">
-            <p>${f.a}</p>
-          </div>
-        </div>`).join("")}
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ INSIGHTS ═══ -->
-  <section class="sec sec--cream" id="insights">
-    <div class="container">
-      <div class="sec-head reveal">
-        <div>
-          <p class="eyebrow">INSIGHTS &amp; RESEARCH</p>
-          <h2>Knowledge for a<br><strong>Brighter Tomorrow.</strong></h2>
-          <p class="sec-sub">Stay informed with the latest insights, the best updates and financial planning tips.</p>
-        </div>
-        <a class="link-arrow" href="#insights">View All Insights</a>
-      </div>
-      <div class="ins-grid">
-        ${insights.map((n, i) => `
-        <div class="ins-card reveal reveal-delay-${(i % 3) + 1}">
-          <div class="ins-img" style="background-image:url('${n.image}')">
-            <span class="ins-tag">${n.tag}</span>
-          </div>
-          <div class="ins-body" style="display:flex; flex-direction:column; min-height: 140px;">
-            <h3 style="margin-bottom:24px;">${n.title}</h3>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:auto;">
-              <span class="ins-date">${n.date}</span>
-              <span style="color:var(--gold); font-size:16px;">→</span>
+            <div class="guide-links">
+              <a href="#" class="li-icon">in</a>
+              <a href="#" class="guide-view">View Profile →</a>
             </div>
           </div>
-        </div>`).join("")}
+        </div>
+        
+        <!-- Guide 2 -->
+        <div class="guide-card">
+          <img src="./assets/profile_priya.png" alt="Priya Sharma" class="guide-img">
+          <div class="guide-info">
+            <div>
+              <h4>Priya Sharma</h4>
+              <div class="role">Investment Strategist</div>
+              <div class="exp">12+ years experience</div>
+            </div>
+            <div class="guide-links">
+              <a href="#" class="li-icon">in</a>
+              <a href="#" class="guide-view">View Profile →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Guide 3 -->
+        <div class="guide-card">
+          <img src="./assets/profile_amit.png" alt="Vikram Sinha" class="guide-img">
+          <div class="guide-info">
+            <div>
+              <h4>Vikram Sinha</h4>
+              <div class="role">Financial Planner</div>
+              <div class="exp">10+ years experience</div>
+            </div>
+            <div class="guide-links">
+              <a href="#" class="li-icon">in</a>
+              <a href="#" class="guide-view">View Profile →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Guide 4 -->
+        <div class="guide-card">
+          <img src="./assets/profile_priya.png" alt="Ananya Kapoor" class="guide-img">
+          <div class="guide-info">
+            <div>
+              <h4>Ananya Kapoor</h4>
+              <div class="role">Client Relationship Head</div>
+              <div class="exp">9+ years experience</div>
+            </div>
+            <div class="guide-links">
+              <a href="#" class="li-icon">in</a>
+              <a href="#" class="guide-view">View Profile →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Quote Card -->
+        <div class="guide-quote-card">
+          <div style="color:var(--gold); font-size:40px; font-family:'Instrument Serif','Times New Roman',serif; line-height:0.5; margin-bottom:12px;">“</div>
+          <p>We don't just<br>manage wealth.<br>We build lasting<br>relationships.</p>
+        </div>
+        
       </div>
     </div>
   </section>
+
+  <!-- ═══ WHY FINVISTA ═══ -->
+  <section class="sec sec--cream" id="why" style="padding-top: 40px; padding-bottom: 20px;">
+    <div class="container">
+      <div class="fv-why-layout">
+        <div class="fv-why-left reveal">
+          <p class="fv-eyebrow">WHY FINVISTA</p>
+          <h2>More Than Investments.<br>A Partner for Life.</h2>
+          <p>We combine expertise, transparency and a<br>client-first approach to help you make<br>smarter financial decisions.</p>
+        </div>
+        <div class="fv-why-right reveal reveal-delay-1">
+          <div class="fv-why-card">
+            <div class="fv-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+            <h4>Client-First<br>Advice</h4>
+            <p>Your goals always<br>come first.</p>
+          </div>
+          <div class="fv-why-card">
+            <div class="fv-icon">
+               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <h4>Transparent<br>Process</h4>
+            <p>Clear, honest and<br>unbiased guidance.</p>
+          </div>
+          <div class="fv-why-card">
+            <div class="fv-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <h4>Trusted<br>Partners</h4>
+            <p>Work with leading<br>financial institutions.</p>
+          </div>
+          <div class="fv-why-card">
+            <div class="fv-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            </div>
+            <h4>Ongoing<br>Support</h4>
+            <p>Regular reviews as<br>your life evolves.</p>
+          </div>
+          <div class="fv-why-card">
+            <div class="fv-icon">
+               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l10 6.5v7L12 22 2 15.5v-7L12 2z"></path></svg>
+            </div>
+            <h4>Long-Term<br>Relationship</h4>
+            <p>Because your<br>tomorrow matters.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
 
 
 
@@ -774,32 +1032,44 @@ const render = () => {
   <footer class="ftr">
     <div class="container ftr-top">
       <div class="ftr-brand">
-        <a class="brand" href="#top"><img src="./assets/logo-finvista.png" alt="FinVista" style="height: 72px; width: auto;"></a>
-        <p>Plan Today. Wealth Tomorrow.</p>
-        <div class="ftr-socials">
-          <a href="#">in</a><a href="#">▶</a><a href="#">𝕏</a><a href="#">◎</a>
+        <a class="brand" href="#top"><img src="./assets/logo-finvista.png" alt="MIMAG Finance" style="height: 72px; width: auto;"></a>
+        <div class="ftr-socials" style="margin-top: 16px;">
+          <a href="#" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
         </div>
       </div>
       <div class="ftr-cols">
-        <div class="ftr-col"><span>Quick Links</span><a href="#top">Home</a><a href="#top">About Us</a><a href="#services">Our Services</a><a href="#calc">SIP Calculator</a></div>
-        <div class="ftr-col"><span>Our Services</span><a href="#services">Mutual Funds</a><a href="#services">Insurance</a><a href="#services">PMS &amp; AIF</a><a href="#services">NPS &amp; FD</a><a href="#services">Loan Against MF</a></div>
-        <div class="ftr-col">
-          <h3>Newsletter</h3>
-          <p style="color:#888; font-size:13px; line-height:1.5; margin-bottom:16px;">Get the latest updates and insights.</p>
-          <form class="nl-form" id="nlForm" style="display:flex; gap:8px;">
-            <input type="email" placeholder="Enter your email" required style="flex:1; padding:0 16px; border-radius:4px; border:1px solid #333; background:transparent; color:#fff; height:48px;">
-            <button type="submit" style="width:48px;height:48px;background:var(--gold);border:none;border-radius:4px;color:var(--black);font-size:16px;cursor:pointer;">↗</button>
+        <div class="ftr-col"><span>Company</span><a href="#top">About Us</a><a href="#">Our Team</a><a href="#">Careers</a><a href="#">Contact</a></div>
+        <div class="ftr-col"><span>Services</span><a href="#">Investments</a><a href="#services">Insurance</a><a href="#">Retirement</a><a href="#">Tax Planning</a><a href="#">Estate Planning</a><a href="#">Loans</a></div>
+        <div class="ftr-col"><span>Tools</span><a href="#calc">SIP Calculator</a><a href="#">Lumpsum Calculator</a><a href="#">Retirement Calculator</a><a href="#">Goal Planner</a></div>
+        <div class="ftr-col"><span>Insights</span><a href="#">Market Updates</a><a href="#">Articles</a><a href="#">Guides</a><a href="#">FAQs</a></div>
+        <div class="ftr-col" style="padding-left: 48px; border-left: 1px solid #222;">
+          <span style="text-transform:none;">Subscribe to our newsletter</span>
+          <p style="color:#888; font-size:12px; margin-bottom:12px;">Get the latest insights and updates.</p>
+          <form class="nl-form" id="nlForm" style="display:flex; gap:0;">
+            <input type="email" placeholder="Enter your email" required style="flex:1; padding:0 12px; border-radius:4px 0 0 4px; border:1px solid #333; background:#1a1a1a; color:#fff; height:40px; border-right:none;">
+            <button type="submit" style="width:40px;height:40px;background:var(--gold);border:none;border-radius:0 4px 4px 0;color:var(--black);font-size:16px;cursor:pointer;font-weight:bold;">↗</button>
           </form>
         </div>
         
-        <div class="ftr-col" style="text-align:right; font-size:11px; letter-spacing:0.3em; line-height:2.4; font-weight:700; color:#888; padding-top:16px;">
+        <div class="ftr-col" style="padding-left: 48px; border-left: 1px solid #222; text-align:right; font-size:11px; letter-spacing:0.3em; line-height:2.4; font-weight:700; color:#888; margin-left: auto;">
           INVEST<br>PROTECT<br>GROW<br>BELONG
         </div>
       </div>
     </div>
-    <div class="container ftr-bottom">
-      <span>© 2024 MIMAG Finance. All rights reserved.</span>
-      <div class="ftr-legal"><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a><a href="#">Sitemap</a></div>
+    <div class="container ftr-bottom" style="border-top: 1px solid #222; margin-top: 24px;">
+      <span style="color:#666;">© 2024 MIMAG Finance. All rights reserved.</span>
+      <div class="ftr-legal"><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a><a href="#">Risk Disclosure</a><a href="#">Sitemap</a></div>
     </div>
   </footer>
 
@@ -1262,7 +1532,7 @@ if (!isReduced && window.matchMedia("(hover: hover)").matches) {
 
     const startAutoRotate = () => {
       stopAutoRotate();
-      autoRotateInterval = setInterval(scrollNext, 1800); // 1.8 seconds
+      autoRotateInterval = setInterval(scrollNext, 1200); // 1.2 seconds
     };
 
     const stopAutoRotate = () => {
@@ -1375,7 +1645,7 @@ if (carousel && btnPrev && btnNext) {
 
   const startAutoRotate = () => {
     stopAutoRotate();
-    autoRotateInterval = setInterval(scrollNext, 1800); // 1.8 seconds
+    autoRotateInterval = setInterval(scrollNext, 1200); // 1.2 seconds
   };
 
   const stopAutoRotate = () => {
@@ -1402,44 +1672,128 @@ if (carousel && btnPrev && btnNext) {
   startAutoRotate();
 }
 
-// --- Hero Section Scroll Animation ---
-// The user loved the zoom-out effect specifically on the hero section, so we restore it here.
-const heroSection = document.querySelector('.hero');
-if (heroSection) {
-  ScrollTrigger.create({
-    trigger: heroSection,
-    start: "top top",
-    pin: true,
-    pinSpacing: false, // Next section scrolls over it
-    id: 'pin-hero'
-  });
-
-  gsap.to(heroSection, {
-    scale: 0.92,
-    opacity: 0.4,
-    ease: "none",
-    scrollTrigger: {
-      trigger: heroSection,
-      start: "top top",
-      end: () => `+=${heroSection.offsetHeight}`,
-      scrub: true,
-    }
-  });
-}
-
 // --- Image Parallax Effect ---
 // Add parallax to specific images for depth without lag
-const parallaxImages = gsap.utils.toArray('.global-card img, .parallax-img, .waypoints-bg');
-parallaxImages.forEach(img => {
-  gsap.to(img, {
-    yPercent: 15, // Move the image slightly down as we scroll
-    ease: "none",
-    scrollTrigger: {
-      trigger: img.parentElement,
-      start: "top bottom",
-      end: "bottom top",
-      scrub: true
-    }
+window.addEventListener('load', () => {
+
+  const parallaxImages = gsap.utils.toArray('.parallax-img, .waypoints-bg');
+  parallaxImages.forEach(img => {
+    gsap.to(img, {
+      yPercent: 15, // Move the image slightly down as we scroll
+      ease: "none",
+      scrollTrigger: {
+        trigger: img.parentElement,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
   });
+
+  /* ═══ OUR APPROACH SCROLL ANIMATION ═══ */
+  const approachData = [
+    { num: '01', title: 'Understand', desc: 'We begin by understanding your<br>current financial situation, goals,<br>values and aspirations.', items: ['Income & Expenses', 'Existing Investments', 'Risk Profile', 'Short & Long Term Goals'], point: {x: 78.0, y: 83.5} },
+    { num: '02', title: 'Plan', desc: 'We craft a personalized roadmap<br>tailored specifically to your<br>life objectives.', items: ['Asset Allocation', 'Retirement Timeline', 'Tax Strategies', 'Risk Mitigation'], point: {x: 63.2, y: 70.3} },
+    { num: '03', title: 'Invest', desc: 'Deploying capital into diversified<br>portfolios designed to maximize<br>returns and minimize volatility.', items: ['Mutual Funds', 'Equities', 'Fixed Income', 'Alternative Assets'], point: {x: 78.5, y: 59.5} },
+    { num: '04', title: 'Protect', desc: 'Safeguarding your wealth against<br>unforeseen events and ensuring<br>your family\'s security.', items: ['Life Insurance', 'Health Coverage', 'Emergency Funds', 'Estate Planning'], point: {x: 69.3, y: 54.8} },
+    { num: '05', title: 'Grow', desc: 'Actively monitoring and rebalancing<br>your portfolio to align with<br>changing market conditions.', items: ['Quarterly Reviews', 'Market Analysis', 'Rebalancing', 'Opportunity Identification'], point: {x: 76.0, y: 50.0} },
+    { num: '06', title: 'Achieve', desc: 'Reaching your financial milestones<br>and transitioning seamlessly into<br>the next phase of your life.', items: ['Financial Freedom', 'Legacy Transfer', 'Retirement Transition', 'Ongoing Support'], point: {x: 70.5, y: 45.0} },
+    { num: '07', title: 'Legacy', desc: 'Ensuring your wealth creates a lasting<br>impact for future generations<br>and your chosen causes.', items: ['Estate Preservation', 'Philanthropy', 'Family Governance', 'Succession Planning'], point: {x: 75.3, y: 41.5} }
+  ];
+
+  const approachSec = document.getElementById('process');
+  const mountainMarker = document.getElementById('mountainMarker');
+  const approachSteps = document.querySelectorAll('.approach-step');
+  const acNum = document.getElementById('acNum');
+  const acTitle = document.getElementById('acTitle');
+  const acDesc = document.getElementById('acDesc');
+  const acList = document.getElementById('acList');
+  const approachCard = document.getElementById('approachCard');
+
+  if (approachSec && mountainMarker) {
+    // Initialize marker position
+    gsap.set(mountainMarker, { left: `${approachData[0].point.x}%`, top: `${approachData[0].point.y}%` });
+
+    let currentStepIndex = -1;
+
+    function updateApproachStep(index) {
+      if (index === currentStepIndex) return;
+      currentStepIndex = index;
+      const data = approachData[index];
+
+      // Update steps UI
+      approachSteps.forEach((step, i) => {
+        if (i === index) step.classList.add('active');
+        else step.classList.remove('active');
+      });
+
+      // Move Marker
+      gsap.to(mountainMarker, {
+        left: `${data.point.x}%`,
+        top: `${data.point.y}%`,
+        duration: 0.8,
+        ease: "power2.out"
+      });
+      const markerLabel = document.getElementById('markerLabel');
+      if (markerLabel) markerLabel.textContent = data.title;
+
+      // Update Card UI
+      gsap.to(approachCard, { opacity: 0, duration: 0.2, onComplete: () => {
+        acNum.textContent = data.num;
+        acTitle.textContent = data.title;
+        acDesc.innerHTML = data.desc;
+        acList.innerHTML = data.items.map(item => `<li><span class="card-check">✓</span> ${item}</li>`).join('');
+        gsap.to(approachCard, { opacity: 1, duration: 0.3 });
+      }});
+    }
+
+    // Force first update
+    updateApproachStep(0);
+
+    ScrollTrigger.create({
+      trigger: approachSec,
+      start: "center center",
+      end: "+=3000",
+      pin: true,
+      scrub: true,
+      snap: [0, 1/7, 2/7, 3/7, 4/7, 5/7, 6/7, 1],
+      onUpdate: (self) => {
+        let p = self.progress; 
+        let mappedProgress = p / (6/7); // The first 6/7 of the scroll covers all 7 points
+        if (mappedProgress > 1) mappedProgress = 1;
+        let index = Math.floor(mappedProgress * approachData.length);
+        if (index >= approachData.length) index = approachData.length - 1;
+        updateApproachStep(index);
+      }
+    });
+  }
+
+  // --- Hero Section Scroll Animation ---
+  // The user loved the zoom-out effect specifically on the hero section, so we restore it here.
+  const heroSection = document.querySelector('.hero');
+  if (heroSection) {
+    ScrollTrigger.create({
+      trigger: heroSection,
+      start: "top top",
+      pin: true,
+      pinSpacing: false, // Next section scrolls over it
+      id: 'pin-hero'
+    });
+
+    gsap.to(heroSection, {
+      scale: 0.92,
+      opacity: 0.4,
+      ease: "none",
+      scrollTrigger: {
+        trigger: heroSection,
+        start: "top top",
+        end: () => `+=${heroSection.offsetHeight}`,
+        scrub: true,
+      }
+    });
+  }
+  
 });
+
+
 
