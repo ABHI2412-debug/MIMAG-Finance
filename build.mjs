@@ -1,7 +1,9 @@
 import { cpSync, mkdirSync, rmSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const root = resolve(import.meta.dirname);
+import { fileURLToPath } from 'node:url';
+
+const root = resolve(fileURLToPath(import.meta.url), '..');
 const output = resolve(root, 'public');
 
 rmSync(output, { recursive: true, force: true });
