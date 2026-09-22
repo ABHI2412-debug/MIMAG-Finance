@@ -1,4 +1,6 @@
-import https from "node:https";
+export const config = {
+  runtime: 'edge',
+};
 
 const YF_SYMBOLS = [
   { key: "nifty50",   symbol: "%5ENSEI"   },
@@ -15,30 +17,27 @@ const YF_HEADERS = {
   "Referer": "https://finance.yahoo.com/",
 };
 
-function fetchSymbol(sym) {
-  return new Promise((resolve) => {
+async function fetchSymbol(sym) {
+  try {
     const url = `https://query1.finance.yahoo.com/v8/finance/chart/${sym.symbol}?interval=1d&range=5d`;
-    const req = https.get(url, { headers: YF_HEADERS, timeout: 8000 }, (res) => {
-      let data = "";
-      res.on("data", c => data += c);
-      res.on("end", () => {
-        try {
-          const json = JSON.parse(data);
-          const meta = json?.chart?.result?.[0]?.meta;
-          if (!meta) return resolve(null);
-          const prev  = meta.chartPreviousClose || meta.previousClose;
-          const price = meta.regularMarketPrice;
-          const chgPct = prev ? ((price - prev) / prev) * 100 : null;
-          resolve({ key: sym.key, price, chgPct });
-        } catch { resolve(null); }
-      });
+    const res = await fetch(url, {
+      headers: YF_HEADERS,
+      signal: AbortSignal.timeout(8000)
     });
-    req.on("error", () => resolve(null));
-    req.on("timeout", () => { req.destroy(); resolve(null); });
-  });
+    if (!res.ok) return null;
+    const json = await res.json();
+    const meta = json?.chart?.result?.[0]?.meta;
+    if (!meta) return null;
+    const prev  = meta.chartPreviousClose || meta.previousClose;
+    const price = meta.regularMarketPrice;
+    const chgPct = prev ? ((price - prev) / prev) * 100 : null;
+    return { key: sym.key, price, chgPct };
+  } catch (err) {
+    return null;
+  }
 }
 
-export default async function handler(req, res) {
+export default async function handler(req) {
   try {
     const results = await Promise.all(YF_SYMBOLS.map(fetchSymbol));
     const payload = {};
@@ -50,8 +49,18 @@ export default async function handler(req, res) {
       payload.gold.priceInr10g = payload.gold.price * usdInr * (10 / 31.1035);
     }
 
-    res.status(200).json(payload);
+    return new Response(JSON.stringify(payload), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+      }
+    });
   } catch (err) {
-    res.status(502).json({ error: err.message });
+    return new Response(JSON.stringify({ error: err.message }), {
+      status: 502,
+      headers: { "Content-Type": "application/json" }
+    });
   }
 }
