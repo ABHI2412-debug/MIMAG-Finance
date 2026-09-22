@@ -7,7 +7,7 @@ const output = resolve(root, 'public');
 rmSync(output, { recursive: true, force: true });
 mkdirSync(output, { recursive: true });
 
-for (const file of ['index.html', 'app.js', 'globe.js', 'styles.css']) {
+for (const file of ['index.html', 'app.js', 'globe.js', 'styles.css', 'market-data.js']) {
   cpSync(resolve(root, file), resolve(output, file));
 }
 
