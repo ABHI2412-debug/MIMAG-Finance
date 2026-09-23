@@ -247,7 +247,9 @@ const render = () => {
 
   <!-- ═══ OUR APPROACH ═══ -->
   <section class="sec approach-sec" id="process">
-    <div class="mountain-marker" id="mountainMarker"><span class="marker-label" id="markerLabel"></span></div>
+    <div class="mountain-bg-wrapper">
+      <div class="mountain-marker" id="mountainMarker"><span class="marker-label" id="markerLabel"></span></div>
+    </div>
     <div class="container approach-layout">
       <div class="approach-header reveal">
         <p class="fv-eyebrow">OUR APPROACH</p>
