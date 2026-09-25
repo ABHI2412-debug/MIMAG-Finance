@@ -301,12 +301,12 @@ const render = () => {
           </div>
         </div>
       </div>
-      <div class="hero-float-text">
-        <span>DISCIPLINE</span>
-        <span>TODAY</span>
-        <span>FREEDOM</span>
-        <span>TOMORROW</span>
-      </div>
+
+
+
+
+
+
     </div>
 
   </section>
