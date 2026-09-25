@@ -132,10 +132,111 @@ const render = () => {
         <nav class="nav" id="mainNav">
           <div class="nav-highlight" id="navHighlight"></div>
           <a href="#top">About Us</a>
-          <a href="#services">Our Services <span style="font-size:10px">▼</span></a>
+          <div class="nav-item-dropdown relative group" style="display:inline-block;">
+            <a href="#services" class="dropdown-trigger flex items-center gap-1.5 transition-colors group-hover:text-[#E5A93C]" style="display: inline-flex !important; align-items: center !important; gap: 6px !important; white-space: nowrap !important; text-decoration: none;">
+              <span>Our Services</span>
+              <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-180" style="display: inline-block !important; flex-shrink: 0 !important; width: 12px; height: 12px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </a>
+
+  <!-- Invisible hover bridge -->
+  <div class="absolute top-full left-0 w-full h-4"></div>
+
+  <!-- Dropdown Panel -->
+  <div class="absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[90vw] md:w-[650px] max-h-[80vh] overflow-y-auto overflow-x-hidden opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 ease-out z-50">
+      
+      <!-- Glassmorphic Container -->
+      <div class="bg-[#121212]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 relative overflow-hidden text-left" style="font-family: 'Inter', sans-serif;">
+          
+          <!-- Ambient Gold Glow -->
+          <div class="absolute -top-20 -right-20 w-64 h-64 bg-[#E5A93C]/10 blur-[80px] rounded-full pointer-events-none"></div>
+
+          <!-- Column 1: Core Investments -->
+          <div class="relative z-10">
+              <h3 class="text-xs font-bold tracking-[0.15em] text-gray-500 uppercase mb-5 border-b border-white/5 pb-3">Core Investments</h3>
+              <ul class="space-y-2 m-0 p-0 list-none">
+                  <li>
+                      <button onclick="window.openServiceModal('mf')" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">Mutual Funds</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Goal-based systematic investing & SIPs</span>
+                          </div>
+                      </button>
+                  </li>
+                  <li>
+                      <button onclick="window.openServiceModal('pms')" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">PMS & AIF</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Bespoke alternative portfolios for HNIs</span>
+                          </div>
+                      </button>
+                  </li>
+                  <li>
+                      <button onclick="window.openServiceModal('nps')" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">NPS & FD</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Retirement architecture & fixed-yield</span>
+                          </div>
+                      </button>
+                  </li>
+              </ul>
+          </div>
+          
+          <!-- Column 2: Protection & Advisory -->
+          <div class="relative z-10">
+              <h3 class="text-xs font-bold tracking-[0.15em] text-gray-500 uppercase mb-5 border-b border-white/5 pb-3">Protection & Advisory</h3>
+              <ul class="space-y-2 m-0 p-0 list-none">
+                  <li>
+                      <button onclick="window.openServiceModal('insurance')" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">Life & Health Insurance</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Comprehensive risk & health coverage</span>
+                          </div>
+                      </button>
+                  </li>
+                  <li>
+                      <button onclick="window.openServiceModal('estate')" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">Estate & Legacy Planning</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Family trusts & succession structuring</span>
+                          </div>
+                      </button>
+                  </li>
+                  <li>
+                      <button onclick="window.openServiceModal('overview')" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">All Services Overview</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Explore our complete wealth framework</span>
+                          </div>
+                      </button>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </div>
+</div>
           <a href="#calc">SIP Calculator</a>
-          <a href="#insights">Insights</a>
-          <a href="#contact">Careers</a>
+          <a href="insights.html">Insights</a>
+          <a href="contact.html">Contact Us</a>
         </nav>
       </div>
       <div class="hdr-right">
@@ -315,10 +416,12 @@ const render = () => {
     <div class="approach-right-text reveal">
       A<br>CLEARER<br>PATH<br>A BRIGHTER<br>TOMORROW
     </div>
+    
+
   </section>
   
   <!-- ═══ WAYPOINTS ═══ -->
-  <section class="sec waypoint-sec" id="waypoints">
+  <section class="sec waypoint-sec" id="services">
     <div class="container" style="position:relative; z-index:1;">
       <div class="wp-main-header reveal" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 48px; text-align: center;">
         <p class="wp-eyebrow">COMPREHENSIVE SOLUTIONS</p>
@@ -660,157 +763,145 @@ const render = () => {
     </div>
   </section>
 
-  <!-- ═══ MARKET INTELLIGENCE ═══ -->
-  <section class="sec sec--cream" id="market-intelligence">
-    <div class="container">
-      <div class="mi-layout">
-        
-        <!-- Column 1 -->
-        <div class="mi-left reveal">
-          <p class="eyebrow eyebrow--gold" style="margin-bottom:8px;">MARKET INTELLIGENCE</p>
-          <h2 style="font-family: 'Instrument Serif', 'Times New Roman', serif; font-size: 32px; font-weight: 400; line-height: 1.2; margin-bottom: 24px; color: #111;">Stay informed.<br>Make better decisions.</h2>
-          
-          <div class="mi-card">
-            <div class="mi-tabs" style="display:flex; align-items:center; justify-content:space-between;">
-              <div style="display:flex; gap:4px;">
-                <button class="mi-tab active">Market Today</button>
-                <button class="mi-tab">Top Gainers</button>
-                <button class="mi-tab">Top Losers</button>
-              </div>
-              <span id="miLiveStatus" style="display:inline-flex; align-items:center; gap:5px; font-size:10px; font-weight:700; letter-spacing:0.08em; color:#888; padding:3px 8px; border-radius:99px; border:1px solid #e5e5e5; background:#f8f8f8;"><span id="miLiveDot" style="width:6px;height:6px;border-radius:50%;background:#ccc;display:inline-block;"></span><span id="miLiveLabel">–</span></span>
-            </div>
-            
-            <div class="mi-row" id="mi-row-nifty50">
-              <span class="mi-col-name">NIFTY 50</span>
-              <span class="mi-col-val" id="mi-val-nifty50">22,514.65</span>
-              <span class="mi-col-chg text-green" id="mi-chg-nifty50">+0.85%</span>
-            </div>
-            <div class="mi-row" id="mi-row-sensex">
-              <span class="mi-col-name">SENSEX</span>
-              <span class="mi-col-val" id="mi-val-sensex">74,226.02</span>
-              <span class="mi-col-chg text-red" id="mi-chg-sensex">-0.78%</span>
-            </div>
-            <div class="mi-row" id="mi-row-niftybank">
-              <span class="mi-col-name">NIFTY BANK</span>
-              <span class="mi-col-val" id="mi-val-niftybank">49,158.10</span>
-              <span class="mi-col-chg text-green" id="mi-chg-niftybank">+1.20%</span>
-            </div>
-            <div class="mi-row" id="mi-row-usdinr">
-              <span class="mi-col-name">USD/INR</span>
-              <span class="mi-col-val" id="mi-val-usdinr">83.45</span>
-              <span class="mi-col-chg text-red" id="mi-chg-usdinr">-0.05%</span>
-            </div>
-            <div class="mi-row" id="mi-row-gold">
-              <span class="mi-col-name">GOLD (10g)</span>
-              <span class="mi-col-val" id="mi-val-gold">71,450</span>
-              <span class="mi-col-chg text-red" id="mi-chg-gold">-0.12%</span>
-            </div>
-            
-            <a href="#" class="mi-link-right">View Live Markets →</a>
-          </div>
+  
+  <!-- ═══ FINVISTA PRIVATE CLIENT (FAMILY OFFICE) ═══ -->
+  <section class="sec" style="background: radial-gradient(circle at 50% 0%, #FAF5EE 0%, #F1E9DE 50%, #E8DFCFA0 100%); background-attachment: fixed; background-attachment: fixed; color: #1A1A1A; padding: 80px 0; font-family: 'Open Sans', sans-serif; position: relative;">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12 text-center md:text-left reveal">
+            <h2 class="text-xs font-semibold tracking-[0.2em] uppercase mb-3" style="color: #B58E58;">FINVISTA PRIVATE CLIENT</h2>
+            <h1 class="text-4xl md:text-5xl font-serif font-medium mb-4" style="color: #1A1A1A;">Comprehensive Family Office Services</h1>
+            <p class="max-w-2xl text-sm md:text-base leading-relaxed" style="color: #555555;">
+                Strategic governance and bespoke architectural design for multi-generational wealth accumulation, preservation, and transfer.
+            </p>
         </div>
 
-        <!-- Column 2 -->
-        <div class="mi-center reveal reveal-delay-1">
-          <div class="mi-header-row">
-            <h3>Latest Insights</h3>
-            <a href="#">View All Insights →</a>
-          </div>
-          <div class="mi-insights-grid">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
-            <div class="mi-insight-card">
-              <img src="./assets/journey-mountain.png" alt="Mountains" class="mi-insight-img">
-              <div class="mi-insight-body">
-                <span class="mi-tag">MARKET INSIGHTS</span>
-                <h4 class="mi-insight-title">Will 2024 Be the Year of Value Investing?</h4>
-                <div class="mi-insight-meta">Aug 28, 2024 • 5 min read</div>
-              </div>
-            </div>
-            
-            <div class="mi-insight-card">
-              <img src="./assets/insights_blog_1.png" alt="Person on rock" class="mi-insight-img">
-              <div class="mi-insight-body">
-                <span class="mi-tag">RETIREMENT</span>
-                <h4 class="mi-insight-title">Why Early Retirement Planning Matters</h4>
-                <div class="mi-insight-meta">Aug 20, 2024 • 7 min read</div>
-              </div>
-            </div>
-            
-            <div class="mi-insight-card">
-              <img src="./assets/insights_blog_2.png" alt="Road" class="mi-insight-img">
-              <div class="mi-insight-body">
-                <span class="mi-tag">TAX PLANNING</span>
-                <h4 class="mi-insight-title">New Tax Regime vs Old Regime: A Guide</h4>
-                <div class="mi-insight-meta">Aug 18, 2024 • 6 min read</div>
-              </div>
-            </div>
-            
-          </div>
-          
-          <div style="margin-top: 24px; background: #FFFFFF; border-radius: 12px; padding: 24px; border: 1px solid rgba(0,0,0,0.03); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02);">
-            <div>
-              <h4 style="font-size: 16px; font-weight: 600; margin: 0 0 4px 0; color: #111;">Get Daily Updates</h4>
-              <p style="font-size: 13px; color: #666; margin: 0;">Subscribe to our morning newsletter for curated insights.</p>
-            </div>
-            <div style="display: flex; gap: 8px;">
-              <input type="email" placeholder="Email address" style="padding: 10px 16px; border: 1px solid #EBEBEB; border-radius: 6px; font-size: 13px; outline: none; width: 180px;">
-              <button class="btn" style="background: var(--gold); color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;">Subscribe</button>
-            </div>
-          </div>
-        </div>
+            <div class="md:col-span-2 lg:col-span-1 lg:row-span-2 light-glass-card reveal reveal-delay-1 rounded-3xl p-8 lg:p-10 relative overflow-hidden group hover:border-[#B58E58]/40 transition-all duration-500 hover:-translate-y-1 flex flex-col justify-between cursor-default">
+                
+                <!-- Ambient Glow effect inside card -->
+                <div class="absolute -top-32 -right-32 w-80 h-80 rounded-full blur-[80px] group-hover:bg-[#B58E58]/10 transition-colors duration-700 pointer-events-none" style="background-color: rgba(181, 142, 88, 0.05);"></div>
 
-        <!-- Column 3 -->
-        <div class="mi-right reveal reveal-delay-2">
-          <div class="mi-header-row">
-            <h3>What We're Watching</h3>
-          </div>
-          <div class="mi-list">
-            
-            <div class="mi-list-item">
-              <svg class="mi-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              <span class="mi-list-text">RBI policy outlook and interest rates</span>
-            </div>
-            
-            <div class="mi-list-item">
-              <svg class="mi-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              <span class="mi-list-text">Global market volatility</span>
-            </div>
-            
-            <div class="mi-list-item">
-              <svg class="mi-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              <span class="mi-list-text">Indian equities: opportunities in 2024</span>
-            </div>
-            
-            <div class="mi-list-item">
-              <svg class="mi-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              <span class="mi-list-text">Gold prices and safe-haven demand</span>
-            </div>
-            
-            <div class="mi-list-item">
-              <svg class="mi-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              <span class="mi-list-text">Upcoming union budget expectations</span>
-            </div>
-            
-            <div class="mi-list-item">
-              <svg class="mi-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              <span class="mi-list-text">Tech sector earnings reports</span>
-            </div>
-            
-            <div class="mi-list-item">
-              <svg class="mi-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              <span class="mi-list-text">FII / DII institutional flows</span>
-            </div>
-            
-          </div>
-        </div>
+                <div>
+                    <!-- Icon / Graphic -->
+                    <div class="w-16 h-16 rounded-2xl bg-white border border-black/5 flex items-center justify-center mb-8 group-hover:border-[#B58E58]/30 transition-colors duration-500 shadow-sm">
+                        <svg class="w-8 h-8" style="color: #B58E58;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M3 21h18M5 21V7l7-4 7 4v14M9 10h6v7H9v-7z" />
+                        </svg>
+                    </div>
 
-      </div>
+                    <h3 class="text-3xl lg:text-4xl font-serif font-medium mb-4 leading-tight group-hover:text-[#B58E58] transition-colors duration-300" style="color: #1A1A1A;">
+                        Wealth<br>Architecture
+                    </h3>
+                    <p class="text-sm leading-relaxed mb-8" style="color: #555555;">
+                        A holistic framework designed to protect assets across jurisdictions, minimize tax drag, and align liquidity with your legacy objectives.
+                    </p>
+                </div>
+
+                <!-- Bullet List -->
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3">
+                        <div class="mt-1 w-1.5 h-1.5 rounded-full" style="background-color: #B58E58; box-shadow: 0 0 4px rgba(181, 142, 88, 0.4);"></div>
+                        <span class="text-sm" style="color: #444444;">Liquidity & Cash Flow Planning</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="mt-1 w-1.5 h-1.5 rounded-full" style="background-color: #B58E58; box-shadow: 0 0 4px rgba(181, 142, 88, 0.4);"></div>
+                        <span class="text-sm" style="color: #444444;">Estate & Trust Structure Design</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="mt-1 w-1.5 h-1.5 rounded-full" style="background-color: #B58E58; box-shadow: 0 0 4px rgba(181, 142, 88, 0.4);"></div>
+                        <span class="text-sm" style="color: #444444;">Strategic Private Equity Access</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="light-glass-card reveal reveal-delay-2 rounded-3xl p-8 relative overflow-hidden group hover:border-[#B58E58]/40 transition-all duration-500 hover:-translate-y-1 flex flex-col justify-between cursor-default">
+                
+                <h3 class="text-2xl font-serif font-medium mb-6" style="color: #1A1A1A;">Tax Alpha &<br>Harvesting</h3>
+                
+                <div class="flex flex-col sm:flex-row items-center gap-6 mt-auto">
+                    <!-- Circular Stat Badge -->
+                    <div class="relative w-28 h-28 shrink-0 rounded-full border border-black/5 flex flex-col items-center justify-center bg-white group-hover:border-[#B58E58]/30 transition-all duration-500 shadow-sm">
+                        <div class="absolute inset-1 rounded-full border border-black/5 border-dashed group-hover:rotate-12 transition-transform duration-700"></div>
+                        <span class="text-2xl font-serif font-semibold" style="color: #B58E58;">1.8%</span>
+                        <span class="text-[8px] uppercase tracking-widest text-center mt-0.5 leading-tight" style="color: #777777;">Annual Tax<br>Savings</span>
+                    </div>
+
+                    <ul class="space-y-2.5">
+                        <li class="flex items-center gap-2 text-xs" style="color: #444444;">
+                            <svg class="w-3.5 h-3.5" style="color: #B58E58;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Systematic Loss Harvesting
+                        </li>
+                        <li class="flex items-center gap-2 text-xs" style="color: #444444;">
+                            <svg class="w-3.5 h-3.5" style="color: #B58E58;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Capital Gains Optimization
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="light-glass-card reveal reveal-delay-3 rounded-3xl p-8 relative overflow-hidden group hover:border-[#B58E58]/40 transition-all duration-500 hover:-translate-y-1 flex flex-col justify-between cursor-default">
+                
+                <div class="flex justify-between items-start mb-6">
+                    <h3 class="text-2xl font-serif font-medium" style="color: #1A1A1A;">Bespoke<br>Fixed Income</h3>
+                    <!-- Minimal Yield Curve Graphic -->
+                    <div class="w-10 h-10 shrink-0 transition-colors duration-500" style="color: #B58E58; opacity: 0.8;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 3v18h18" />
+                            <path d="M7 16c2-4 4-8 8-10 2-1 4-1 4-1" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="mt-auto">
+                    <p class="text-sm mb-5 leading-relaxed" style="color: #555555;">
+                        Curated debt structures engineered to preserve capital while generating predictable, inflation-beating yields.
+                    </p>
+                    <ul class="space-y-3 border-t border-black/5 pt-4">
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1.5 w-1 h-1 rounded-sm" style="background-color: #B58E58;"></div>
+                            <span class="text-sm" style="color: #444444;">Sovereign Bond Ladders</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1.5 w-1 h-1 rounded-sm" style="background-color: #B58E58;"></div>
+                            <span class="text-sm" style="color: #444444;">Global Rate Strategy</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 light-glass-card reveal reveal-delay-4 rounded-3xl p-8 lg:p-10 relative overflow-hidden group hover:border-[#B58E58]/40 transition-all duration-500 hover:-translate-y-1 flex flex-col sm:flex-row items-center sm:items-end justify-between gap-8">
+                
+                <!-- Background decorative line art -->
+                <div class="absolute right-0 top-0 opacity-[0.03] group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
+                    <svg width="300" height="200" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="200" cy="50" r="150" stroke="#B58E58" stroke-width="1"/>
+                        <circle cx="200" cy="50" r="100" stroke="#B58E58" stroke-width="1"/>
+                    </svg>
+                </div>
+
+                <div class="max-w-lg relative z-10 text-center sm:text-left">
+                    <h3 class="text-2xl lg:text-3xl font-serif font-medium mb-3" style="color: #1A1A1A;">Institutional Governance</h3>
+                    <p class="text-sm leading-relaxed" style="color: #555555;">
+                        Discreet, clean-line strategies ensuring smooth generational transitions. Our fiduciary structure guarantees objective advice completely free of product-pushing conflicts.
+                    </p>
+                </div>
+
+                <!-- CTA Button -->
+                <a href="#contact" class="relative z-10 shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold rounded-full hover:scale-105 transition-all duration-300" style="background-color: #1A1A1A; color: #FFFFFF; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    Schedule Family Consultation
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
+
+        </div>
     </div>
   </section>
-
+  
   <!-- ═══ PLATFORM MOCKUP ═══ -->
-  <section class="sec platform-sec" style="background:var(--dark-bg);">
-    <div class="container">
+  <section class="sec platform-sec" style="background:var(--dark-bg); position: relative;">
+    <canvas id="financeMatrix" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; opacity:0.35; pointer-events:none;"></canvas>
+    <div class="container" style="position: relative; z-index: 1;">
       <div class="platform-layout">
         <div class="plat-left reveal">
           <p class="eyebrow eyebrow--gold">OUR PLATFORM</p>
@@ -1075,7 +1166,7 @@ const render = () => {
     </div>
   </footer>
 
-  <button class="fab" id="fabBtn"><span>◎</span> Talk to a Money Guide <b>↗</b></button>  <!-- Service Info Modal -->
+  <!-- Service Info Modal -->
   <div class="modal-overlay" id="serviceModal" onclick="if(event.target===this) this.classList.remove('active')">
     <div class="modal-content" style="text-align: center; max-width: 500px;">
       <button class="modal-close" onclick="document.getElementById('serviceModal').classList.remove('active')">✕</button>
@@ -1346,6 +1437,12 @@ document.querySelector("#menuBtn").addEventListener("click", () => {
   document.querySelector("#mainNav").classList.toggle("open");
 });
 
+document.querySelectorAll("#mainNav a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.querySelector("#mainNav").classList.remove("open");
+  });
+});
+
 // Newsletter
 document.querySelector("#nlForm").addEventListener("submit", e => {
   e.preventDefault(); e.currentTarget.reset();
@@ -1356,7 +1453,7 @@ document.querySelector("#nlForm").addEventListener("submit", e => {
 const modal = document.getElementById("contactModal");
 const modalClose = document.getElementById("modalClose");
 const mgForm = document.getElementById("moneyGuideForm");
-const contactTriggers = document.querySelectorAll('a[href="#contact"], #fabBtn');
+const contactTriggers = document.querySelectorAll('a[href="#contact"]');
 
 if (modal) {
   contactTriggers.forEach(btn => {
@@ -1435,13 +1532,13 @@ if (!isReduced && window.matchMedia("(hover: hover)").matches) {
   // Nav Highlight
   const nav = document.getElementById("mainNav");
   const highlight = document.getElementById("navHighlight");
-  const links = nav.querySelectorAll("a");
+    const links = nav.querySelectorAll(":scope > a, :scope > .nav-item-dropdown");
 
   links.forEach(link => {
     link.addEventListener("mouseenter", (e) => {
       highlight.style.opacity = "1";
-      highlight.style.width = e.target.offsetWidth + "px";
-      highlight.style.transform = `translateX(${e.target.offsetLeft}px)`;
+      highlight.style.width = link.offsetWidth + "px";
+      highlight.style.transform = `translateX(${link.offsetLeft}px)`;
     });
   });
   nav.addEventListener("mouseleave", () => {
@@ -1694,13 +1791,13 @@ window.addEventListener('load', () => {
 
   /* ═══ OUR APPROACH SCROLL ANIMATION ═══ */
   const approachData = [
-    { num: '01', title: 'Understand', desc: 'We begin by understanding your<br>current financial situation, goals,<br>values and aspirations.', items: ['Income & Expenses', 'Existing Investments', 'Risk Profile', 'Short & Long Term Goals'], point: {x: 78.0, y: 83.5} },
-    { num: '02', title: 'Plan', desc: 'We craft a personalized roadmap<br>tailored specifically to your<br>life objectives.', items: ['Asset Allocation', 'Retirement Timeline', 'Tax Strategies', 'Risk Mitigation'], point: {x: 63.2, y: 70.3} },
-    { num: '03', title: 'Invest', desc: 'Deploying capital into diversified<br>portfolios designed to maximize<br>returns and minimize volatility.', items: ['Mutual Funds', 'Equities', 'Fixed Income', 'Alternative Assets'], point: {x: 78.5, y: 60.5} },
-    { num: '04', title: 'Protect', desc: 'Safeguarding your wealth against<br>unforeseen events and ensuring<br>your family\'s security.', items: ['Life Insurance', 'Health Coverage', 'Emergency Funds', 'Estate Planning'], point: {x: 69.3, y: 54.8} },
-    { num: '05', title: 'Grow', desc: 'Actively monitoring and rebalancing<br>your portfolio to align with<br>changing market conditions.', items: ['Quarterly Reviews', 'Market Analysis', 'Rebalancing', 'Opportunity Identification'], point: {x: 76.0, y: 50.0} },
-    { num: '06', title: 'Achieve', desc: 'Reaching your financial milestones<br>and transitioning seamlessly into<br>the next phase of your life.', items: ['Financial Freedom', 'Legacy Transfer', 'Retirement Transition', 'Ongoing Support'], point: {x: 70.5, y: 45.0} },
-    { num: '07', title: 'Legacy', desc: 'Ensuring your wealth creates a lasting<br>impact for future generations<br>and your chosen causes.', items: ['Estate Preservation', 'Philanthropy', 'Family Governance', 'Succession Planning'], point: {x: 75.3, y: 41.5} }
+    { num: '01', title: 'Understand', desc: 'We begin by understanding your<br>current financial situation, goals,<br>values and aspirations.', items: ['Income & Expenses', 'Existing Investments', 'Risk Profile', 'Short & Long Term Goals'], point: { x: 78.0, y: 83.5 } },
+    { num: '02', title: 'Plan', desc: 'We craft a personalized roadmap<br>tailored specifically to your<br>life objectives.', items: ['Asset Allocation', 'Retirement Timeline', 'Tax Strategies', 'Risk Mitigation'], point: { x: 63.2, y: 70.3 } },
+    { num: '03', title: 'Invest', desc: 'Deploying capital into diversified<br>portfolios designed to maximize<br>returns and minimize volatility.', items: ['Mutual Funds', 'Equities', 'Fixed Income', 'Alternative Assets'], point: { x: 78.5, y: 60.5 } },
+    { num: '04', title: 'Protect', desc: 'Safeguarding your wealth against<br>unforeseen events and ensuring<br>your family\'s security.', items: ['Life Insurance', 'Health Coverage', 'Emergency Funds', 'Estate Planning'], point: { x: 69.3, y: 54.8 } },
+    { num: '05', title: 'Grow', desc: 'Actively monitoring and rebalancing<br>your portfolio to align with<br>changing market conditions.', items: ['Quarterly Reviews', 'Market Analysis', 'Rebalancing', 'Opportunity Identification'], point: { x: 76.0, y: 50.0 } },
+    { num: '06', title: 'Achieve', desc: 'Reaching your financial milestones<br>and transitioning seamlessly into<br>the next phase of your life.', items: ['Financial Freedom', 'Legacy Transfer', 'Retirement Transition', 'Ongoing Support'], point: { x: 70.5, y: 45.0 } },
+    { num: '07', title: 'Legacy', desc: 'Ensuring your wealth creates a lasting<br>impact for future generations<br>and your chosen causes.', items: ['Estate Preservation', 'Philanthropy', 'Family Governance', 'Succession Planning'], point: { x: 75.3, y: 41.5 } }
   ];
 
   const approachSec = document.getElementById('process');
@@ -1740,33 +1837,58 @@ window.addEventListener('load', () => {
       if (markerLabel) markerLabel.textContent = data.title;
 
       // Update Card UI
-      gsap.to(approachCard, { opacity: 0, duration: 0.2, onComplete: () => {
-        acNum.textContent = data.num;
-        acTitle.textContent = data.title;
-        acDesc.innerHTML = data.desc;
-        acList.innerHTML = data.items.map(item => `<li><span class="card-check">✓</span> ${item}</li>`).join('');
-        gsap.to(approachCard, { opacity: 1, duration: 0.3 });
-      }});
+      gsap.to(approachCard, {
+        opacity: 0, duration: 0.2, onComplete: () => {
+          acNum.textContent = data.num;
+          acTitle.textContent = data.title;
+          acDesc.innerHTML = data.desc;
+          acList.innerHTML = data.items.map(item => `<li><span class="card-check">✓</span> ${item}</li>`).join('');
+          gsap.to(approachCard, { opacity: 1, duration: 0.3 });
+        }
+      });
     }
 
     // Force first update
     updateApproachStep(0);
 
+    let currentPhase = 0;
+    let phaseInterval = null;
+
+    const startAutoplay = () => {
+      if (!phaseInterval) {
+        phaseInterval = setInterval(() => {
+          currentPhase = (currentPhase + 1) % approachData.length;
+          updateApproachStep(currentPhase);
+        }, 3000);
+      }
+    };
+
+    const stopAutoplay = () => {
+      if (phaseInterval) {
+        clearInterval(phaseInterval);
+        phaseInterval = null;
+      }
+    };
+
     ScrollTrigger.create({
       trigger: approachSec,
-      start: "center center",
-      end: "+=3000",
-      pin: true,
-      scrub: true,
-      snap: [0, 1/7, 2/7, 3/7, 4/7, 5/7, 6/7, 1],
-      onUpdate: (self) => {
-        let p = self.progress; 
-        let mappedProgress = p / (6/7); // The first 6/7 of the scroll covers all 7 points
-        if (mappedProgress > 1) mappedProgress = 1;
-        let index = Math.floor(mappedProgress * approachData.length);
-        if (index >= approachData.length) index = approachData.length - 1;
-        updateApproachStep(index);
-      }
+      start: "top bottom",
+      end: "bottom top",
+      onEnter: startAutoplay,
+      onLeave: stopAutoplay,
+      onEnterBack: startAutoplay,
+      onLeaveBack: stopAutoplay
+    });
+
+    const stepElements = document.querySelectorAll('.approach-step');
+    stepElements.forEach((step, idx) => {
+      step.style.cursor = 'pointer';
+      step.addEventListener('click', () => {
+        currentPhase = idx;
+        updateApproachStep(currentPhase);
+        stopAutoplay();
+        startAutoplay();
+      });
     });
   }
 
@@ -1790,12 +1912,404 @@ window.addEventListener('load', () => {
         trigger: heroSection,
         start: "top top",
         end: () => `+=${heroSection.offsetHeight}`,
-        scrub: true,
+        scrub: 1,
       }
     });
   }
-  
+
+  // --- Finance Matrix Background ---
+  const matrixCanvas = document.getElementById('financeMatrix');
+  if (matrixCanvas) {
+    const ctx = matrixCanvas.getContext('2d');
+    let time = 0;
+    
+    function resizeCanvas() {
+      matrixCanvas.width = matrixCanvas.parentElement.offsetWidth;
+      matrixCanvas.height = matrixCanvas.parentElement.offsetHeight;
+    }
+    
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function drawPattern() {
+      const width = matrixCanvas.width;
+      const height = matrixCanvas.height;
+
+      // 1. Draw Background Gradient
+      const bgGradient = ctx.createLinearGradient(0, 0, width, 0);
+      bgGradient.addColorStop(0, '#0a1c12'); // Dark green
+      bgGradient.addColorStop(0.5, '#0e111a'); // Dark navy transition
+      bgGradient.addColorStop(1, '#110b1a'); // Dark purple
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, width, height);
+
+      // 2. Draw Repeating Text Blocks
+      ctx.font = '12px "Courier New", Courier, monospace'; // Slightly larger
+      ctx.fillStyle = 'rgba(46, 140, 100, 0.7)'; // Brighter text
+      ctx.textBaseline = 'top';
+
+      const block = [
+        "₹₹₹₹₹₹₹₹₹₹",
+        "$$$$$$$$$$",
+        "€€€€€€€€€€"
+      ];
+      
+      const charWidth = 6.6; 
+      const lineHeight = 14;
+      const blockWidth = 10 * charWidth;
+      const blockHeight = 3 * lineHeight;
+      
+      const gapX = charWidth * 3; // 3 chars gap horizontally
+      const gapY = lineHeight * 1.5; // Gap vertically
+
+      const totalWidth = blockWidth + gapX;
+      
+      time += 0.3; // Speed of movement
+
+      for (let y = 0; y < height; y += (blockHeight + gapY)) {
+        for (let row = 0; row < 3; row++) {
+          // Even rows move left, odd rows move right
+          let rowOffset = row % 2 === 0 ? -time : time;
+          
+          rowOffset = rowOffset % totalWidth;
+          if (rowOffset > 0) rowOffset -= totalWidth;
+
+          // Draw enough blocks to cover the screen width
+          for (let x = rowOffset - totalWidth; x < width + totalWidth; x += totalWidth) {
+            ctx.fillText(block[row], x, y + (row * lineHeight));
+          }
+        }
+      }
+
+      // 3. Draw Scanlines Overlay
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
+      for (let y = 0; y < height; y += 3) {
+        ctx.fillRect(0, y, width, 1);
+      }
+      
+      requestAnimationFrame(drawPattern);
+    }
+
+    drawPattern();
+  }
+
 });
 
 
 
+
+
+// --- SPA Router & Smooth Scroll ---
+let homeMain = null;
+let homeFooter = null;
+document.addEventListener('click', async (e) => {
+  const link = e.target.closest('a');
+  if (!link) return;
+  const href = link.getAttribute('href');
+  if (!href || href === '#') return;
+
+  if (href === 'insights.html' || href === 'contact.html') {
+    e.preventDefault();
+    if (!homeMain) {
+      homeMain = document.querySelector('main');
+      homeFooter = document.querySelector('footer');
+    }
+    
+    // Show Loader for 2 seconds when navigating to insights or contact us tabs
+    const loader = document.getElementById('pageLoader');
+    if (loader) {
+      loader.classList.remove('hidden');
+      await new Promise(r => setTimeout(r, 2000));
+    }
+    
+    const res = await fetch(href);
+    const text = await res.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, 'text/html');
+    const newMain = doc.querySelector('main');
+    const innerHeader = newMain.querySelector('header');
+    if (innerHeader) innerHeader.remove(); // Prevent duplicate headers
+    const newFooter = doc.querySelector('footer');
+    const currentMain = document.querySelector('main');
+    const currentFooter = document.querySelector('footer');
+    if (currentMain && newMain) currentMain.replaceWith(newMain);
+    if (currentFooter && newFooter) currentFooter.replaceWith(newFooter);
+    document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+    const navLink = link.closest('.nav') ? link : document.querySelector(`.nav a[href="${href}"]`);
+    if (navLink) navLink.classList.add('active');
+    
+    // Force header background so text is visible on light background
+    const hdr = document.querySelector('.hdr');
+    if (hdr) hdr.classList.add('force-scrolled');
+    const ticker = document.getElementById('tickerWrap');
+    if (ticker) ticker.style.display = 'none';
+
+    const scripts = doc.querySelectorAll('script');
+    scripts.forEach(s => {
+      if (!s.src && s.innerHTML.includes('refresh()')) {
+        const newScript = document.createElement('script');
+        newScript.textContent = s.textContent;
+        document.body.appendChild(newScript);
+      }
+    });
+    window.scrollTo(0, 0);
+    const pageName = href.replace('.html', '');
+    history.pushState({ page: pageName }, '', href);
+    
+    if (loader) loader.classList.add('hidden');
+  } else if (href.includes('#')) {
+    const hash = href.substring(href.indexOf('#'));
+    if (!hash || hash === '#') return;
+
+    // Check if target element exists on current page
+    const target = document.querySelector(hash);
+    if (target) {
+      e.preventDefault();
+
+      // Auto-close mobile menu if open
+      const mainNav = document.getElementById('mainNav');
+      if (mainNav) mainNav.classList.remove('open');
+
+      // Set active class on navbar links
+      document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+      const activeLink = document.querySelector(`.nav a[href="${href}"], .nav a[href="${hash}"]`);
+      if (activeLink) activeLink.classList.add('active');
+
+      const headerOffset = 80;
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      history.pushState(null, '', hash);
+      return;
+    }
+
+    // If target is on home page and homeMain needs to be restored from subpage:
+    if (homeMain && !document.body.contains(homeMain)) {
+      e.preventDefault();
+
+      const currentMain = document.querySelector('main');
+      const currentFooter = document.querySelector('footer');
+      if (currentMain && homeMain) currentMain.replaceWith(homeMain);
+      if (currentFooter && homeFooter) currentFooter.replaceWith(homeFooter);
+
+      document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+      const activeLink = document.querySelector(`.nav a[href="${href}"], .nav a[href="${hash}"]`);
+      if (activeLink) activeLink.classList.add('active');
+
+      const hdr = document.querySelector('.hdr');
+      if (hdr) hdr.classList.remove('force-scrolled');
+      const ticker = document.getElementById('tickerWrap');
+      if (ticker) ticker.style.display = 'flex';
+
+      history.pushState({ page: 'home' }, '', 'index.html' + hash);
+      const restoredTarget = document.querySelector(hash);
+      if (restoredTarget) {
+        const headerOffset = 80;
+        const elementPosition = restoredTarget.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      } else {
+        window.scrollTo(0, 0);
+      }
+      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    }
+  }
+});
+window.addEventListener('popstate', () => window.location.reload());
+
+
+// Premium GSAP Scroll Animations
+setTimeout(() => {
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Parallax on section titles (target entire header group if present so title and eyebrow move together)
+    gsap.utils.toArray('section h2').forEach(title => {
+      const parentHeader = title.closest('.approach-header, .sec-header, .fv-why-left, .lifestage-left');
+      const target = parentHeader || title;
+      gsap.fromTo(target, 
+        { y: 0 },
+        {
+          y: -20,
+          ease: "none",
+          scrollTrigger: {
+            trigger: title.closest('section'),
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5
+          }
+        }
+      );
+    });
+
+    // Parallax on glass cards
+    gsap.utils.toArray('.light-glass-card').forEach((card, i) => {
+      const distance = i % 2 === 0 ? -50 : -30;
+      gsap.fromTo(card,
+        { y: 0 },
+        {
+          y: distance,
+          ease: "none",
+          scrollTrigger: {
+            trigger: card.closest('.grid'),
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1
+          }
+        }
+      );
+    });
+  }
+}, 500); // small delay to ensure DOM is fully parsed and rendered
+
+
+
+// --- New Modal Logic ---
+window.finServices = {
+    'mf': {
+        title: 'Mutual Funds & SIPs',
+        desc: 'Build wealth systematically with our curated mutual fund portfolios designed for your unique goals.',
+        icon: '<svg class="w-12 h-12 text-[#E5A93C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>',
+        features: [
+            'Goal-based investment planning',
+            'Automated SIP management',
+            'Tax-saving ELSS funds',
+            'Regular portfolio rebalancing'
+        ]
+    },
+    'pms': {
+        title: 'Portfolio Management',
+        desc: 'Bespoke investment strategies for high-net-worth individuals seeking superior risk-adjusted returns.',
+        icon: '<svg class="w-12 h-12 text-[#E5A93C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>',
+        features: [
+            'Direct equity exposure',
+            'Customized portfolio construction',
+            'Active risk management',
+            'Dedicated fund manager'
+        ]
+    },
+    'nps': {
+        title: 'Retirement Planning',
+        desc: 'Secure your future with tax-efficient retirement solutions including NPS and structured annuities.',
+        icon: '<svg class="w-12 h-12 text-[#E5A93C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>',
+        features: [
+            'NPS account opening & management',
+            'Additional Section 80CCD tax benefits',
+            'Pension & annuity structuring',
+            'Inflation-adjusted withdrawal strategies'
+        ]
+    },
+    'insurance': {
+        title: 'Insurance Solutions',
+        desc: 'Comprehensive protection for your life, health, and assets against unforeseen circumstances.',
+        icon: '<svg class="w-12 h-12 text-[#E5A93C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>',
+        features: [
+            'Term life insurance',
+            'Comprehensive health covers',
+            'Key-man & business insurance',
+            'Claim settlement assistance'
+        ]
+    },
+    'estate': {
+        title: 'Estate Planning',
+        desc: 'Ensure smooth intergenerational wealth transfer with legally sound estate planning structures.',
+        icon: '<svg class="w-12 h-12 text-[#E5A93C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>',
+        features: [
+            'Will drafting & registration',
+            'Private family trusts',
+            'Power of attorney structuring',
+            'Business succession planning'
+        ]
+    },
+    'overview': {
+        title: 'Holistic Wealth Overview',
+        desc: 'A unified approach to managing all your assets, liabilities, and financial aspirations in one place.',
+        icon: '<svg class="w-12 h-12 text-[#E5A93C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>',
+        features: [
+            'Consolidated portfolio reporting',
+            'Net worth tracking',
+            'Asset allocation analysis',
+            'Periodic performance reviews'
+        ]
+    }
+};
+
+window.openServiceModal = function(serviceKey) {
+    const data = window.finServices[serviceKey];
+    if(!data) return;
+    
+    const modal = document.getElementById('fvServiceModal');
+    const modalCard = document.getElementById('modalCard');
+    if(!modal || !modalCard) return;
+
+    // Inject Data
+    document.getElementById('modalTitle').innerText = data.title;
+    document.getElementById('modalDesc').innerText = data.desc;
+    document.getElementById('modalIcon').innerHTML = data.icon;
+    
+    const featureList = data.features.map(f => `
+        <li class="flex items-start gap-3">
+            <div class="mt-0.5 text-[#E5A93C] bg-[#E5A93C]/10 p-1 rounded-full">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <span class="text-gray-200 text-sm font-medium leading-relaxed">${f}</span>
+        </li>
+    `).join('');
+    document.getElementById('modalFeatures').innerHTML = featureList;
+
+    // Show Modal & Animate
+    modal.classList.remove('hidden');
+    modal.style.display = 'flex';
+    
+    // Small delay to allow display:block to apply before animating opacity/scale
+    requestAnimationFrame(() => {
+        setTimeout(() => {
+            modalCard.style.opacity = '1';
+            modalCard.style.transform = 'scale(1)';
+        }, 10);
+    });
+};
+
+window.closeModal = function() {
+    const modal = document.getElementById('fvServiceModal');
+    const modalCard = document.getElementById('modalCard');
+    if(!modal || !modalCard) return;
+
+    modalCard.style.opacity = '0';
+    modalCard.style.transform = 'scale(0.95)';
+    
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.style.display = 'none';
+    }, 300);
+};
+
+// Event delegation
+document.addEventListener('click', function(e) {
+    // Check if click was on a button with data-service or onclick that opens modal
+    const btn = e.target.closest('button');
+    if (btn) {
+        let serviceKey = btn.getAttribute('data-service');
+        if (!serviceKey && btn.getAttribute('onclick')) {
+            const match = btn.getAttribute('onclick').match(/window\.openServiceModal\('([^']+)'\)/);
+            if (match) serviceKey = match[1];
+        }
+        
+        if (serviceKey) {
+            e.preventDefault();
+            e.stopPropagation();
+            window.openServiceModal(serviceKey);
+        }
+    }
+});
+
+document.addEventListener('keydown', function(event) {
+    const modal = document.getElementById('fvServiceModal');
+    if (event.key === "Escape" && modal && !modal.classList.contains('hidden')) {
+        window.closeModal();
+    }
+});

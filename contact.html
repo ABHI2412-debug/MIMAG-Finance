@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - MIMAG Finance</title>
+  <link rel="stylesheet" href="contact.css">
+  <script>tailwind.config = { corePlugins: { preflight: false } }</script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- LOADER OVERLAY -->
+  <div class="loader-overlay" id="pageLoader">
+    <div class="typewriter">
+      <div class="slide"><i></i></div>
+      <div class="paper"></div>
+      <div class="keyboard"></div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('pageLoader');
+        if (loader) {
+          loader.classList.add('hidden');
+        }
+      }, 2000);
+    });
+  </script>
+
+  <header class="hdr force-scrolled">
+    <div class="container hdr-inner" style="width: min(1440px, 100% - 64px); margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+      <a class="brand" href="/">
+        <img src="./assets/logo-finvista.png" alt="FinVista" style="height: 72px; width: auto;">
+      </a>
+      <div class="nav-wrap">
+        <nav class="nav" id="mainNav">
+          <a href="index.html#top">About Us</a>
+          <div class="nav-item-dropdown relative group" style="display:inline-flex !important; align-items:center !important; white-space:nowrap !important;">
+            <a href="index.html#services" class="dropdown-trigger flex items-center gap-1.5 transition-colors group-hover:text-[#E5A93C]" style="display: inline-flex !important; align-items: center !important; gap: 6px !important; white-space: nowrap !important; text-decoration: none;">
+              <span>Our Services</span>
+              <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-180" style="display: inline-block !important; flex-shrink: 0 !important; width: 12px; height: 12px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </a>
+
+  <!-- Invisible hover bridge -->
+  <div class="absolute top-full left-0 w-full h-4"></div>
+
+  <!-- Dropdown Panel -->
+  <div class="absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[650px] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 ease-out z-50">
+      
+      <!-- Glassmorphic Container -->
+      <div class="bg-[#121212]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-8 grid grid-cols-2 gap-10 relative overflow-hidden text-left" style="font-family: 'Inter', sans-serif;">
+          
+          <!-- Ambient Gold Glow -->
+          <div class="absolute -top-20 -right-20 w-64 h-64 bg-[#E5A93C]/10 blur-[80px] rounded-full pointer-events-none"></div>
+
+          <!-- Column 1: Core Investments -->
+          <div class="relative z-10">
+              <h3 class="text-xs font-bold tracking-[0.15em] text-gray-500 uppercase mb-5 border-b border-white/5 pb-3">Core Investments</h3>
+              <ul class="space-y-2 m-0 p-0 list-none">
+                  <li>
+                      <button data-service="mf" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">Mutual Funds</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Goal-based systematic investing & SIPs</span>
+                          </div>
+                      </button>
+                  </li>
+                  <li>
+                      <button data-service="pms" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">PMS & AIF</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Bespoke alternative portfolios for HNIs</span>
+                          </div>
+                      </button>
+                  </li>
+                  <li>
+                      <button data-service="nps" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">NPS & FD</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Retirement architecture & fixed-yield</span>
+                          </div>
+                      </button>
+                  </li>
+              </ul>
+          </div>
+          
+          <!-- Column 2: Protection & Advisory -->
+          <div class="relative z-10">
+              <h3 class="text-xs font-bold tracking-[0.15em] text-gray-500 uppercase mb-5 border-b border-white/5 pb-3">Protection & Advisory</h3>
+              <ul class="space-y-2 m-0 p-0 list-none">
+                  <li>
+                      <button data-service="insurance" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">Life & Health Insurance</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Comprehensive risk & health coverage</span>
+                          </div>
+                      </button>
+                  </li>
+                  <li>
+                      <button data-service="estate" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">Estate & Legacy Planning</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Family trusts & succession structuring</span>
+                          </div>
+                      </button>
+                  </li>
+                  <li>
+                      <button data-service="overview" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">All Services Overview</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Explore our complete wealth framework</span>
+                          </div>
+                      </button>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </div>
+</div>
+          <a href="index.html#calc">SIP Calculator</a>
+          <a href="insights.html">Insights</a>
+          <a href="contact.html" class="active">Contact Us</a>
+        </nav>
+      </div>
+      <div class="hdr-right">
+        <a class="btn btn--gold" href="contact.html">Book a Consultation ↗</a>
+        <button class="hamburger" id="menuBtn" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </header>
+  <main class="mimag-contact">
+    <section class="contact-hero">
+      <div class="hero-bg"></div>
+      <div class="hero-wash"></div>
+
+
+
+      <div class="hero-copy">
+        <p class="eyebrow">CONTACT US</p>
+        <h1>
+          Let’s build<br>
+          your financial<br>
+          future <em>together.</em>
+        </h1>
+        <p class="hero-description">
+          Whether you have a question, want to explore our services,<br class="desktop">
+          or simply need guidance — we’re here to help.
+        </p>
+      </div>
+
+      <div class="hero-sidewords">
+        <span>IDEAS</span>
+        <span>STRATEGY</span>
+        <span>OPPORTUNITIES</span>
+        <span>A BRIGHTER TOMORROW</span>
+      </div>
+
+      <div class="contact-grid">
+        <aside class="contact-details">
+          <div class="contact-item">
+            <div class="contact-icon">✉</div>
+            <div>
+              <p class="eyebrow">EMAIL</p>
+              <div class="contact-value">hello@mimag-finance.com</div>
+            </div>
+            <span class="contact-arrow">↗</span>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">⌕</div>
+            <div>
+              <p class="eyebrow">PHONE</p>
+              <div class="contact-value">+91 98765 43210</div>
+            </div>
+            <span class="contact-arrow">↗</span>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">⌖</div>
+            <div>
+              <p class="eyebrow">OFFICE</p>
+              <div class="contact-value">Mumbai, India<br>400001</div>
+            </div>
+            <span class="contact-arrow">↗</span>
+          </div>
+
+          <div class="socials">
+            <p class="eyebrow">FOLLOW US</p>
+            <div class="social-row">
+              <a href="#" aria-label="LinkedIn">in</a>
+              <a href="#" aria-label="Instagram">◎</a>
+              <a href="#" aria-label="X">𝕏</a>
+              <a href="#" aria-label="YouTube">▶</a>
+            </div>
+          </div>
+        </aside>
+
+        <form class="contact-card" onsubmit="event.preventDefault(); alert('Message sent!');">
+          <div class="form-heading">
+            <div>
+              <p class="eyebrow">SEND US A MESSAGE</p>
+              <h2>Start a conversation.</h2>
+            </div>
+            <p>
+              Tell us how we can help you and<br>
+              our team will get back to you shortly.
+            </p>
+          </div>
+
+          <div class="form-grid">
+            <label class="field">
+              <span>Full Name *</span>
+              <input type="text" placeholder="Enter your name" required>
+            </label>
+            <label class="field">
+              <span>Email Address *</span>
+              <input type="email" placeholder="you@example.com" required>
+            </label>
+            <label class="field">
+              <span>Phone Number</span>
+              <input type="tel" placeholder="+91 98765 43210">
+            </label>
+            <label class="field">
+              <span>I’m interested in</span>
+              <select>
+                <option value="">Select an option</option>
+                <option>Investment Planning</option>
+                <option>Wealth Management</option>
+                <option>Financial Planning</option>
+                <option>Business Advisory</option>
+                <option>Partnership</option>
+                <option>General Enquiry</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="field full">
+            <span>Message *</span>
+            <textarea rows="4" placeholder="Tell us about your goals, questions or requirements..." required></textarea>
+          </label>
+
+          <button class="submit-btn" type="submit">
+            Send Message <span>→</span>
+          </button>
+        </form>
+      </div>
+
+      <div class="bottom-message">
+        <span></span>
+        <h3>
+          We look forward<br>
+          to hearing from <em>you.</em>
+        </h3>
+      </div>
+
+      <div class="bottom-sidewords">
+        <span>PEOPLE</span>
+        <span>DISCIPLINE</span>
+        <span>STRATEGY</span>
+        <span>OPPORTUNITY</span>
+        <span>A BRIGHTER TOMORROW</span>
+      </div>
+    </section>
+  </main>
+
+<footer class="ftr">
+    <div class="container ftr-top">
+      <div class="ftr-brand">
+        <a class="brand" href="#top"><img src="./assets/logo-finvista.png" alt="MIMAG Finance" style="height: 72px; width: auto;"></a>
+        <div class="ftr-socials" style="margin-top: 16px;">
+          <a href="#" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="ftr-cols">
+        <div class="ftr-col"><span>Company</span><a href="#top">About Us</a><a href="#">Our Team</a><a href="#">Careers</a><a href="#">Contact</a></div>
+        <div class="ftr-col"><span>Services</span><a href="#">Investments</a><a href="#services">Insurance</a><a href="#">Retirement</a><a href="#">Tax Planning</a><a href="#">Estate Planning</a><a href="#">Loans</a></div>
+        <div class="ftr-col"><span>Tools</span><a href="#calc">SIP Calculator</a><a href="#">Lumpsum Calculator</a><a href="#">Retirement Calculator</a><a href="#">Goal Planner</a></div>
+        <div class="ftr-col"><span>Insights</span><a href="#">Market Updates</a><a href="#">Articles</a><a href="#">Guides</a><a href="#">FAQs</a></div>
+        <div class="ftr-col" style="padding-left: 48px; border-left: 1px solid #222;">
+          <span style="text-transform:none;">Subscribe to our newsletter</span>
+          <p style="color:#888; font-size:12px; margin-bottom:12px;">Get the latest insights and updates.</p>
+          <form class="nl-form" id="nlForm" style="display:flex; gap:0;">
+            <input type="email" placeholder="Enter your email" required style="flex:1; padding:0 12px; border-radius:4px 0 0 4px; border:1px solid #333; background:#1a1a1a; color:#fff; height:40px; border-right:none;">
+            <button type="submit" style="width:40px;height:40px;background:var(--gold);border:none;border-radius:0 4px 4px 0;color:var(--black);font-size:16px;cursor:pointer;font-weight:bold;">↗</button>
+          </form>
+        </div>
+        
+        <div class="ftr-col" style="padding-left: 48px; border-left: 1px solid #222; text-align:right; font-size:11px; letter-spacing:0.3em; line-height:2.4; font-weight:700; color:#888; margin-left: auto;">
+          INVEST<br>PROTECT<br>GROW<br>BELONG
+        </div>
+      </div>
+    </div>
+    <div class="container ftr-bottom" style="border-top: 1px solid #222; margin-top: 24px;">
+      <span style="color:#666;">© 2024 MIMAG Finance. All rights reserved.</span>
+      <div class="ftr-legal"><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a><a href="#">Risk Disclosure</a><a href="#">Sitemap</a></div>
+    </div>
+  </footer>
+
+    <!-- Dynamic Modal Overlay -->
+    <div id="fvServiceModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-md cursor-pointer" onclick="closeModal()"></div>
+        
+        <!-- Modal Content Box -->
+        <div class="relative bg-[#121212] border border-white/10 rounded-2xl shadow-2xl max-w-lg w-full p-8 transform scale-95 opacity-0 transition-all duration-300" id="modalCard">
+            
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors bg-[#0a0a0a] p-2 rounded-full border border-white/5">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <!-- Dynamic Content Injection Points -->
+            <div class="w-14 h-14 bg-[#0a0a0a] border border-white/5 rounded-xl flex items-center justify-center text-[#E5A93C] mb-6" id="modalIcon">
+                <!-- Icon injected here -->
+            </div>
+            
+            <h2 class="text-2xl font-serif font-semibold text-white mb-3" id="modalTitle">Service Title</h2>
+            <p class="text-gray-400 text-sm leading-relaxed mb-8" id="modalDesc">Service description goes here.</p>
+            
+            <h4 class="text-xs font-bold tracking-[0.15em] text-gray-500 uppercase mb-4 border-b border-white/5 pb-2">Key Capabilities</h4>
+            <ul class="space-y-4 mb-8" id="modalFeatures">
+                <!-- List items injected here -->
+            </ul>
+
+            <button onclick="closeModal()" class="w-full bg-[#E5A93C] hover:bg-[#d49931] text-[#121212] font-semibold py-3.5 rounded-lg text-sm transition-all shadow-[0_0_15px_rgba(229,169,60,0.2)]">
+                Request Strategy Call
+            </button>
+        </div>
+    </div>
+
+    <script>
+        window.finServices = {
+            mf: {
+                title: "Mutual Funds & SIPs",
+                desc: "Goal-based systematic investing across equity, debt, and hybrid mutual funds. We algorithmically select funds to ensure consistent compounding, liquidity, and risk mitigation tailored to your unique financial timeline.",
+                features: [
+                    "Active & Passive fund selection models",
+                    "Tax-saving ELSS optimization & harvesting",
+                    "Automated SIP, STP, and SWP structuring"
+                ],
+                icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>`
+            },
+            pms: {
+                title: "PMS & Alternative Investments",
+                desc: "Bespoke Portfolio Management Services (PMS) and Alternative Investment Funds (AIF) tailored strictly for High Net Worth Individuals seeking alpha and specialized exposure outside traditional retail markets.",
+                features: [
+                    "Direct equity and unlisted private exposure",
+                    "Absolute return and long-short strategies",
+                    "Dedicated institutional fund managers"
+                ],
+                icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`
+            },
+            nps: {
+                title: "NPS & Fixed Income",
+                desc: "Regulated, low-cost retirement planning vehicles and secure fixed-income assets designed for predictable yield, absolute capital preservation, and structural tax efficiency over long horizons.",
+                features: [
+                    "Exclusive Section 80CCD tax optimization",
+                    "Sovereign guarantees on specific instruments",
+                    "Automated lifecycle asset rebalancing"
+                ],
+                icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`
+            },
+            insurance: {
+                title: "Life & Health Protection",
+                desc: "Comprehensive risk coverage architecture specifically designed to protect your accumulated wealth, clear outstanding liabilities, and maintain your family's standard of living against unforeseen events.",
+                features: [
+                    "High-cover term life structural planning",
+                    "Global health and premium family floaters",
+                    "Corporate Keyman & partnership insurance"
+                ],
+                icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>`
+            },
+            estate: {
+                title: "Estate & Legacy Planning",
+                desc: "Strategic structuring of your assets, governance documentation, and directives to ensure a smooth, entirely private, and highly tax-efficient transfer of generational wealth.",
+                features: [
+                    "Comprehensive Will drafting and registration",
+                    "Private Family Trust formation & management",
+                    "Cross-border succession & repatriation advisory"
+                ],
+                icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>`
+            },
+            overview: {
+                title: "Comprehensive Overview",
+                desc: "A true 360-degree view of your financial life. We seamlessly integrate asset growth, capital protection, tax mitigation, and legacy planning into one cohesive, easily managed strategy.",
+                features: [
+                    "Consolidated multi-asset performance reporting",
+                    "Dedicated senior wealth manager & support team",
+                    "Quarterly strategic review & tactical rebalancing"
+                ],
+                icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>`
+            }
+        };
+
+        window.openServiceModal = function(serviceKey) {
+            const data = window.finServices[serviceKey];
+            if(!data) return;
+            
+            const modal = document.getElementById('fvServiceModal');
+            const modalCard = document.getElementById('modalCard');
+            if(!modal || !modalCard) return;
+
+            // Inject Data
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalDesc').innerText = data.desc;
+            document.getElementById('modalIcon').innerHTML = data.icon;
+            
+            const featureList = data.features.map(f => `
+                <li class="flex items-start gap-3">
+                    <div class="mt-0.5 text-[#E5A93C] bg-[#E5A93C]/10 p-1 rounded-full">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <span class="text-gray-200 text-sm font-medium leading-relaxed">${f}</span>
+                </li>
+            `).join('');
+            document.getElementById('modalFeatures').innerHTML = featureList;
+
+            // Show Modal & Animate
+            modal.classList.remove('hidden');
+            modal.style.display = 'flex';
+            
+            // Small delay to allow display:block to apply before animating opacity/scale
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    modalCard.style.opacity = '1';
+                    modalCard.style.transform = 'scale(1)';
+                }, 10);
+            });
+        }
+
+        window.closeModal = function() {
+            const modal = document.getElementById('fvServiceModal');
+            const modalCard = document.getElementById('modalCard');
+            if(!modal || !modalCard) return;
+
+            modalCard.style.opacity = '0';
+            modalCard.style.transform = 'scale(0.95)';
+            
+            // Wait for transition to finish before hiding
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(event) {
+            const modal = document.getElementById('fvServiceModal');
+            if (event.key === "Escape" && modal && !modal.classList.contains('hidden')) {
+                window.closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>

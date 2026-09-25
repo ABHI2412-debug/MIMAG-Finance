@@ -8,6 +8,45 @@
   <meta name="description"
     content="MIMAG Finance — comprehensive financial solutions: mutual funds, insurance, SIP, PMS, AIF, NPS, and more. A more secure, confident you." />
   <title>MIMAG Finance — A More Secure, Confident You.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      corePlugins: { preflight: false },
+      theme: {
+        extend: {
+          colors: {
+            finDark: '#0D0D0C',
+            finCardDark: '#141413',
+            finAccent: '#D4AF37',
+            finGold: '#E8BD56',
+            finGoldLight: '#F5DC98',
+            finCreamBg: '#F3EDE4',
+            finCreamCard: '#FFFFFF',
+            finTextDark: '#1D1B16',
+            finTextMuted: '#68645C',
+            obsidian: '#121212',
+            charcoal: '#1a1a1a',
+            charcoalLight: '#242424',
+            amber: '#E5A93C',
+            amberLight: '#F3C56E',
+            champagne: '#FAF8F5',
+            champagneMuted: '#D1CCC3',
+          },
+          fontFamily: {
+            sans: ['"Open Sans"', 'sans-serif'],
+            serif: ['"Instrument Serif"', 'serif'],
+            display: ['"Inter"', 'sans-serif'],
+          },
+          boxShadow: {
+            'luxury': '0 20px 40px -15px rgba(28, 22, 11, 0.08), 0 0 1px 1px rgba(212, 175, 55, 0.15)',
+            'floating-dark': '0 25px 50px -12px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(212, 175, 55, 0.25)',
+            'gold-glow': '0 0 25px rgba(232, 189, 86, 0.35)',
+            'subtle-card': '0 4px 20px -2px rgba(40, 30, 10, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.02)',
+          }
+        }
+      }
+    }
+  </script>
   <link rel="stylesheet" href="./styles.css?v=fv10" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,10 +57,192 @@
 </head>
 
 <body>
+
+  <!-- LOADER OVERLAY -->
+  <div class="loader-overlay" id="pageLoader">
+    <div class="typewriter">
+      <div class="slide"><i></i></div>
+      <div class="paper"></div>
+      <div class="keyboard"></div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('pageLoader');
+        if (loader) {
+          loader.classList.add('hidden');
+        }
+      }, 2000);
+    });
+  </script>
+
   <div id="app"></div>
   <script type="module" src="./app.js?v=fv8"></script>
   <!-- LIVE MARKET DATA — remove this line + market-data.js to revert -->
   <script src="./market-data.js?v=2" defer></script>
+
+    <!-- Dynamic Modal Overlay -->
+    <div id="fvServiceModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-md cursor-pointer" onclick="closeModal()"></div>
+        
+        <!-- Modal Content Box -->
+        <div class="relative bg-[#121212]/80 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-2xl max-w-lg w-full p-8 transform scale-95 opacity-0 transition-all duration-300" id="modalCard">
+            
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors bg-white/5 hover:bg-white/10 p-2 rounded-full border border-white/5 backdrop-blur-sm">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <!-- Dynamic Content Injection Points -->
+            <div class="w-14 h-14 bg-[#E5A93C]/10 border border-[#E5A93C]/20 rounded-xl flex items-center justify-center text-[#E5A93C] mb-6 shadow-[0_0_15px_rgba(229,169,60,0.15)]" id="modalIcon">
+                <!-- Icon injected here -->
+            </div>
+            
+            <h2 class="text-2xl font-serif font-semibold text-white mb-3" id="modalTitle">Service Title</h2>
+            <p class="text-gray-400 text-sm leading-relaxed mb-8" id="modalDesc">Service description goes here.</p>
+            
+            <h4 class="text-xs font-bold tracking-[0.15em] text-gray-500 uppercase mb-4 border-b border-white/5 pb-2">Key Capabilities</h4>
+            <ul class="space-y-4 mb-8" id="modalFeatures">
+                <!-- List items injected here -->
+            </ul>
+
+            <button onclick="closeModal()" class="w-full bg-[#E5A93C] hover:bg-[#d49931] text-[#121212] font-semibold py-3.5 rounded-lg text-sm transition-all shadow-[0_0_15px_rgba(229,169,60,0.2)]">
+                Request Strategy Call
+            </button>
+        </div>
+    </div>
+
+    <script>
+        window.finServices = {
+            mf: {
+                title: "Mutual Funds & SIPs",
+                desc: "Goal-based systematic investing across equity, debt, and hybrid mutual funds. We algorithmically select funds to ensure consistent compounding, liquidity, and risk mitigation tailored to your unique financial timeline.",
+                features: [
+                    "Active & Passive fund selection models",
+                    "Tax-saving ELSS optimization & harvesting",
+                    "Automated SIP, STP, and SWP structuring"
+                ],
+                icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>`
+            },
+            pms: {
+                title: "PMS & Alternative Investments",
+                desc: "Bespoke Portfolio Management Services (PMS) and Alternative Investment Funds (AIF) tailored strictly for High Net Worth Individuals seeking alpha and specialized exposure outside traditional retail markets.",
+                features: [
+                    "Direct equity and unlisted private exposure",
+                    "Absolute return and long-short strategies",
+                    "Dedicated institutional fund managers"
+                ],
+                icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`
+            },
+            nps: {
+                title: "NPS & Fixed Income",
+                desc: "Regulated, low-cost retirement planning vehicles and secure fixed-income assets designed for predictable yield, absolute capital preservation, and structural tax efficiency over long horizons.",
+                features: [
+                    "Exclusive Section 80CCD tax optimization",
+                    "Sovereign guarantees on specific instruments",
+                    "Automated lifecycle asset rebalancing"
+                ],
+                icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`
+            },
+            insurance: {
+                title: "Life & Health Protection",
+                desc: "Comprehensive risk coverage architecture specifically designed to protect your accumulated wealth, clear outstanding liabilities, and maintain your family's standard of living against unforeseen events.",
+                features: [
+                    "High-cover term life structural planning",
+                    "Global health and premium family floaters",
+                    "Corporate Keyman & partnership insurance"
+                ],
+                icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>`
+            },
+            estate: {
+                title: "Estate & Legacy Planning",
+                desc: "Strategic structuring of your assets, governance documentation, and directives to ensure a smooth, entirely private, and highly tax-efficient transfer of generational wealth.",
+                features: [
+                    "Comprehensive Will drafting and registration",
+                    "Private Family Trust formation & management",
+                    "Cross-border succession & repatriation advisory"
+                ],
+                icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>`
+            },
+            overview: {
+                title: "Comprehensive Overview",
+                desc: "A true 360-degree view of your financial life. We seamlessly integrate asset growth, capital protection, tax mitigation, and legacy planning into one cohesive, easily managed strategy.",
+                features: [
+                    "Consolidated multi-asset performance reporting",
+                    "Dedicated senior wealth manager & support team",
+                    "Quarterly strategic review & tactical rebalancing"
+                ],
+                icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>`
+            }
+        };
+
+        window.openServiceModal = function(serviceKey) {
+            console.log("openServiceModal called with:", serviceKey);
+            const data = window.finServices[serviceKey];
+            if(!data) { console.log("No data for", serviceKey); return; }
+            
+            const modal = document.getElementById('fvServiceModal');
+            const modalCard = document.getElementById('modalCard');
+            if(!modal || !modalCard) { console.log("No modal elements found"); return; }
+
+            // Inject Data
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalDesc').innerText = data.desc;
+            document.getElementById('modalIcon').innerHTML = data.icon;
+            
+            const featureList = data.features.map(f => `
+                <li class="flex items-start gap-3">
+                    <div class="mt-0.5 text-[#E5A93C] bg-[#E5A93C]/10 p-1 rounded-full">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <span class="text-gray-200 text-sm font-medium leading-relaxed">${f}</span>
+                </li>
+            `).join('');
+            document.getElementById('modalFeatures').innerHTML = featureList;
+
+            console.log("Removing hidden class");
+            // Show Modal & Animate
+            modal.classList.remove('hidden');
+            modal.style.display = 'flex';
+            
+            // Small delay to allow display:block to apply before animating opacity/scale
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    modalCard.style.opacity = '1';
+                    modalCard.style.transform = 'scale(1)';
+                }, 10);
+            });
+        }
+
+        window.closeModal = function() {
+            const modal = document.getElementById('fvServiceModal');
+            const modalCard = document.getElementById('modalCard');
+            if(!modal || !modalCard) return;
+
+            modalCard.style.opacity = '0';
+            modalCard.style.transform = 'scale(0.95)';
+            
+            // Wait for transition to finish before hiding
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(event) {
+            const modal = document.getElementById('fvServiceModal');
+            if (event.key === "Escape" && modal && !modal.classList.contains('hidden')) {
+                window.closeModal();
+            }
+        });
+
+
+    </script>
+
 </body>
 
 </html>
