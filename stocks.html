@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stocks Dashboard</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    body { font-family: 'Inter', sans-serif !important; background-color: #f6f8fb !important; background-image: none !important; }
+    /* Sparkline SVG styling */
+    .sparkline-green { stroke: #10B981; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .sparkline-red { stroke: #EF4444; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .chart-area { fill: url(#greenGradient); stroke: none; }
+  </style>
+</head>
+<body class="text-[#1A1F36]">
+
+  <header class="hdr" style="background: rgba(20, 18, 15, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.1);">
+    <div class="container hdr-inner">
+      <a class="brand" href="index.html#top">
+        <img src="./assets/logo-finvista.png" alt="FinVista" style="height: 72px; width: auto;">
+      </a>
+      <div class="nav-wrap">
+        <nav class="nav" id="mainNav">
+          <div class="nav-highlight" id="navHighlight"></div>
+          <a href="about.html">About Us</a>
+          <div class="nav-item-dropdown relative group" style="display:inline-block;">
+            <a href="index.html#services" class="dropdown-trigger flex items-center gap-1.5 transition-colors group-hover:text-[#E5A93C]" style="display: inline-flex !important; align-items: center !important; gap: 6px !important; white-space: nowrap !important; text-decoration: none;">
+              <span>Our Services</span>
+              <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-180" style="display: inline-block !important; flex-shrink: 0 !important; width: 12px; height: 12px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </a>
+
+  <!-- Invisible hover bridge -->
+  <div class="absolute top-full left-0 w-full h-4"></div>
+
+  <!-- Dropdown Panel -->
+  <div class="absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[90vw] md:w-[650px] max-h-[80vh] overflow-y-auto overflow-x-hidden opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 ease-out z-50">
+      
+      <!-- Glassmorphic Container -->
+      <div class="bg-[#121212]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 relative overflow-hidden text-left" style="font-family: 'Inter', sans-serif;">
+          
+          <!-- Ambient Gold Glow -->
+          <div class="absolute -top-20 -right-20 w-64 h-64 bg-[#E5A93C]/10 blur-[80px] rounded-full pointer-events-none"></div>
+
+          <!-- Column 1: Core Investments -->
+          <div class="relative z-10">
+              <h3 class="text-xs font-bold tracking-[0.15em] text-gray-500 uppercase mb-5 border-b border-white/5 pb-3">Core Investments</h3>
+              <ul class="space-y-2 m-0 p-0 list-none">
+                  <li>
+                      <button onclick="window.openServiceModal('mf')" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">Mutual Funds</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Goal-based systematic investing & SIPs</span>
+                          </div>
+                      </button>
+                  </li>
+                  <li>
+                      <button onclick="window.openServiceModal('pms')" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">PMS & AIF</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Bespoke alternative portfolios for HNIs</span>
+                          </div>
+                      </button>
+                  </li>
+                  <li>
+                      <button onclick="window.openServiceModal('nps')" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">NPS & FD</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Retirement architecture & fixed-yield</span>
+                          </div>
+                      </button>
+                  </li>
+              </ul>
+          </div>
+          
+          <!-- Column 2: Protection & Advisory -->
+          <div class="relative z-10">
+              <h3 class="text-xs font-bold tracking-[0.15em] text-gray-500 uppercase mb-5 border-b border-white/5 pb-3">Protection & Advisory</h3>
+              <ul class="space-y-2 m-0 p-0 list-none">
+                  <li>
+                      <button onclick="window.openServiceModal('insurance')" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">Life & Health Insurance</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Comprehensive risk & health coverage</span>
+                          </div>
+                      </button>
+                  </li>
+                  <li>
+                      <button onclick="window.openServiceModal('estate')" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">Estate & Legacy Planning</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Family trusts & succession structuring</span>
+                          </div>
+                      </button>
+                  </li>
+                  <li>
+                      <button onclick="window.openServiceModal('overview')" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                          <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                          </div>
+                          <div>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">All Services Overview</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Explore our complete wealth framework</span>
+                          </div>
+                      </button>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </div>
+</div>
+          <a href="index.html#calc">SIP Calculator</a>
+          <div class="nav-item-dropdown relative group" style="display:inline-block;">
+            <a href="#" class="dropdown-trigger flex items-center gap-1.5 transition-colors group-hover:text-[#E5A93C]" style="display: inline-flex !important; align-items: center !important; gap: 6px !important; white-space: nowrap !important; text-decoration: none;">
+              <span>Track Prices</span>
+              <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-180" style="display: inline-block !important; flex-shrink: 0 !important; width: 12px; height: 12px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </a>
+            <div class="absolute top-full left-0 w-full h-4"></div>
+            <div class="absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[200px] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 ease-out z-50">
+              <div class="bg-[#121212]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl p-2 flex flex-col gap-1 text-left" style="font-family: 'Inter', sans-serif;">
+                <a href="mutual-funds.html" class="px-4 py-3 rounded-lg hover:bg-white/5 text-sm font-semibold text-gray-200 hover:text-[#E5A93C] transition-colors" style="text-decoration:none;">Mutual Funds</a>
+                <a href="stocks.html" class="px-4 py-3 rounded-lg hover:bg-white/5 text-sm font-semibold text-gray-200 hover:text-[#E5A93C] transition-colors" style="text-decoration:none;">Stocks</a>
+              </div>
+            </div>
+          </div>
+          <a href="insights.html">Insights</a>
+          <a href="contact.html">Contact Us</a>
+        </nav>
+      </div>
+      <div class="hdr-right">
+        <a class="btn btn--gold" href="index.html#contact">Book a Consultation ↗</a>
+        <button class="hamburger" id="menuBtn" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-[1440px] mx-auto p-4 md:p-6 pt-24 flex flex-col gap-5">
+    
+    
+
+    <!-- Banner -->
+    <div class="relative w-full rounded-2xl overflow-hidden h-[220px] shadow-sm flex items-center p-10 bg-slate-800">
+      <img src="./assets/journey-mountain.png" class="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-overlay" style="object-position: center 30%;">
+      <div class="absolute inset-0 bg-gradient-to-r from-[#eaf0f9] via-[#eaf0f9]/90 to-transparent"></div>
+      
+      <div class="relative z-10 max-w-xl">
+        <div class="text-xs font-bold tracking-[0.2em] text-[#556987] mb-2 uppercase">STOCKS</div>
+        <h1 class="text-3xl font-bold text-[#1A1F36] mb-3 leading-tight tracking-tight">Invest in the companies<br>building tomorrow</h1>
+        <p class="text-sm text-[#556987] leading-relaxed pr-10">Track your favourite stocks, explore market trends and make smarter investment decisions.</p>
+      </div>
+    </div>
+
+    <!-- Index Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      
+      <!-- Card 1 -->
+      <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-2">
+        <div class="flex items-center gap-2">
+          <img src="https://logo.uplead.com/nseindia.com" class="w-6 h-6 rounded-full bg-gray-50 p-1 border border-gray-100" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2Y5NzMxNiI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48L3N2Zz4='">
+          <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">NIFTY 50</span>
+        </div>
+        <div class="flex items-end justify-between mt-1">
+          <div>
+            <div id="val-nifty50" class="text-xl font-bold text-gray-900">24,821.10</div>
+            <div class="text-xs font-semibold text-[#10B981] flex items-center gap-1 mt-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+              <span id="chg-nifty50">+236.40 (+0.96%)</span>
+            </div>
+          </div>
+          <svg class="w-20 h-10 sparkline-green" viewBox="0 0 100 40"><path d="M0,35 Q10,35 20,25 T40,20 T60,15 T80,10 T100,5" /></svg>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-2">
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-[10px] font-bold border border-blue-100">BSE</div>
+          <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">SENSEX</span>
+        </div>
+        <div class="flex items-end justify-between mt-1">
+          <div>
+            <div id="val-sensex" class="text-xl font-bold text-gray-900">81,159.68</div>
+            <div class="text-xs font-semibold text-[#10B981] flex items-center gap-1 mt-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+              <span id="chg-sensex">+742.48 (+0.92%)</span>
+            </div>
+          </div>
+          <svg class="w-20 h-10 sparkline-green" viewBox="0 0 100 40"><path d="M0,38 L20,30 L40,32 L60,18 L80,15 L100,2" /></svg>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-2">
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-100">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M4 10h16v11H4zM2 8l10-5 10 5z"/></svg>
+          </div>
+          <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">BANK NIFTY</span>
+        </div>
+        <div class="flex items-end justify-between mt-1">
+          <div>
+            <div id="val-niftybank" class="text-xl font-bold text-gray-900">54,712.35</div>
+            <div class="text-xs font-semibold text-[#10B981] flex items-center gap-1 mt-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+              <span id="chg-niftybank">+512.20 (+0.94%)</span>
+            </div>
+          </div>
+          <svg class="w-20 h-10 sparkline-green" viewBox="0 0 100 40"><path d="M0,35 L10,32 L30,25 L50,15 L70,18 L100,5" /></svg>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-2">
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center text-[10px] font-bold border border-purple-100">N100</div>
+          <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">NIFTY 100</span>
+        </div>
+        <div class="flex items-end justify-between mt-1">
+          <div>
+            <div id="val-nifty100" class="text-xl font-bold text-gray-900">25,436.72</div>
+            <div class="text-xs font-semibold text-[#10B981] flex items-center gap-1 mt-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+              <span id="chg-nifty100">+241.30 (+0.96%)</span>
+            </div>
+          </div>
+          <svg class="w-20 h-10 sparkline-green" viewBox="0 0 100 40"><path d="M0,32 Q25,35 50,20 T100,4" /></svg>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Main Content Area Grid (3 columns layout: 7 + 5 or something) -->
+    <!-- Actually image shows: 
+         Top Stocks table on left (about 45% width)
+         Selected Stock in middle (about 35% width)
+         Market Overview on right (about 20% width)
+    -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 mt-2">
+      
+      <!-- COLUMN 1: TOP STOCKS (approx col-span-4) -->
+      <div class="lg:col-span-4 bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col">
+        
+        <div class="flex items-center justify-between p-5 border-b border-gray-100">
+          <h2 class="text-lg font-bold text-gray-900">Top Stocks</h2>
+          <a href="#" class="text-sm font-semibold text-gray-500 flex items-center gap-1 hover:text-gray-800">View all &rarr;</a>
+        </div>
+
+        <div class="px-5 pt-4 pb-2 overflow-x-auto no-scrollbar">
+          <div class="flex gap-2 w-max">
+            <button class="px-4 py-1.5 bg-[#1A1F36] text-white rounded-full text-xs font-semibold">All</button>
+            <button class="px-4 py-1.5 bg-gray-50 text-gray-600 rounded-full text-xs font-semibold border border-gray-100 hover:bg-gray-100">NIFTY 50</button>
+            <button class="px-4 py-1.5 bg-gray-50 text-gray-600 rounded-full text-xs font-semibold border border-gray-100 hover:bg-gray-100">Banking</button>
+            <button class="px-4 py-1.5 bg-gray-50 text-gray-600 rounded-full text-xs font-semibold border border-gray-100 hover:bg-gray-100">IT</button>
+            <button class="px-4 py-1.5 bg-gray-50 text-gray-600 rounded-full text-xs font-semibold border border-gray-100 hover:bg-gray-100">Pharma</button>
+            <button class="px-4 py-1.5 bg-gray-50 text-gray-600 rounded-full text-xs font-semibold border border-gray-100 hover:bg-gray-100">Energy</button>
+          </div>
+        </div>
+
+        <div class="flex-1 px-5 pb-5 overflow-x-auto">
+          <table class="w-full text-left border-collapse min-w-[500px]">
+            <thead>
+              <tr>
+                <th class="py-4 text-xs font-semibold text-gray-500 uppercase w-32">Symbol</th>
+                <th class="py-4 text-xs font-semibold text-gray-500 uppercase w-32">Company</th>
+                <th class="py-4 text-xs font-semibold text-gray-500 uppercase text-right w-20 leading-tight">Last<br>Price</th>
+                <th class="py-4 text-xs font-semibold text-gray-500 uppercase text-right w-20">Change</th>
+                <th class="py-4 text-xs font-semibold text-gray-500 uppercase text-right w-20 leading-tight">%<br>Change</th>
+                <th class="py-4 text-xs font-semibold text-gray-500 uppercase text-center w-24">1D Chart</th>
+                <th class="py-4 w-12"></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50">
+              <!-- Row 1 -->
+              <tr class="hover:bg-gray-50 group">
+                <td class="py-5 text-xs font-bold text-gray-900 flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border border-gray-100 shadow-sm overflow-hidden p-1"><img src="/images/ril.png" class="w-full h-full object-contain" alt="RIL"></div>
+                  RELIANCE
+                </td>
+                <td class="py-5 text-xs text-gray-500">Reliance Industries</td>
+                <td class="py-5 text-xs font-medium text-gray-900 text-right" id="row-val-RELIANCE">₹ 1,362.80</td>
+                <td class="py-5 text-xs font-semibold text-[#10B981] text-right" id="row-chg-RELIANCE">+18.40</td>
+                <td class="py-5 text-xs font-semibold text-[#10B981] text-right" id="row-pct-RELIANCE">+1.37%</td>
+                <td class="py-5 text-center">
+                  <svg class="w-12 h-5 inline-block sparkline-green" viewBox="0 0 100 30"><path d="M0,25 L20,20 L40,15 L60,18 L80,5 L100,2" /></svg>
+                </td>
+                <td class="py-5 text-right">
+                  <button class="px-3 py-1 bg-white border border-gray-200 text-gray-700 rounded-md text-xs font-semibold hover:border-gray-300 shadow-sm opacity-0 group-hover:opacity-100 transition">Buy</button>
+                </td>
+              </tr>
+              <!-- Row 2 -->
+              <tr class="hover:bg-gray-50 group">
+                <td class="py-5 text-xs font-bold text-gray-900 flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border border-gray-100 shadow-sm overflow-hidden p-1"><img src="/images/tcs.png" class="w-full h-full object-contain" alt="TCS"></div>
+                  TCS
+                </td>
+                <td class="py-5 text-xs text-gray-500">Tata Consultancy Services</td>
+                <td class="py-5 text-xs font-medium text-gray-900 text-right" id="row-val-TCS">₹ 3,467.20</td>
+                <td class="py-5 text-xs font-semibold text-[#10B981] text-right" id="row-chg-TCS">+32.60</td>
+                <td class="py-5 text-xs font-semibold text-[#10B981] text-right" id="row-pct-TCS">+0.95%</td>
+                <td class="py-5 text-center">
+                  <svg class="w-12 h-5 inline-block sparkline-green" viewBox="0 0 100 30"><path d="M0,28 L25,18 L50,20 L75,10 L100,5" /></svg>
+                </td>
+                <td class="py-5 text-right">
+                  <button class="px-3 py-1 bg-white border border-gray-200 text-gray-700 rounded-md text-xs font-semibold hover:border-gray-300 shadow-sm opacity-0 group-hover:opacity-100 transition">Buy</button>
+                </td>
+              </tr>
+              <!-- Row 3 -->
+              <tr class="hover:bg-gray-50 group">
+                <td class="py-5 text-xs font-bold text-gray-900 flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border border-gray-100 shadow-sm overflow-hidden p-1"><img src="/images/hdfc.png" class="w-full h-full object-contain" alt="HDFCBANK"></div>
+                  HDFCBANK
+                </td>
+                <td class="py-5 text-xs text-gray-500">HDFC Bank</td>
+                <td class="py-5 text-xs font-medium text-gray-900 text-right" id="row-val-HDFCBANK">₹ 1,672.35</td>
+                <td class="py-5 text-xs font-semibold text-[#10B981] text-right" id="row-chg-HDFCBANK">+14.25</td>
+                <td class="py-5 text-xs font-semibold text-[#10B981] text-right" id="row-pct-HDFCBANK">+0.86%</td>
+                <td class="py-5 text-center">
+                  <svg class="w-12 h-5 inline-block sparkline-green" viewBox="0 0 100 30"><path d="M0,20 L20,25 L40,15 L70,10 L100,2" /></svg>
+                </td>
+                <td class="py-5 text-right">
+                  <button class="px-3 py-1 bg-white border border-gray-200 text-gray-700 rounded-md text-xs font-semibold hover:border-gray-300 shadow-sm opacity-0 group-hover:opacity-100 transition">Buy</button>
+                </td>
+              </tr>
+              <!-- Row 4 -->
+              <tr class="hover:bg-gray-50 group">
+                <td class="py-5 text-xs font-bold text-gray-900 flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border border-gray-100 shadow-sm overflow-hidden p-1"><img src="/images/icici.png" class="w-full h-full object-contain" alt="ICICIBANK"></div>
+                  ICICIBANK
+                </td>
+                <td class="py-5 text-xs text-gray-500">ICICI Bank</td>
+                <td class="py-5 text-xs font-medium text-gray-900 text-right" id="row-val-ICICIBANK">₹ 1,247.60</td>
+                <td class="py-5 text-xs font-semibold text-[#10B981] text-right" id="row-chg-ICICIBANK">+10.80</td>
+                <td class="py-5 text-xs font-semibold text-[#10B981] text-right" id="row-pct-ICICIBANK">+0.87%</td>
+                <td class="py-5 text-center">
+                  <svg class="w-12 h-5 inline-block sparkline-green" viewBox="0 0 100 30"><path d="M0,22 L30,22 L60,10 L80,12 L100,5" /></svg>
+                </td>
+                <td class="py-5 text-right">
+                  <button class="px-3 py-1 bg-white border border-gray-200 text-gray-700 rounded-md text-xs font-semibold hover:border-gray-300 shadow-sm opacity-0 group-hover:opacity-100 transition">Buy</button>
+                </td>
+              </tr>
+              <!-- Row 5 -->
+              <tr class="hover:bg-gray-50 group">
+                <td class="py-5 text-xs font-bold text-gray-900 flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border border-gray-100 shadow-sm overflow-hidden p-1"><img src="/images/infy.png" class="w-full h-full object-contain" alt="INFY"></div>
+                  INFY
+                </td>
+                <td class="py-5 text-xs text-gray-500">Infosys</td>
+                <td class="py-5 text-xs font-medium text-gray-900 text-right" id="row-val-INFY">₹ 1,452.30</td>
+                <td class="py-5 text-xs font-semibold text-[#10B981] text-right" id="row-chg-INFY">+11.75</td>
+                <td class="py-5 text-xs font-semibold text-[#10B981] text-right" id="row-pct-INFY">+0.82%</td>
+                <td class="py-5 text-center">
+                  <svg class="w-12 h-5 inline-block sparkline-green" viewBox="0 0 100 30"><path d="M0,25 L30,20 L60,15 L80,10 L100,2" /></svg>
+                </td>
+                <td class="py-5 text-right">
+                  <button class="px-3 py-1 bg-white border border-gray-200 text-gray-700 rounded-md text-xs font-semibold hover:border-gray-300 shadow-sm opacity-0 group-hover:opacity-100 transition">Buy</button>
+                </td>
+              </tr>
+              <!-- Row 6 (Red) -->
+              <tr class="hover:bg-gray-50 group">
+                <td class="py-5 text-xs font-bold text-gray-900 flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border border-gray-100 shadow-sm overflow-hidden p-1"><img src="/images/sbin.png" class="w-full h-full object-contain" alt="SBIN"></div>
+                  SBIN
+                </td>
+                <td class="py-5 text-xs text-gray-500">State Bank of India</td>
+                <td class="py-5 text-xs font-medium text-gray-900 text-right" id="row-val-SBIN">₹ 812.45</td>
+                <td class="py-5 text-xs font-semibold text-[#EF4444] text-right" id="row-chg-SBIN">-3.20</td>
+                <td class="py-5 text-xs font-semibold text-[#EF4444] text-right" id="row-pct-SBIN">-0.39%</td>
+                <td class="py-5 text-center">
+                  <svg class="w-12 h-5 inline-block sparkline-red" viewBox="0 0 100 30"><path d="M0,5 L20,10 L40,8 L60,20 L80,25 L100,28" /></svg>
+                </td>
+                <td class="py-5 text-right">
+                  <button class="px-3 py-1 bg-white border border-gray-200 text-gray-700 rounded-md text-xs font-semibold hover:border-gray-300 shadow-sm opacity-0 group-hover:opacity-100 transition">Buy</button>
+                </td>
+              </tr>
+              <!-- Row 7 -->
+              <tr class="hover:bg-gray-50 group">
+                <td class="py-5 text-xs font-bold text-gray-900 flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border border-gray-100 shadow-sm overflow-hidden p-1"><img src="/images/airtel.png" class="w-full h-full object-contain" alt="BHARTIARTL"></div>
+                  BHARTIARTL
+                </td>
+                <td class="py-5 text-xs text-gray-500">Bharti Airtel</td>
+                <td class="py-5 text-xs font-medium text-gray-900 text-right" id="row-val-BHARTIARTL">₹ 1,683.70</td>
+                <td class="py-5 text-xs font-semibold text-[#10B981] text-right" id="row-chg-BHARTIARTL">+12.90</td>
+                <td class="py-5 text-xs font-semibold text-[#10B981] text-right" id="row-pct-BHARTIARTL">+0.77%</td>
+                <td class="py-5 text-center">
+                  <svg class="w-12 h-5 inline-block sparkline-green" viewBox="0 0 100 30"><path d="M0,28 L30,22 L50,15 L80,18 L100,5" /></svg>
+                </td>
+                <td class="py-5 text-right">
+                  <button class="px-3 py-1 bg-white border border-gray-200 text-gray-700 rounded-md text-xs font-semibold hover:border-gray-300 shadow-sm opacity-0 group-hover:opacity-100 transition">Buy</button>
+                </td>
+              </tr>
+              <!-- Row 8 -->
+              <tr class="hover:bg-gray-50 group">
+                <td class="py-5 text-xs font-bold text-gray-900 flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border border-gray-100 shadow-sm overflow-hidden p-1"><img src="/images/itc.png" class="w-full h-full object-contain" alt="ITC"></div>
+                  ITC
+                </td>
+                <td class="py-5 text-xs text-gray-500">ITC Limited</td>
+                <td class="py-5 text-xs font-medium text-gray-900 text-right" id="row-val-ITC">₹ 423.15</td>
+                <td class="py-5 text-xs font-semibold text-[#10B981] text-right" id="row-chg-ITC">+4.60</td>
+                <td class="py-5 text-xs font-semibold text-[#10B981] text-right" id="row-pct-ITC">+1.10%</td>
+                <td class="py-5 text-center">
+                  <svg class="w-12 h-5 inline-block sparkline-green" viewBox="0 0 100 30"><path d="M0,25 L40,15 L70,12 L100,5" /></svg>
+                </td>
+                <td class="py-5 text-right">
+                  <button class="px-3 py-1 bg-white border border-gray-200 text-gray-700 rounded-md text-xs font-semibold hover:border-gray-300 shadow-sm opacity-0 group-hover:opacity-100 transition">Buy</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- COLUMN 2: SELECTED STOCK (Reliance) (approx col-span-4) -->
+      <div class="lg:col-span-4 flex flex-col gap-5">
+        
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col relative overflow-hidden">
+        
+        <div class="flex items-start justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-white border border-gray-100 flex items-center justify-center shadow-sm shrink-0 overflow-hidden p-1"><img src="/images/ril.png" class="w-full h-full object-contain" alt="RIL"></div>
+            <div>
+              <h2 class="text-base font-bold text-gray-900">Reliance Industries</h2>
+              <div class="text-[11px] font-semibold text-gray-400 tracking-wider">RELIANCE • NSE</div>
+            </div>
+          </div>
+          <button class="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 rounded-lg text-xs font-semibold text-gray-600 hover:bg-gray-50 transition">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+            Follow
+          </button>
+        </div>
+
+        <div class="mt-5">
+          <div class="flex items-end gap-3">
+            <div id="sel-val" class="text-2xl font-bold text-gray-900">₹ 1,362.80</div>
+            <div class="text-sm font-semibold text-[#10B981] flex items-center mb-0.5">
+              <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+              <span id="sel-chg">+18.40 (+1.37%)</span>
+            </div>
+          </div>
+          <div class="text-xs text-gray-400 mt-1 font-medium"><span id="sel-time">As of 24 Sep 2025, 3:30 PM</span></div>
+        </div>
+
+        <div class="mt-5 flex items-center justify-between bg-gray-50 p-1 rounded-lg">
+          <button class="px-3 py-1.5 bg-[#1A1F36] text-white rounded-md text-[11px] font-bold flex-1">1D</button>
+          <button class="px-3 py-1.5 text-gray-500 hover:text-gray-900 rounded-md text-[11px] font-bold flex-1">1W</button>
+          <button class="px-3 py-1.5 text-gray-500 hover:text-gray-900 rounded-md text-[11px] font-bold flex-1">1M</button>
+          <button class="px-3 py-1.5 text-gray-500 hover:text-gray-900 rounded-md text-[11px] font-bold flex-1">6M</button>
+          <button class="px-3 py-1.5 text-gray-500 hover:text-gray-900 rounded-md text-[11px] font-bold flex-1">1Y</button>
+          <button class="px-3 py-1.5 text-gray-500 hover:text-gray-900 rounded-md text-[11px] font-bold flex-1">5Y</button>
+        </div>
+
+        <!-- Chart Placeholder -->
+        <div class="mt-4 relative h-40 w-full">
+          <!-- Grid lines -->
+          <div class="absolute inset-0 flex flex-col justify-between pointer-events-none">
+            <div class="border-t border-gray-100 flex-1"></div>
+            <div class="border-t border-gray-100 flex-1"></div>
+            <div class="border-t border-gray-100 flex-1"></div>
+            <div class="border-t border-gray-100 flex-1"></div>
+            <div class="border-t border-gray-100"></div>
+          </div>
+          <div class="absolute inset-y-0 -left-6 flex flex-col justify-between text-[9px] text-gray-400 font-medium py-1 items-end">
+            <span>1,400</span>
+            <span>1,380</span>
+            <span>1,360</span>
+            <span>1,340</span>
+          </div>
+          
+          <svg viewBox="0 0 400 160" preserveAspectRatio="none" class="w-full h-full absolute inset-0 z-10">
+            <defs>
+              <linearGradient id="greenGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#10B981" stop-opacity="0.2"/>
+                <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0,130 L40,120 L80,125 L120,110 L160,95 L200,60 L240,75 L280,105 L320,115 L360,95 L400,100 L400,160 L0,160 Z" class="chart-area" />
+            <path d="M0,130 L40,120 L80,125 L120,110 L160,95 L200,60 L240,75 L280,105 L320,115 L360,95 L400,100" class="sparkline-green" stroke-width="2.5" />
+          </svg>
+
+          <div class="absolute -bottom-5 inset-x-0 flex justify-between text-[9px] text-gray-400 font-medium z-20">
+            <span>9:15 AM</span>
+            <span>11:00 AM</span>
+            <span>1:00 PM</span>
+            <span>3:30 PM</span>
+          </div>
+        </div>
+
+        <div class="mt-10 grid grid-cols-2 gap-y-4 gap-x-6 pb-2">
+          <div>
+            <div class="text-[10px] font-medium text-gray-400 mb-0.5">Open</div>
+            <div class="text-sm font-semibold text-gray-900">₹ 1,345.60</div>
+          </div>
+          <div>
+            <div class="text-[10px] font-medium text-gray-400 mb-0.5">High</div>
+            <div class="text-sm font-semibold text-gray-900">₹ 1,375.00</div>
+          </div>
+          <div>
+            <div class="text-[10px] font-medium text-gray-400 mb-0.5">Low</div>
+            <div class="text-sm font-semibold text-gray-900">₹ 1,338.20</div>
+          </div>
+          <div>
+            <div class="text-[10px] font-medium text-gray-400 mb-0.5">Previous Close</div>
+            <div class="text-sm font-semibold text-gray-900">₹ 1,344.40</div>
+          </div>
+          <div>
+            <div class="text-[10px] font-medium text-gray-400 mb-0.5">Market Cap</div>
+            <div class="text-sm font-semibold text-gray-900">₹ 20.43 L Cr</div>
+          </div>
+          <div>
+            <div class="text-[10px] font-medium text-gray-400 mb-0.5">P/E Ratio</div>
+            <div class="text-sm font-semibold text-gray-900">28.76</div>
+          </div>
+        </div>
+
+        <div class="mt-6 flex items-center gap-3">
+          <button class="flex-1 bg-[#1A1F36] hover:bg-slate-900 text-white font-semibold py-3 rounded-lg text-sm transition">Buy</button>
+          <button class="flex-1 bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 font-semibold py-3 rounded-lg text-sm flex items-center justify-center gap-2 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+            Add to Watchlist
+          </button>
+        </div>
+        
+        </div>
+        
+        <!-- Analyst Ratings Widget -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex-1 flex flex-col">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-bold text-gray-900">Analyst Ratings</h3>
+            <span class="px-2 py-0.5 bg-green-50 text-green-700 rounded text-[10px] font-bold uppercase tracking-wider">Strong Buy</span>
+          </div>
+          
+          <div class="flex items-end gap-3 mb-6">
+            <div class="text-4xl font-black text-[#10B981] leading-none">84<span class="text-xl font-bold text-gray-400">%</span></div>
+            <div class="text-sm font-semibold text-gray-500 pb-1">Buy Rating</div>
+          </div>
+          
+          <div class="flex-1 flex flex-col justify-center gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 text-xs font-semibold text-gray-500">Buy</div>
+              <div class="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full bg-[#10B981] rounded-full" style="width: 84%"></div>
+              </div>
+              <div class="w-6 text-right text-xs font-bold text-gray-900">32</div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+              <div class="w-10 text-xs font-semibold text-gray-500">Hold</div>
+              <div class="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full bg-yellow-400 rounded-full" style="width: 11%"></div>
+              </div>
+              <div class="w-6 text-right text-xs font-bold text-gray-900">4</div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+              <div class="w-10 text-xs font-semibold text-gray-500">Sell</div>
+              <div class="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full bg-[#EF4444] rounded-full" style="width: 5%"></div>
+              </div>
+              <div class="w-6 text-right text-xs font-bold text-gray-900">2</div>
+            </div>
+          </div>
+          
+          <div class="mt-6 pt-4 border-t border-gray-50 flex items-center justify-between text-xs">
+            <span class="text-gray-400 font-medium">1Y Price Target</span>
+            <span class="font-bold text-gray-900">₹ 1,520.00 <span class="text-[#10B981] font-semibold">(+11.5%)</span></span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- COLUMN 3: MARKET OVERVIEW & NEWS (approx col-span-4) -->
+      <div class="lg:col-span-4 flex flex-col gap-5">
+        
+        <!-- HDFC Bank Card -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col relative overflow-hidden">
+          
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-white border border-gray-100 flex items-center justify-center shadow-sm shrink-0 overflow-hidden p-1"><img src="/images/hdfc.png" class="w-full h-full object-contain" alt="HDFCBANK"></div>
+              <div>
+                <h2 class="text-base font-bold text-gray-900">HDFC Bank</h2>
+                <div class="text-[11px] font-semibold text-gray-400 tracking-wider">HDFCBANK • NSE</div>
+              </div>
+            </div>
+            <button class="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 rounded-lg text-xs font-semibold text-gray-600 hover:bg-gray-50 transition">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+              Follow
+            </button>
+          </div>
+
+          <div class="mt-5">
+            <div class="flex items-end gap-3">
+              <div id="sel2-val" class="text-2xl font-bold text-gray-900">₹ 1,672.35</div>
+              <div class="text-sm font-semibold text-[#10B981] flex items-center mb-0.5">
+                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+                <span id="sel2-chg">+14.25 (+0.86%)</span>
+              </div>
+            </div>
+            <div class="text-xs text-gray-400 mt-1 font-medium"><span id="sel2-time">As of 24 Sep 2025, 3:30 PM</span></div>
+          </div>
+
+          <div class="mt-5 flex items-center justify-between bg-gray-50 p-1 rounded-lg">
+            <button class="px-3 py-1.5 bg-[#1A1F36] text-white rounded-md text-[11px] font-bold flex-1">1D</button>
+            <button class="px-3 py-1.5 text-gray-500 hover:text-gray-900 rounded-md text-[11px] font-bold flex-1">1W</button>
+            <button class="px-3 py-1.5 text-gray-500 hover:text-gray-900 rounded-md text-[11px] font-bold flex-1">1M</button>
+            <button class="px-3 py-1.5 text-gray-500 hover:text-gray-900 rounded-md text-[11px] font-bold flex-1">6M</button>
+            <button class="px-3 py-1.5 text-gray-500 hover:text-gray-900 rounded-md text-[11px] font-bold flex-1">1Y</button>
+            <button class="px-3 py-1.5 text-gray-500 hover:text-gray-900 rounded-md text-[11px] font-bold flex-1">5Y</button>
+          </div>
+
+          <!-- Chart Placeholder -->
+          <div class="mt-4 relative h-40 w-full">
+            <!-- Grid lines -->
+            <div class="absolute inset-0 flex flex-col justify-between pointer-events-none">
+              <div class="border-t border-gray-100 flex-1"></div>
+              <div class="border-t border-gray-100 flex-1"></div>
+              <div class="border-t border-gray-100 flex-1"></div>
+              <div class="border-t border-gray-100 flex-1"></div>
+              <div class="border-t border-gray-100"></div>
+            </div>
+            <div class="absolute inset-y-0 -left-6 flex flex-col justify-between text-[9px] text-gray-400 font-medium py-1 items-end">
+              <span>1,700</span>
+              <span>1,680</span>
+              <span>1,660</span>
+              <span>1,640</span>
+            </div>
+            
+            <svg viewBox="0 0 400 160" preserveAspectRatio="none" class="w-full h-full absolute inset-0 z-10">
+              <defs>
+                <linearGradient id="greenGradient2" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#10B981" stop-opacity="0.2"/>
+                  <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,130 L40,110 L80,105 L120,90 L160,75 L200,60 L240,75 L280,55 L320,45 L360,35 L400,20 L400,160 L0,160 Z" class="chart-area" fill="url(#greenGradient2)" />
+              <path d="M0,130 L40,110 L80,105 L120,90 L160,75 L200,60 L240,75 L280,55 L320,45 L360,35 L400,20" class="sparkline-green" stroke-width="2.5" />
+            </svg>
+
+            <div class="absolute -bottom-5 inset-x-0 flex justify-between text-[9px] text-gray-400 font-medium z-20">
+              <span>9:15 AM</span>
+              <span>11:00 AM</span>
+              <span>1:00 PM</span>
+              <span>3:30 PM</span>
+            </div>
+          </div>
+
+          <div class="mt-10 grid grid-cols-2 gap-y-4 gap-x-6 pb-2">
+            <div>
+              <div class="text-[10px] font-medium text-gray-400 mb-0.5">Open</div>
+              <div class="text-sm font-semibold text-gray-900">₹ 1,660.10</div>
+            </div>
+            <div>
+              <div class="text-[10px] font-medium text-gray-400 mb-0.5">High</div>
+              <div class="text-sm font-semibold text-gray-900">₹ 1,675.00</div>
+            </div>
+            <div>
+              <div class="text-[10px] font-medium text-gray-400 mb-0.5">Low</div>
+              <div class="text-sm font-semibold text-gray-900">₹ 1,655.20</div>
+            </div>
+            <div>
+              <div class="text-[10px] font-medium text-gray-400 mb-0.5">Previous Close</div>
+              <div class="text-sm font-semibold text-gray-900">₹ 1,658.10</div>
+            </div>
+            <div>
+              <div class="text-[10px] font-medium text-gray-400 mb-0.5">Market Cap</div>
+              <div class="text-sm font-semibold text-gray-900">₹ 12.50 L Cr</div>
+            </div>
+            <div>
+              <div class="text-[10px] font-medium text-gray-400 mb-0.5">P/E Ratio</div>
+              <div class="text-sm font-semibold text-gray-900">16.52</div>
+            </div>
+          </div>
+
+          <div class="mt-6 flex items-center gap-3">
+            <button class="flex-1 bg-[#1A1F36] hover:bg-slate-900 text-white font-semibold py-3 rounded-lg text-sm transition">Buy</button>
+            <button class="flex-1 bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 font-semibold py-3 rounded-lg text-sm flex items-center justify-center gap-2 transition">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+              Add to Watchlist
+            </button>
+          </div>
+
+        </div>
+
+        <!-- HDFC Analyst Ratings Widget -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex-1 flex flex-col">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-bold text-gray-900">Analyst Ratings</h3>
+            <span class="px-2 py-0.5 bg-green-50 text-green-700 rounded text-[10px] font-bold uppercase tracking-wider">Strong Buy</span>
+          </div>
+          
+          <div class="flex items-end gap-3 mb-6">
+            <div class="text-4xl font-black text-[#10B981] leading-none">92<span class="text-xl font-bold text-gray-400">%</span></div>
+            <div class="text-sm font-semibold text-gray-500 pb-1">Buy Rating</div>
+          </div>
+          
+          <div class="flex-1 flex flex-col justify-center gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 text-xs font-semibold text-gray-500">Buy</div>
+              <div class="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full bg-[#10B981] rounded-full" style="width: 92%"></div>
+              </div>
+              <div class="w-6 text-right text-xs font-bold text-gray-900">46</div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+              <div class="w-10 text-xs font-semibold text-gray-500">Hold</div>
+              <div class="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full bg-yellow-400 rounded-full" style="width: 8%"></div>
+              </div>
+              <div class="w-6 text-right text-xs font-bold text-gray-900">4</div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+              <div class="w-10 text-xs font-semibold text-gray-500">Sell</div>
+              <div class="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full bg-[#EF4444] rounded-full" style="width: 0%"></div>
+              </div>
+              <div class="w-6 text-right text-xs font-bold text-gray-900">0</div>
+            </div>
+          </div>
+          
+          <div class="mt-6 pt-4 border-t border-gray-50 flex items-center justify-between text-xs">
+            <span class="text-gray-400 font-medium">1Y Price Target</span>
+            <span class="font-bold text-gray-900">₹ 1,950.00 <span class="text-[#10B981] font-semibold">(+16.6%)</span></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom Banner -->
+    <div class="mt-2 bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+      <!-- Decorative background wave/gradient -->
+      <div class="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-slate-50 to-transparent pointer-events-none"></div>
+      
+      <div class="flex items-center gap-5 relative z-10">
+        <div class="w-12 h-12 bg-slate-50 border border-gray-100 rounded-xl flex items-center justify-center text-slate-700">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-gray-900">Explore more</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Discover mutual funds, insurance plans, and personalised investment advice.</p>
+        </div>
+      </div>
+      
+      <a href="index.html#services" class="relative z-10 whitespace-nowrap bg-[#1A1F36] hover:bg-slate-900 text-white px-5 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 transition">
+        Explore Services &rarr;
+      </a>
+    </div>
+
+  </div>
+
+
+  <script>
+    const fmt2 = v => v == null ? '–' : (+v).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const fmtPct = p => p == null ? '–' : `${(+p) >= 0 ? '+' : ''}${(+p).toFixed(2)}%`;
+    const fmtChg = (p, prev) => {
+       if(!p || !prev) return '–';
+       const diff = p - prev;
+       return `${diff >= 0 ? '+' : ''}${diff.toFixed(2)}`;
+    };
+
+    async function fetchLiveStocks() {
+      try {
+        const res = await fetch('/api/market');
+        const data = await res.json();
+        
+        const updates = [
+          { key: 'nifty50', elVal: 'val-nifty50', elChg: 'chg-nifty50' },
+          { key: 'sensex', elVal: 'val-sensex', elChg: 'chg-sensex' },
+          { key: 'niftybank', elVal: 'val-niftybank', elChg: 'chg-niftybank' },
+          { key: 'nifty100', elVal: 'val-nifty100', elChg: 'chg-nifty100' },
+        ];
+        
+        updates.forEach(u => {
+           if(data[u.key]) {
+              document.getElementById(u.elVal).innerText = fmt2(data[u.key].price);
+              const prev = data[u.key].price / (1 + (data[u.key].chgPct / 100));
+              document.getElementById(u.elChg).innerText = `${fmtChg(data[u.key].price, prev)} (${fmtPct(data[u.key].chgPct)})`;
+              
+              const chgColor = data[u.key].chgPct >= 0 ? '#10B981' : '#EF4444';
+              document.getElementById(u.elChg).parentElement.style.color = chgColor;
+           }
+        });
+
+        const stocks = ['RELIANCE', 'TCS', 'HDFCBANK', 'ICICIBANK', 'INFY', 'SBIN', 'BHARTIARTL', 'ITC'];
+        stocks.forEach(s => {
+           if(data[s]) {
+              document.getElementById('row-val-' + s).innerText = '₹ ' + fmt2(data[s].price);
+              const prev = data[s].price / (1 + (data[s].chgPct / 100));
+              document.getElementById('row-chg-' + s).innerText = fmtChg(data[s].price, prev);
+              document.getElementById('row-pct-' + s).innerText = fmtPct(data[s].chgPct);
+
+              const color = data[s].chgPct >= 0 ? 'text-[#10B981]' : 'text-[#EF4444]';
+              document.getElementById('row-chg-' + s).className = `py-5 text-xs font-semibold text-right ${color}`;
+              document.getElementById('row-pct-' + s).className = `py-5 text-xs font-semibold text-right ${color}`;
+           }
+        });
+
+        if(data['RELIANCE']) {
+           document.getElementById('sel-val').innerText = '₹ ' + fmt2(data['RELIANCE'].price);
+           const prev = data['RELIANCE'].price / (1 + (data['RELIANCE'].chgPct / 100));
+           document.getElementById('sel-chg').innerText = `${fmtChg(data['RELIANCE'].price, prev)} (${fmtPct(data['RELIANCE'].chgPct)})`;
+           document.getElementById('sel-chg').parentElement.style.color = data['RELIANCE'].chgPct >= 0 ? '#10B981' : '#EF4444';
+           document.getElementById('sel-time').innerText = 'As of ' + new Date().toLocaleString('en-IN');
+        }
+
+        if(data['HDFCBANK']) {
+           document.getElementById('sel2-val').innerText = '₹ ' + fmt2(data['HDFCBANK'].price);
+           const prev = data['HDFCBANK'].price / (1 + (data['HDFCBANK'].chgPct / 100));
+           document.getElementById('sel2-chg').innerText = `${fmtChg(data['HDFCBANK'].price, prev)} (${fmtPct(data['HDFCBANK'].chgPct)})`;
+           document.getElementById('sel2-chg').parentElement.style.color = data['HDFCBANK'].chgPct >= 0 ? '#10B981' : '#EF4444';
+           document.getElementById('sel2-time').innerText = 'As of ' + new Date().toLocaleString('en-IN');
+        }
+
+      } catch(e) {
+        console.error('Error fetching live stocks', e);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+       fetchLiveStocks();
+       setInterval(fetchLiveStocks, 60000);
+    });
+  </script>
+</body>
+
+</html>

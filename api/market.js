@@ -8,6 +8,17 @@ const YF_SYMBOLS = [
   { key: "niftybank", symbol: "%5ENSEBANK" },
   { key: "usdinr",    symbol: "USDINR%3DX" },
   { key: "gold",      symbol: "GC%3DF"    },
+  { key: "nifty100",  symbol: "%5ECNX100" },
+  { key: "niftymid",  symbol: "%5ECNXMID" },
+  { key: "niftysmall",symbol: "%5ECNXSC"  },
+  { key: "RELIANCE",  symbol: "RELIANCE.NS" },
+  { key: "TCS",       symbol: "TCS.NS"      },
+  { key: "HDFCBANK",  symbol: "HDFCBANK.NS" },
+  { key: "ICICIBANK", symbol: "ICICIBANK.NS" },
+  { key: "INFY",      symbol: "INFY.NS"     },
+  { key: "SBIN",      symbol: "SBIN.NS"     },
+  { key: "BHARTIARTL",symbol: "BHARTIARTL.NS" },
+  { key: "ITC",       symbol: "ITC.NS"      },
 ];
 
 const YF_HEADERS = {
