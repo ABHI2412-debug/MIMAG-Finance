@@ -241,7 +241,7 @@ const replacement = `  <section class="py-12" id="funds">
               <p class="text-gray-400 text-[12px] mt-0.5">Get expert advice and personalised fund recommendations.</p>
             </div>
           </div>
-          <a href="#contact" class="bg-[#0a1930] hover:bg-[#1a2f52] text-white px-5 py-2.5 rounded-[10px] text-[11px] font-semibold transition-colors whitespace-nowrap shadow-md">
+          <a href="contact.html" class="bg-[#0a1930] hover:bg-[#1a2f52] text-white px-5 py-2.5 rounded-[10px] text-[11px] font-semibold transition-colors whitespace-nowrap shadow-md">
             Book a Free Consultation &rarr;
           </a>
         </div>

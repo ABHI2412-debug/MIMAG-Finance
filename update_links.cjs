@@ -1,13 +1,23 @@
 const fs = require('fs');
+const path = require('path');
 
-const files = ['index.html', 'mutual-funds.html', 'stocks.html', 'insights.html', 'contact.html'];
+const dir = 'd:\\MIMAG-Finance';
+const files = fs.readdirSync(dir);
 
-for (const file of files) {
-  if (fs.existsSync(file)) {
-    let content = fs.readFileSync(file, 'utf8');
-    // The navbar link currently says:
-    // <a href="index.html#top" class="text-white/70 hover:text-[#E5A93C] font-semibold text-sm px-6 py-2 transition-colors">About Us</a>
-    content = content.replace(/href="index\.html#top"([^>]*>About Us<\/a>)/g, 'href="about.html"$1');
-    fs.writeFileSync(file, content, 'utf8');
+files.forEach(file => {
+  if (file.endsWith('.html') || file === 'app.js') {
+    const filePath = path.join(dir, file);
+    let content = fs.readFileSync(filePath, 'utf8');
+    
+    // Replace href="contact.html" with href="contact.html"
+    content = content.replace(/href="index\.html#contact"/g, 'href="contact.html"');
+    
+    // Replace href="contact.html" with href="contact.html" ONLY for the "Book a Consultation" button in app.js
+    if (file === 'app.js') {
+      content = content.replace(/href="contact.html"(>Book a Consultation)/g, 'href="contact.html"$1');
+    }
+    
+    fs.writeFileSync(filePath, content);
   }
-}
+});
+console.log('Replaced links');

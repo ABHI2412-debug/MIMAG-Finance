@@ -168,7 +168,7 @@ const familyOfficeHtml = `
                 </div>
 
                 <!-- CTA Button -->
-                <a href="#contact" class="relative z-10 shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3.5 gold-gradient-bg text-obsidian text-sm font-semibold rounded-full hover:scale-105 hover:shadow-gold-glow-strong transition-all duration-300" style="color: #121212;">
+                <a href="contact.html" class="relative z-10 shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3.5 gold-gradient-bg text-obsidian text-sm font-semibold rounded-full hover:scale-105 hover:shadow-gold-glow-strong transition-all duration-300" style="color: #121212;">
                     Schedule Family Consultation
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </a>

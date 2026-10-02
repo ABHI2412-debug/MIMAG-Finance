@@ -208,13 +208,13 @@ const render = () => {
                       </button>
                   </li>
                   <li>
-                      <button onclick="window.openServiceModal('estate')" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                      <button onclick="window.openServiceModal('loan')" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
                           <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
-                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
                           </div>
                           <div>
-                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">Estate & Legacy Planning</span>
-                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Family trusts & succession structuring</span>
+                              <span class="block text-sm font-semibold text-gray-200 group-hover/item:text-[#E5A93C] transition-colors" style="margin-bottom:4px;">Loan Against Mutual Funds</span>
+                              <span class="block text-xs text-gray-400 mt-1" style="line-height:1.4;">Unlock the value of your investments</span>
                           </div>
                       </button>
                   </li>
@@ -255,7 +255,7 @@ const render = () => {
         </nav>
       </div>
       <div class="hdr-right">
-        <a class="btn btn--gold" href="#contact">Book a Consultation ↗</a>
+        <a class="btn btn--gold" href="contact.html">Book a Consultation ↗</a>
         <button class="hamburger" id="menuBtn" aria-label="Menu">☰</button>
       </div>
     </div>
@@ -566,7 +566,7 @@ const render = () => {
         <h2>Building Trust Today,<br>For <i>A Brighter Tomorrow.</i></h2>
         <p>We work with India's most trusted asset management companies, insurance providers and financial institutions, giving you access to genuine products, expert guidance and the best opportunities.</p>
         <div class="pn-actions">
-          <a href="#contact" class="pn-btn">VIEW ALL PARTNERS &rarr;</a>
+          <a href="contact.html" class="pn-btn">VIEW ALL PARTNERS &rarr;</a>
           <a href="#" class="pn-btn-play">
             <div class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
             <span>SEE HOW<br>WE CREATE VALUE</span>
@@ -574,24 +574,13 @@ const render = () => {
         </div>
       </div>
 
-      <div class="pn-glass-container">
-        <div class="pn-glass-left">
-          <h4>OUR PARTNERS</h4>
-          <p>India's most trusted<br>names, all in one place.</p>
-        </div>
-        <div class="pn-logos">
+      <div class="pn-glass-container" style="justify-content: center;">
+        <div class="pn-logos" style="padding-left: 0;">
           ${partners.map(p => `
             <div class="pn-logo-box">
               <img src="${p.img}" alt="${p.name}">
             </div>
           `).join("")}
-          <!-- We could render an axis bank logo here as seen in the image, but the dynamic array is sufficient -->
-          <div class="pn-logo-box" style="background:transparent; border-color:transparent;">
-            <div class="pn-logo-more">
-              <div class="circle">+</div>
-              <span>and more</span>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -903,7 +892,7 @@ const render = () => {
                 </div>
 
                 <!-- CTA Button -->
-                <a href="#contact" class="relative z-10 shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold rounded-full hover:scale-105 transition-all duration-300" style="background-color: #1A1A1A; color: #FFFFFF; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                <a href="contact.html" class="relative z-10 shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold rounded-full hover:scale-105 transition-all duration-300" style="background-color: #1A1A1A; color: #FFFFFF; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
                     Schedule Family Consultation
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </a>
@@ -1051,7 +1040,7 @@ const render = () => {
         </div>
         <div class="cta-center reveal reveal-delay-1" style="max-width:320px;">
           <p class="sec-sub" style="margin:0 0 24px 0; color: rgba(255,255,255,0.95);">Connect with our financial experts and get a personalised plan for your goals.</p>
-          <a class="btn btn--gold" href="#contact">Book a Free Consultation ↗</a>
+          <a class="btn btn--gold" href="contact.html">Book a Free Consultation ↗</a>
         </div>
         <div class="cta-right-float reveal reveal-delay-2" style="text-align:right; font-size:10px; font-weight:700; letter-spacing:0.3em; color:rgba(255,255,255,0.85); line-height:2.4;">
           SAME.<br>GOALS.<br>A BRIGHTER.<br>TOMORROW.
@@ -1394,7 +1383,7 @@ document.querySelector("#nlForm").addEventListener("submit", e => {
 const modal = document.getElementById("contactModal");
 const modalClose = document.getElementById("modalClose");
 const mgForm = document.getElementById("moneyGuideForm");
-const contactTriggers = document.querySelectorAll('a[href="#contact"]');
+const contactTriggers = document.querySelectorAll('a[href="contact.html"]');
 
 if (modal) {
   contactTriggers.forEach(btn => {
@@ -2155,15 +2144,15 @@ window.finServices = {
             'Claim settlement assistance'
         ]
     },
-    'estate': {
-        title: 'Estate Planning',
-        desc: 'Ensure smooth intergenerational wealth transfer with legally sound estate planning structures.',
-        icon: '<svg class="w-12 h-12 text-[#E5A93C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>',
+    'loan': {
+        title: 'Loan Against Mutual Funds',
+        desc: 'Need urgent liquidity? Secure an overdraft facility against your mutual fund holdings at attractive interest rates.',
+        icon: '<svg class="w-12 h-12 text-[#E5A93C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>',
         features: [
-            'Will drafting & registration',
-            'Private family trusts',
-            'Power of attorney structuring',
-            'Business succession planning'
+            'Instant liquidity without selling',
+            'Only pay interest on utilized amount',
+            'Continued portfolio growth',
+            'Hassle-free digital process'
         ]
     },
     'overview': {

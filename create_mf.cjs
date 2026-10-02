@@ -60,7 +60,7 @@ const htmlContent = `<!DOCTYPE html>
         </nav>
       </div>
       <div class="hdr-right flex items-center">
-        <a class="bg-[#E5A93C] text-black px-6 py-2 rounded-full font-bold text-sm hover:bg-[#ffc65c] transition-colors" href="index.html#contact">Book a Consultation &nearr;</a>
+        <a class="bg-[#E5A93C] text-black px-6 py-2 rounded-full font-bold text-sm hover:bg-[#ffc65c] transition-colors" href="contact.html">Book a Consultation &nearr;</a>
       </div>
     </div>
   </header>
@@ -86,7 +86,7 @@ const htmlContent = `<!DOCTYPE html>
           <a href="#funds" class="bg-[#0a1930] hover:bg-[#1a2f52] text-white px-8 py-4 rounded-xl font-semibold transition-colors flex items-center gap-2 shadow-lg shadow-blue-900/10">
             Explore Mutual Funds <span class="text-xl leading-none">&rarr;</span>
           </a>
-          <a href="#contact" class="bg-white/70 hover:bg-white text-[#0a1930] border border-[#0a1930]/10 px-8 py-4 rounded-xl font-semibold transition-colors flex items-center gap-2">
+          <a href="contact.html" class="bg-white/70 hover:bg-white text-[#0a1930] border border-[#0a1930]/10 px-8 py-4 rounded-xl font-semibold transition-colors flex items-center gap-2">
             Talk to an Advisor
           </a>
         </div>
@@ -382,7 +382,7 @@ const htmlContent = `<!DOCTYPE html>
               <p class="text-gray-500 text-xs mt-1">Get expert advice and personalised fund recommendations.</p>
             </div>
           </div>
-          <a href="#contact" class="bg-[#0a1930] hover:bg-[#1a2f52] text-white px-6 py-3 rounded-xl text-xs font-semibold transition-colors whitespace-nowrap shadow-md">
+          <a href="contact.html" class="bg-[#0a1930] hover:bg-[#1a2f52] text-white px-6 py-3 rounded-xl text-xs font-semibold transition-colors whitespace-nowrap shadow-md">
             Book a Free Consultation &rarr;
           </a>
         </div>
