@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
 @import url("contact.css");
 @import url("loader.css");
 /* SECTION */
@@ -57,6 +58,12 @@ body {
 a {
   color: inherit;
   text-decoration: none
+}
+
+.font-serif {
+  font-family: 'Instrument Serif', 'Times New Roman', serif !important;
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 
 button,
@@ -128,7 +135,7 @@ img {
 .testi-h,
 .cta-left h2 {
   font-size: clamp(32px, 4vw, 48px);
-  font-weight: 200;
+  font-weight: 300;
   letter-spacing: -.04em;
   line-height: 1.15;
   color: var(--dark)
@@ -609,7 +616,7 @@ h1.hero-reveal {
   margin: 28px 0 0;
   color: #fff;
   font-size: clamp(48px, 6vw, 72px);
-  font-weight: 200;
+  font-weight: 300;
   letter-spacing: -.04em;
   line-height: 1.1
 }

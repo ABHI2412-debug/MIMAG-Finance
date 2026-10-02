@@ -1,0 +1,10 @@
+const fs = require('fs');
+let content = fs.readFileSync('d:\\MIMAG-Finance\\app.js', 'utf8');
+const lines = content.split(/\r?\n/);
+const before = lines.slice(0, 977).join('\n');
+const quoteSec = lines.slice(977, 987).join('\n');
+const whySec = lines.slice(987, 1037).join('\n');
+const after = lines.slice(1037).join('\n');
+const newContent = before + '\n' + whySec + '\n' + quoteSec + '\n' + after;
+fs.writeFileSync('d:\\MIMAG-Finance\\app.js', newContent);
+console.log('Swapped sections successfully');

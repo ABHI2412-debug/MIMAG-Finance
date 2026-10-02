@@ -197,7 +197,7 @@ const render = () => {
               <h3 class="text-xs font-bold tracking-[0.15em] text-gray-500 uppercase mb-5 border-b border-white/5 pb-3">Protection & Advisory</h3>
               <ul class="space-y-2 m-0 p-0 list-none">
                   <li>
-                      <button onclick="window.openServiceModal('insurance')" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                      <button onclick="window.location.href='insurance.html'" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
                           <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
                               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                           </div>
@@ -975,90 +975,6 @@ const render = () => {
   -->
 
 
-  <!-- ═══ FINANCIAL GUIDES ═══ -->
-  <section class="sec guides-sec" id="guides">
-    <div class="guides-container">
-      <div class="guides-header reveal">
-        <h2>Meet Your Financial Guides</h2>
-        <p>Experienced professionals. A partner for life.</p>
-      </div>
-      
-      <div class="guides-grid reveal reveal-delay-1">
-        
-        <!-- Guide 1 -->
-        <div class="guide-card">
-          <img src="./assets/profile_rahul.png" alt="Rahul Mehta" class="guide-img">
-          <div class="guide-info">
-            <div>
-              <h4>Rahul Mehta</h4>
-              <div class="role">Founder & Wealth Advisor</div>
-              <div class="exp">15+ years experience</div>
-            </div>
-            <div class="guide-links">
-              <a href="#" class="li-icon">in</a>
-              <a href="#" class="guide-view">View Profile →</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Guide 2 -->
-        <div class="guide-card">
-          <img src="./assets/profile_priya.png" alt="Priya Sharma" class="guide-img">
-          <div class="guide-info">
-            <div>
-              <h4>Priya Sharma</h4>
-              <div class="role">Investment Strategist</div>
-              <div class="exp">12+ years experience</div>
-            </div>
-            <div class="guide-links">
-              <a href="#" class="li-icon">in</a>
-              <a href="#" class="guide-view">View Profile →</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Guide 3 -->
-        <div class="guide-card">
-          <img src="./assets/profile_amit.png" alt="Vikram Sinha" class="guide-img">
-          <div class="guide-info">
-            <div>
-              <h4>Vikram Sinha</h4>
-              <div class="role">Financial Planner</div>
-              <div class="exp">10+ years experience</div>
-            </div>
-            <div class="guide-links">
-              <a href="#" class="li-icon">in</a>
-              <a href="#" class="guide-view">View Profile →</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Guide 4 -->
-        <div class="guide-card">
-          <img src="./assets/profile_priya.png" alt="Ananya Kapoor" class="guide-img">
-          <div class="guide-info">
-            <div>
-              <h4>Ananya Kapoor</h4>
-              <div class="role">Client Relationship Head</div>
-              <div class="exp">9+ years experience</div>
-            </div>
-            <div class="guide-links">
-              <a href="#" class="li-icon">in</a>
-              <a href="#" class="guide-view">View Profile →</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Quote Card -->
-        <div class="guide-quote-card">
-          <div style="color:var(--gold); font-size:40px; font-family:'Instrument Serif','Times New Roman',serif; line-height:0.5; margin-bottom:12px;">“</div>
-          <p>We don't just<br>manage wealth.<br>We build lasting<br>relationships.</p>
-        </div>
-        
-      </div>
-    </div>
-  </section>
-
   <!-- ═══ WHY FINVISTA ═══ -->
   <section class="sec sec--cream" id="why" style="padding-top: 40px; padding-bottom: 20px;">
     <div class="container">
@@ -1105,6 +1021,16 @@ const render = () => {
             <p>Because your<br>tomorrow matters.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ QUOTE SECTION ═══ -->
+  <section class="sec guides-sec" id="guides" style="padding: 140px 0;">
+    <div class="container" style="display: flex; justify-content: center; align-items: center; text-align: center; position: relative; z-index: 2;">
+      <div class="quote-content reveal" style="max-width: 900px; padding: 80px 40px; border: 1px solid rgba(229,169,60,0.2); border-radius: 20px; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);">
+        <div style="color:var(--gold); font-size:80px; font-family:'Instrument Serif', 'Times New Roman', serif; line-height:0.5; margin-bottom:40px;">“</div>
+        <p style="font-size: clamp(36px, 5vw, 56px); font-family: 'Instrument Serif', 'Times New Roman', serif; color: var(--white); font-weight: 400; line-height: 1.3; margin:0;">We don't just manage wealth.<br><span style="color: var(--gold); font-style: italic;">We build lasting relationships.</span></p>
       </div>
     </div>
   </section>
@@ -2317,6 +2243,10 @@ document.addEventListener('click', function(e) {
         if (serviceKey) {
             e.preventDefault();
             e.stopPropagation();
+            if (serviceKey === 'insurance') {
+                window.location.href = 'insurance.html';
+                return;
+            }
             window.openServiceModal(serviceKey);
         }
     }

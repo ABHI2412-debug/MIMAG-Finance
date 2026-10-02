@@ -150,7 +150,7 @@ if (!isReduced && window.matchMedia("(hover: hover)").matches) {
 
   // --- Image Parallax Effect ---
   // Add parallax to specific images for depth without lag
-  const parallaxImages = gsap.utils.toArray('.global-card img, .parallax-img, .waypoints-bg');
+  const parallaxImages = gsap.utils.toArray('.parallax-img, .waypoints-bg');
   parallaxImages.forEach(img => {
     gsap.to(img, {
       yPercent: 15, // Move the image slightly down as we scroll

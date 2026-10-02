@@ -84,6 +84,50 @@ http.createServer((request, response) => {
     return;
   }
 
+  if (pathname === "/api/quote") {
+    const symbolsStr = new URL(request.url, `http://${request.headers.host}`).searchParams.get('symbols');
+    if (!symbolsStr) {
+      response.writeHead(400, { "Content-Type": "application/json" });
+      response.end(JSON.stringify({ error: "No symbols provided" }));
+      return;
+    }
+    
+    const symbols = symbolsStr.split(',');
+    Promise.all(symbols.map(sym => {
+      return new Promise((resolve) => {
+        const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?interval=1d&range=1d`;
+        const req = https.get(url, { headers: YF_HEADERS, timeout: 8000 }, (resProxy) => {
+          let data = "";
+          resProxy.on("data", c => data += c);
+          resProxy.on("end", () => {
+            try {
+              const json = JSON.parse(data);
+              const meta = json?.chart?.result?.[0]?.meta;
+              if (meta) {
+                resolve({
+                  symbol: sym,
+                  regularMarketPrice: meta.regularMarketPrice,
+                  regularMarketChangePercent: meta.regularMarketChangePercent
+                });
+                return;
+              }
+            } catch (e) {}
+            resolve(null);
+          });
+        });
+        req.on("error", () => resolve(null));
+      });
+    })).then(results => {
+      const validResults = results.filter(r => r !== null);
+      response.writeHead(200, {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      });
+      response.end(JSON.stringify({ quoteResponse: { result: validResults } }));
+    });
+    return;
+  }
+
   const requested = pathname === "/" ? "index.html" : pathname.slice(1);
   const dependencyFallbacks = {
     "three.module.js": path.join(root, "node_modules/three/build/three.module.js"),

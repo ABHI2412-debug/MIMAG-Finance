@@ -31,7 +31,7 @@
     });
   </script>
 
-  <header class="hdr" style="background: rgba(20, 18, 15, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.1);">
+  <header class="hdr" style="background: rgba(20, 18, 15, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 100;">
     <div class="container hdr-inner" style="width: min(1440px, 100% - 64px); margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
       <a class="brand" href="/">
         <img src="./assets/logo-finvista.png" alt="FinVista" style="height: 72px; width: auto;">
@@ -104,7 +104,7 @@
               <h3 class="text-xs font-bold tracking-[0.15em] text-gray-500 uppercase mb-5 border-b border-white/5 pb-3">Protection & Advisory</h3>
               <ul class="space-y-2 m-0 p-0 list-none">
                   <li>
-                      <button data-service="insurance" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
+                      <button onclick="window.location.href='insurance.html'" class="w-full text-left group/item flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-white/5 transition-colors" style="background:none; border:none; cursor:pointer;">
                           <div class="mt-0.5 p-2 rounded-lg bg-[#0a0a0a] border border-white/5 text-[#E5A93C] group-hover/item:scale-110 group-hover/item:border-[#E5A93C]/30 transition-all">
                               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                           </div>
@@ -302,7 +302,7 @@
     </section>
   </main>
 
-<footer class="ftr">
+  <footer class="ftr">
     <div class="container ftr-top">
       <div class="ftr-brand">
         <a class="brand" href="#top"><img src="./assets/logo-finvista.png" alt="MIMAG Finance" style="height: 72px; width: auto;"></a>
@@ -322,7 +322,7 @@
         </div>
       </div>
       <div class="ftr-cols">
-        <div class="ftr-col"><span>Company</span><a href="#top">About Us</a><a href="#">Our Team</a><a href="#">Careers</a><a href="#">Contact</a></div>
+        <div class="ftr-col"><span>Company</span><a href="about.html">About Us</a><a href="#">Our Team</a><a href="#">Careers</a><a href="#">Contact</a></div>
         <div class="ftr-col"><span>Services</span><a href="#">Investments</a><a href="#services">Insurance</a><a href="#">Retirement</a><a href="#">Tax Planning</a><a href="#">Estate Planning</a><a href="#">Loans</a></div>
         <div class="ftr-col"><span>Tools</span><a href="#calc">SIP Calculator</a><a href="#">Lumpsum Calculator</a><a href="#">Retirement Calculator</a><a href="#">Goal Planner</a></div>
         <div class="ftr-col"><span>Insights</span><a href="#">Market Updates</a><a href="#">Articles</a><a href="#">Guides</a><a href="#">FAQs</a></div>
