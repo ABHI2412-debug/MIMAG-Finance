@@ -10,13 +10,18 @@ mkdirSync(output, { recursive: true });
 
 const filesToCopy = [
   'index.html',
+  'about.html',
   'insights.html',
   'contact.html',
+  'insurance.html',
+  'mutual-funds.html',
+  'stocks.html',
   'archive.html',
   'app.js',
   'globe.js',
   'styles.css',
   'contact.css',
+  'insurance.css',
   'loader.css',
   'styles-extended.css',
   'responsive-additions.css',
