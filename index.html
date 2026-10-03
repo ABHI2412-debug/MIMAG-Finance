@@ -58,25 +58,7 @@
 
 <body>
 
-  <!-- LOADER OVERLAY -->
-  <div class="loader-overlay" id="pageLoader">
-    <div class="typewriter">
-      <div class="slide"><i></i></div>
-      <div class="paper"></div>
-      <div class="keyboard"></div>
-    </div>
-  </div>
 
-  <script>
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        const loader = document.getElementById('pageLoader');
-        if (loader) {
-          loader.classList.add('hidden');
-        }
-      }, 2000);
-    });
-  </script>
 
   <div id="app"></div>
   <script type="module" src="./app.js?v=fv12"></script>
